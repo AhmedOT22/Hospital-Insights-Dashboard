@@ -42,17 +42,16 @@ A normalized database schema for managing hospital operations. The database incl
 
 ### 2. Data Visualization:
 
-Interactive Power BI dashboards for:
-
-- Departmental information and performance.
-
-- Patient demographics and statistics.
-
-- Appointment trends and schedules.
-
-- Doctors performances.
-
-- Billing summaries and revenue insights.
+</br></br></br>
+![](screenshots/department.png)
+</br></br></br>
+![](screenshots/appointments.png)
+</br></br></br>
+![](screenshots/doctors.png)
+</br></br></br>
+![](screenshots/patients.png)
+</br></br></br>
+![](screenshots/performance.png)
 
 ## Setup Instructions
 
