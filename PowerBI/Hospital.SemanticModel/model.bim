@@ -1,0 +1,1072 @@
+{
+  "name": "Hospital",
+  "compatibilityLevel": 1601,
+  "model": {
+    "culture": "en-US",
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "discourageImplicitMeasures": true,
+    "tables": [
+      {
+        "name": "Department",
+        "columns": [
+          {
+            "name": "DepartmentID",
+            "dataType": "int64",
+            "sourceColumn": "DepartmentID",
+            "summarizeBy": "none",
+            "isHidden": true
+          },
+          {
+            "name": "DepartmentName",
+            "dataType": "string",
+            "sourceColumn": "DepartmentName",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Location",
+            "dataType": "string",
+            "sourceColumn": "Location",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "PhoneExtension",
+            "dataType": "string",
+            "sourceColumn": "PhoneExtension",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "sourceColumn": "IsActive",
+            "summarizeBy": "none"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Department",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Sql.Database(ServerName, DatabaseName, [CreateNavigationProperties=false]),",
+                "    Rows = Source{[Schema=\"dbo\", Item=\"Department\"]}[Data]",
+                "in",
+                "    Rows"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Medicine",
+        "columns": [
+          {
+            "name": "MedicineID",
+            "dataType": "int64",
+            "sourceColumn": "MedicineID",
+            "summarizeBy": "none",
+            "isHidden": true
+          },
+          {
+            "name": "MedicineName",
+            "dataType": "string",
+            "sourceColumn": "MedicineName",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Manufacturer",
+            "dataType": "string",
+            "sourceColumn": "Manufacturer",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "StockQuantity",
+            "dataType": "int64",
+            "sourceColumn": "StockQuantity",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Price",
+            "dataType": "decimal",
+            "sourceColumn": "Price",
+            "summarizeBy": "none"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Medicine",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Sql.Database(ServerName, DatabaseName, [CreateNavigationProperties=false]),",
+                "    Rows = Source{[Schema=\"dbo\", Item=\"Medicine\"]}[Data]",
+                "in",
+                "    Rows"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Patient",
+        "columns": [
+          {
+            "name": "PatientID",
+            "dataType": "int64",
+            "sourceColumn": "PatientID",
+            "summarizeBy": "none",
+            "isHidden": true
+          },
+          {
+            "name": "FirstName",
+            "dataType": "string",
+            "sourceColumn": "FirstName",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "LastName",
+            "dataType": "string",
+            "sourceColumn": "LastName",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "DateOfBirth",
+            "dataType": "dateTime",
+            "sourceColumn": "DateOfBirth",
+            "summarizeBy": "none",
+            "formatString": "yyyy-MM-dd"
+          },
+          {
+            "name": "Gender",
+            "dataType": "string",
+            "sourceColumn": "Gender",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Address",
+            "dataType": "string",
+            "sourceColumn": "Address",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "PhoneNumber",
+            "dataType": "string",
+            "sourceColumn": "PhoneNumber",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Email",
+            "dataType": "string",
+            "sourceColumn": "Email",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "EmergencyContactName",
+            "dataType": "string",
+            "sourceColumn": "EmergencyContactName",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "EmergencyContactPhone",
+            "dataType": "string",
+            "sourceColumn": "EmergencyContactPhone",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "sourceColumn": "IsActive",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Age group at snapshot",
+            "dataType": "string",
+            "type": "calculated",
+            "expression": "VAR Age = INT(YEARFRAC(Patient[DateOfBirth], DATE(2025,12,31), 1)) RETURN SWITCH(TRUE(), Age < 18, \"0–17\", Age < 30, \"18–29\", Age < 50, \"30–49\", Age < 70, \"50–69\", \"70+\")",
+            "summarizeBy": "none"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Patient",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Sql.Database(ServerName, DatabaseName, [CreateNavigationProperties=false]),",
+                "    Rows = Source{[Schema=\"dbo\", Item=\"Patient\"]}[Data]",
+                "in",
+                "    Rows"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Staff",
+        "columns": [
+          {
+            "name": "StaffID",
+            "dataType": "int64",
+            "sourceColumn": "StaffID",
+            "summarizeBy": "none",
+            "isHidden": true
+          },
+          {
+            "name": "FirstName",
+            "dataType": "string",
+            "sourceColumn": "FirstName",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "LastName",
+            "dataType": "string",
+            "sourceColumn": "LastName",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Role",
+            "dataType": "string",
+            "sourceColumn": "Role",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "DepartmentID",
+            "dataType": "int64",
+            "sourceColumn": "DepartmentID",
+            "summarizeBy": "none",
+            "isHidden": true
+          },
+          {
+            "name": "PhoneNumber",
+            "dataType": "string",
+            "sourceColumn": "PhoneNumber",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Email",
+            "dataType": "string",
+            "sourceColumn": "Email",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ShiftHours",
+            "dataType": "string",
+            "sourceColumn": "ShiftHours",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "sourceColumn": "IsActive",
+            "summarizeBy": "none"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Staff",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Sql.Database(ServerName, DatabaseName, [CreateNavigationProperties=false]),",
+                "    Rows = Source{[Schema=\"dbo\", Item=\"Staff\"]}[Data]",
+                "in",
+                "    Rows"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Doctor",
+        "columns": [
+          {
+            "name": "DoctorID",
+            "dataType": "int64",
+            "sourceColumn": "DoctorID",
+            "summarizeBy": "none",
+            "isHidden": true
+          },
+          {
+            "name": "FirstName",
+            "dataType": "string",
+            "sourceColumn": "FirstName",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "LastName",
+            "dataType": "string",
+            "sourceColumn": "LastName",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Specialization",
+            "dataType": "string",
+            "sourceColumn": "Specialization",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "PhoneNumber",
+            "dataType": "string",
+            "sourceColumn": "PhoneNumber",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Email",
+            "dataType": "string",
+            "sourceColumn": "Email",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "DepartmentID",
+            "dataType": "int64",
+            "sourceColumn": "DepartmentID",
+            "summarizeBy": "none",
+            "isHidden": true
+          },
+          {
+            "name": "Availability",
+            "dataType": "boolean",
+            "sourceColumn": "Availability",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "IsActive",
+            "dataType": "boolean",
+            "sourceColumn": "IsActive",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Doctor name",
+            "dataType": "string",
+            "type": "calculated",
+            "expression": "Doctor[FirstName] & \" \" & Doctor[LastName]",
+            "summarizeBy": "none"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Doctor",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Sql.Database(ServerName, DatabaseName, [CreateNavigationProperties=false]),",
+                "    Rows = Source{[Schema=\"dbo\", Item=\"Doctor\"]}[Data]",
+                "in",
+                "    Rows"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Room",
+        "columns": [
+          {
+            "name": "RoomID",
+            "dataType": "int64",
+            "sourceColumn": "RoomID",
+            "summarizeBy": "none",
+            "isHidden": true
+          },
+          {
+            "name": "RoomNumber",
+            "dataType": "string",
+            "sourceColumn": "RoomNumber",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "DepartmentID",
+            "dataType": "int64",
+            "sourceColumn": "DepartmentID",
+            "summarizeBy": "none",
+            "isHidden": true
+          },
+          {
+            "name": "RoomType",
+            "dataType": "string",
+            "sourceColumn": "RoomType",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "AvailabilityStatus",
+            "dataType": "string",
+            "sourceColumn": "AvailabilityStatus",
+            "summarizeBy": "none"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Room",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Sql.Database(ServerName, DatabaseName, [CreateNavigationProperties=false]),",
+                "    Rows = Source{[Schema=\"dbo\", Item=\"Room\"]}[Data]",
+                "in",
+                "    Rows"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Appointment",
+        "columns": [
+          {
+            "name": "AppointmentID",
+            "dataType": "int64",
+            "sourceColumn": "AppointmentID",
+            "summarizeBy": "none",
+            "isHidden": true
+          },
+          {
+            "name": "PatientID",
+            "dataType": "int64",
+            "sourceColumn": "PatientID",
+            "summarizeBy": "none",
+            "isHidden": true
+          },
+          {
+            "name": "DoctorID",
+            "dataType": "int64",
+            "sourceColumn": "DoctorID",
+            "summarizeBy": "none",
+            "isHidden": true
+          },
+          {
+            "name": "DepartmentID",
+            "dataType": "int64",
+            "sourceColumn": "DepartmentID",
+            "summarizeBy": "none",
+            "isHidden": true
+          },
+          {
+            "name": "AppointmentDate",
+            "dataType": "dateTime",
+            "sourceColumn": "AppointmentDate",
+            "summarizeBy": "none",
+            "formatString": "yyyy-MM-dd"
+          },
+          {
+            "name": "AppointmentTime",
+            "dataType": "dateTime",
+            "sourceColumn": "AppointmentTime",
+            "summarizeBy": "none",
+            "formatString": "HH:mm"
+          },
+          {
+            "name": "Status",
+            "dataType": "string",
+            "sourceColumn": "Status",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Month",
+            "dataType": "string",
+            "type": "calculated",
+            "expression": "FORMAT(Appointment[AppointmentDate], \"yyyy-MM\")",
+            "summarizeBy": "none"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Appointment",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Sql.Database(ServerName, DatabaseName, [CreateNavigationProperties=false]),",
+                "    Rows = Source{[Schema=\"dbo\", Item=\"Appointment\"]}[Data],",
+                "    Typed = Table.TransformColumnTypes(Rows, {{\"AppointmentTime\", type datetime}})",
+                "in",
+                "    Typed"
+              ]
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "Appointments",
+            "expression": "COUNTROWS(Appointment)",
+            "formatString": "#,0",
+            "displayFolder": "Hospital KPIs"
+          },
+          {
+            "name": "Completed appointments",
+            "expression": "CALCULATE([Appointments], KEEPFILTERS(Appointment[Status] = \"Completed\"))",
+            "formatString": "#,0",
+            "displayFolder": "Hospital KPIs"
+          },
+          {
+            "name": "Cancelled appointments",
+            "expression": "CALCULATE([Appointments], KEEPFILTERS(Appointment[Status] = \"Cancelled\"))",
+            "formatString": "#,0",
+            "displayFolder": "Hospital KPIs"
+          },
+          {
+            "name": "Scheduled appointments",
+            "expression": "CALCULATE([Appointments], KEEPFILTERS(Appointment[Status] = \"Scheduled\"))",
+            "formatString": "#,0",
+            "displayFolder": "Hospital KPIs"
+          },
+          {
+            "name": "Completion rate",
+            "expression": "DIVIDE(COALESCE([Completed appointments], 0), [Completed appointments] + [Cancelled appointments])",
+            "formatString": "0.0%",
+            "displayFolder": "Hospital KPIs"
+          },
+          {
+            "name": "Cancellation rate",
+            "expression": "DIVIDE(COALESCE([Cancelled appointments], 0), [Completed appointments] + [Cancelled appointments])",
+            "formatString": "0.0%",
+            "displayFolder": "Hospital KPIs"
+          },
+          {
+            "name": "Patients served",
+            "expression": "CALCULATE(DISTINCTCOUNT(Appointment[PatientID]), KEEPFILTERS(Appointment[Status] = \"Completed\"))",
+            "formatString": "#,0",
+            "displayFolder": "Hospital KPIs"
+          },
+          {
+            "name": "Visits",
+            "expression": "COUNTROWS(Medical_Record)",
+            "formatString": "#,0",
+            "displayFolder": "Hospital KPIs"
+          },
+          {
+            "name": "Prescriptions",
+            "expression": "COUNTROWS(Prescription)",
+            "formatString": "#,0",
+            "displayFolder": "Hospital KPIs"
+          },
+          {
+            "name": "Billed amount",
+            "expression": "SUM(Billing[TotalAmount])",
+            "formatString": "#,0.00",
+            "displayFolder": "Hospital KPIs"
+          },
+          {
+            "name": "Collected amount",
+            "expression": "CALCULATE([Billed amount], KEEPFILTERS(Billing[PaymentStatus] = \"Paid\"))",
+            "formatString": "#,0.00",
+            "displayFolder": "Hospital KPIs"
+          },
+          {
+            "name": "Outstanding amount",
+            "expression": "CALCULATE([Billed amount], KEEPFILTERS(Billing[PaymentStatus] = \"Unpaid\"))",
+            "formatString": "#,0.00",
+            "displayFolder": "Hospital KPIs"
+          },
+          {
+            "name": "Collection rate",
+            "expression": "DIVIDE(COALESCE([Collected amount], 0), [Billed amount])",
+            "formatString": "0.0%",
+            "displayFolder": "Hospital KPIs"
+          },
+          {
+            "name": "Doctors with appointments",
+            "expression": "DISTINCTCOUNT(Appointment[DoctorID])",
+            "formatString": "#,0",
+            "displayFolder": "Hospital KPIs"
+          },
+          {
+            "name": "Department doctors",
+            "expression": "CALCULATE(COUNTROWS(Doctor), TREATAS(VALUES(Department[DepartmentID]), Doctor[DepartmentID]))",
+            "formatString": "#,0",
+            "displayFolder": "Hospital KPIs"
+          },
+          {
+            "name": "Department staff",
+            "expression": "COUNTROWS(Staff)",
+            "formatString": "#,0",
+            "displayFolder": "Hospital KPIs"
+          },
+          {
+            "name": "Rooms",
+            "expression": "COUNTROWS(Room)",
+            "formatString": "#,0",
+            "displayFolder": "Hospital KPIs"
+          },
+          {
+            "name": "Occupied rooms",
+            "expression": "CALCULATE([Rooms], KEEPFILTERS(Room[AvailabilityStatus] = \"Occupied\"))",
+            "formatString": "#,0",
+            "displayFolder": "Hospital KPIs"
+          },
+          {
+            "name": "Snapshot occupancy",
+            "expression": "DIVIDE(COALESCE([Occupied rooms], 0), [Rooms])",
+            "formatString": "0.0%",
+            "displayFolder": "Hospital KPIs"
+          },
+          {
+            "name": "Completed stays",
+            "expression": "COUNTROWS(FILTER(Room_Assignment, NOT ISBLANK(Room_Assignment[DischargeDate])))",
+            "formatString": "#,0",
+            "displayFolder": "Hospital KPIs"
+          },
+          {
+            "name": "Average completed stay",
+            "expression": "AVERAGEX(FILTER(Room_Assignment, NOT ISBLANK(Room_Assignment[DischargeDate])), DATEDIFF(Room_Assignment[AdmissionDate], Room_Assignment[DischargeDate], DAY))",
+            "formatString": "0.0",
+            "displayFolder": "Hospital KPIs"
+          },
+          {
+            "name": "Repeat patients",
+            "expression": "COUNTROWS(FILTER(VALUES(Appointment[PatientID]), CALCULATE([Completed appointments]) > 1))",
+            "formatString": "#,0",
+            "displayFolder": "Hospital KPIs"
+          }
+        ]
+      },
+      {
+        "name": "Medical_Record",
+        "columns": [
+          {
+            "name": "RecordID",
+            "dataType": "int64",
+            "sourceColumn": "RecordID",
+            "summarizeBy": "none",
+            "isHidden": true
+          },
+          {
+            "name": "PatientID",
+            "dataType": "int64",
+            "sourceColumn": "PatientID",
+            "summarizeBy": "none",
+            "isHidden": true
+          },
+          {
+            "name": "DoctorID",
+            "dataType": "int64",
+            "sourceColumn": "DoctorID",
+            "summarizeBy": "none",
+            "isHidden": true
+          },
+          {
+            "name": "VisitDate",
+            "dataType": "dateTime",
+            "sourceColumn": "VisitDate",
+            "summarizeBy": "none",
+            "formatString": "yyyy-MM-dd"
+          },
+          {
+            "name": "Diagnosis",
+            "dataType": "string",
+            "sourceColumn": "Diagnosis",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "TreatmentPlan",
+            "dataType": "string",
+            "sourceColumn": "TreatmentPlan",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Prescription",
+            "dataType": "string",
+            "sourceColumn": "Prescription",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "AppointmentID",
+            "dataType": "int64",
+            "sourceColumn": "AppointmentID",
+            "summarizeBy": "none",
+            "isHidden": true
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Medical_Record",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Sql.Database(ServerName, DatabaseName, [CreateNavigationProperties=false]),",
+                "    Rows = Source{[Schema=\"dbo\", Item=\"Medical_Record\"]}[Data]",
+                "in",
+                "    Rows"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Prescription",
+        "columns": [
+          {
+            "name": "PrescriptionID",
+            "dataType": "int64",
+            "sourceColumn": "PrescriptionID",
+            "summarizeBy": "none",
+            "isHidden": true
+          },
+          {
+            "name": "RecordID",
+            "dataType": "int64",
+            "sourceColumn": "RecordID",
+            "summarizeBy": "none",
+            "isHidden": true
+          },
+          {
+            "name": "MedicineID",
+            "dataType": "int64",
+            "sourceColumn": "MedicineID",
+            "summarizeBy": "none",
+            "isHidden": true
+          },
+          {
+            "name": "Dosage",
+            "dataType": "string",
+            "sourceColumn": "Dosage",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Frequency",
+            "dataType": "string",
+            "sourceColumn": "Frequency",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Duration",
+            "dataType": "string",
+            "sourceColumn": "Duration",
+            "summarizeBy": "none"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Prescription",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Sql.Database(ServerName, DatabaseName, [CreateNavigationProperties=false]),",
+                "    Rows = Source{[Schema=\"dbo\", Item=\"Prescription\"]}[Data]",
+                "in",
+                "    Rows"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Billing",
+        "columns": [
+          {
+            "name": "BillingID",
+            "dataType": "int64",
+            "sourceColumn": "BillingID",
+            "summarizeBy": "none",
+            "isHidden": true
+          },
+          {
+            "name": "PatientID",
+            "dataType": "int64",
+            "sourceColumn": "PatientID",
+            "summarizeBy": "none",
+            "isHidden": true
+          },
+          {
+            "name": "TotalAmount",
+            "dataType": "decimal",
+            "sourceColumn": "TotalAmount",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "PaymentStatus",
+            "dataType": "string",
+            "sourceColumn": "PaymentStatus",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "PaymentDate",
+            "dataType": "dateTime",
+            "sourceColumn": "PaymentDate",
+            "summarizeBy": "none",
+            "formatString": "yyyy-MM-dd"
+          },
+          {
+            "name": "PaymentMethod",
+            "dataType": "string",
+            "sourceColumn": "PaymentMethod",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "RecordID",
+            "dataType": "int64",
+            "sourceColumn": "RecordID",
+            "summarizeBy": "none",
+            "isHidden": true
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Billing",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Sql.Database(ServerName, DatabaseName, [CreateNavigationProperties=false]),",
+                "    Rows = Source{[Schema=\"dbo\", Item=\"Billing\"]}[Data]",
+                "in",
+                "    Rows"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Room_Assignment",
+        "columns": [
+          {
+            "name": "AssignmentID",
+            "dataType": "int64",
+            "sourceColumn": "AssignmentID",
+            "summarizeBy": "none",
+            "isHidden": true
+          },
+          {
+            "name": "RoomID",
+            "dataType": "int64",
+            "sourceColumn": "RoomID",
+            "summarizeBy": "none",
+            "isHidden": true
+          },
+          {
+            "name": "PatientID",
+            "dataType": "int64",
+            "sourceColumn": "PatientID",
+            "summarizeBy": "none",
+            "isHidden": true
+          },
+          {
+            "name": "AdmissionDate",
+            "dataType": "dateTime",
+            "sourceColumn": "AdmissionDate",
+            "summarizeBy": "none",
+            "formatString": "yyyy-MM-dd"
+          },
+          {
+            "name": "DischargeDate",
+            "dataType": "dateTime",
+            "sourceColumn": "DischargeDate",
+            "summarizeBy": "none",
+            "formatString": "yyyy-MM-dd"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Room_Assignment",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = Sql.Database(ServerName, DatabaseName, [CreateNavigationProperties=false]),",
+                "    Rows = Source{[Schema=\"dbo\", Item=\"Room_Assignment\"]}[Data]",
+                "in",
+                "    Rows"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "name": "1723b297-5d10-5cc9-b155-fe6f5564acb6",
+        "fromTable": "Appointment",
+        "fromColumn": "DepartmentID",
+        "fromCardinality": "many",
+        "toTable": "Department",
+        "toColumn": "DepartmentID",
+        "toCardinality": "one",
+        "crossFilteringBehavior": "oneDirection",
+        "isActive": true
+      },
+      {
+        "name": "773c0c00-0bd7-5118-b319-2b241dd70b7d",
+        "fromTable": "Doctor",
+        "fromColumn": "DepartmentID",
+        "fromCardinality": "many",
+        "toTable": "Department",
+        "toColumn": "DepartmentID",
+        "toCardinality": "one",
+        "crossFilteringBehavior": "oneDirection",
+        "isActive": false
+      },
+      {
+        "name": "cdba507d-504b-5957-8433-20f981cf2756",
+        "fromTable": "Room",
+        "fromColumn": "DepartmentID",
+        "fromCardinality": "many",
+        "toTable": "Department",
+        "toColumn": "DepartmentID",
+        "toCardinality": "one",
+        "crossFilteringBehavior": "oneDirection",
+        "isActive": true
+      },
+      {
+        "name": "460306e6-4340-5f55-bd7d-3aa42e01a557",
+        "fromTable": "Staff",
+        "fromColumn": "DepartmentID",
+        "fromCardinality": "many",
+        "toTable": "Department",
+        "toColumn": "DepartmentID",
+        "toCardinality": "one",
+        "crossFilteringBehavior": "oneDirection",
+        "isActive": true
+      },
+      {
+        "name": "d195056a-a141-5f61-a433-0e01ac2de355",
+        "fromTable": "Appointment",
+        "fromColumn": "DoctorID",
+        "fromCardinality": "many",
+        "toTable": "Doctor",
+        "toColumn": "DoctorID",
+        "toCardinality": "one",
+        "crossFilteringBehavior": "oneDirection",
+        "isActive": true
+      },
+      {
+        "name": "44fa2758-a453-5b13-b7eb-802d57c86d3f",
+        "fromTable": "Appointment",
+        "fromColumn": "PatientID",
+        "fromCardinality": "many",
+        "toTable": "Patient",
+        "toColumn": "PatientID",
+        "toCardinality": "one",
+        "crossFilteringBehavior": "oneDirection",
+        "isActive": true
+      },
+      {
+        "name": "636534ee-1c77-57d8-ab54-eef8752c3d7e",
+        "fromTable": "Medical_Record",
+        "fromColumn": "AppointmentID",
+        "fromCardinality": "many",
+        "toTable": "Appointment",
+        "toColumn": "AppointmentID",
+        "toCardinality": "one",
+        "crossFilteringBehavior": "oneDirection",
+        "isActive": true
+      },
+      {
+        "name": "d203dc93-e0f7-5657-b860-957b0dbce133",
+        "fromTable": "Medical_Record",
+        "fromColumn": "PatientID",
+        "fromCardinality": "many",
+        "toTable": "Patient",
+        "toColumn": "PatientID",
+        "toCardinality": "one",
+        "crossFilteringBehavior": "oneDirection",
+        "isActive": false
+      },
+      {
+        "name": "4a4c2038-a5f5-5ef9-9d9c-b2dbba965e7f",
+        "fromTable": "Medical_Record",
+        "fromColumn": "DoctorID",
+        "fromCardinality": "many",
+        "toTable": "Doctor",
+        "toColumn": "DoctorID",
+        "toCardinality": "one",
+        "crossFilteringBehavior": "oneDirection",
+        "isActive": false
+      },
+      {
+        "name": "4b093e74-8101-5275-b618-777a69696dd1",
+        "fromTable": "Prescription",
+        "fromColumn": "RecordID",
+        "fromCardinality": "many",
+        "toTable": "Medical_Record",
+        "toColumn": "RecordID",
+        "toCardinality": "one",
+        "crossFilteringBehavior": "oneDirection",
+        "isActive": true
+      },
+      {
+        "name": "94737c25-f934-5832-852b-f3c0bd14c995",
+        "fromTable": "Prescription",
+        "fromColumn": "MedicineID",
+        "fromCardinality": "many",
+        "toTable": "Medicine",
+        "toColumn": "MedicineID",
+        "toCardinality": "one",
+        "crossFilteringBehavior": "oneDirection",
+        "isActive": true
+      },
+      {
+        "name": "08746563-ecb6-57d9-af9d-268b85ee6bf6",
+        "fromTable": "Billing",
+        "fromColumn": "RecordID",
+        "fromCardinality": "many",
+        "toTable": "Medical_Record",
+        "toColumn": "RecordID",
+        "toCardinality": "one",
+        "crossFilteringBehavior": "oneDirection",
+        "isActive": true
+      },
+      {
+        "name": "54fd8eb8-e7a0-550b-878e-75947f8ff4ec",
+        "fromTable": "Billing",
+        "fromColumn": "PatientID",
+        "fromCardinality": "many",
+        "toTable": "Patient",
+        "toColumn": "PatientID",
+        "toCardinality": "one",
+        "crossFilteringBehavior": "oneDirection",
+        "isActive": false
+      },
+      {
+        "name": "71c4d328-3f1e-57b6-8bd4-eef848ce28f5",
+        "fromTable": "Room_Assignment",
+        "fromColumn": "PatientID",
+        "fromCardinality": "many",
+        "toTable": "Patient",
+        "toColumn": "PatientID",
+        "toCardinality": "one",
+        "crossFilteringBehavior": "oneDirection",
+        "isActive": true
+      },
+      {
+        "name": "8f1dedb5-80d0-526c-9c80-6f62e59370a9",
+        "fromTable": "Room_Assignment",
+        "fromColumn": "RoomID",
+        "fromCardinality": "many",
+        "toTable": "Room",
+        "toColumn": "RoomID",
+        "toCardinality": "one",
+        "crossFilteringBehavior": "oneDirection",
+        "isActive": true
+      }
+    ],
+    "expressions": [
+      {
+        "name": "ServerName",
+        "kind": "m",
+        "expression": "\"localhost\" meta [IsParameterQuery=true, Type=\"Text\", IsParameterQueryRequired=true]"
+      },
+      {
+        "name": "DatabaseName",
+        "kind": "m",
+        "expression": "\"HospitalInsights\" meta [IsParameterQuery=true, Type=\"Text\", IsParameterQueryRequired=true]"
+      }
+    ]
+  }
+}

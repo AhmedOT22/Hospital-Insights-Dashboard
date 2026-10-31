@@ -1,0 +1,56 @@
+{
+  "synthetic": true,
+  "seed": 42,
+  "as_of": "2025-12-31",
+  "assumptions": [
+    "Single-person rooms; admissions inclusive and discharges exclusive",
+    "Scenario diagnoses and medicines are illustrative, not clinical recommendations",
+    "Booked future appointments; settled outcomes through the fixed snapshot date"
+  ],
+  "tables": {
+    "Department": {
+      "rows": 5,
+      "sha256": "a7288006314f1dc56269d44c61b25843bdbb41710a75694f9e9c1d78f35c50b7"
+    },
+    "Medicine": {
+      "rows": 50,
+      "sha256": "c6a3d90f440f3eb02b12c0b82c590ea4f99e0f27c64a558413d59afc5e8e3bbb"
+    },
+    "Patient": {
+      "rows": 200,
+      "sha256": "8ada030cf1610f48e8ec595aa117baad83b31d9a823a0ca6ad714637951a8df8"
+    },
+    "Staff": {
+      "rows": 50,
+      "sha256": "3c037de8f492929f6f256738c806ef9c85ef1fa0e1d3b6857d23d520cbccc081"
+    },
+    "Doctor": {
+      "rows": 20,
+      "sha256": "94acf3e21ea4bf53738c96eeb34027f825a245a48bbe483c3686cb80c8ec1365"
+    },
+    "Room": {
+      "rows": 20,
+      "sha256": "c47c5689b76d044e70693ea0dc53b5df2a93a2b533f5a64f242d6f9efc4248fd"
+    },
+    "Appointment": {
+      "rows": 4338,
+      "sha256": "4c9737a87ff43ce6de5e9cec4fd19b916b1586544cba193014124d434a1f90ef"
+    },
+    "Medical_Record": {
+      "rows": 3519,
+      "sha256": "f40e96ba0b102f10d08b0c984f2d04146ddbac4567a47643e861650e6d99ed85"
+    },
+    "Prescription": {
+      "rows": 3002,
+      "sha256": "af6f4e68ad90af550dc78d317664314044f8289ed6ec4c04e9955dcd6ae468c3"
+    },
+    "Billing": {
+      "rows": 3519,
+      "sha256": "bc86f1b7316268ce820482ffd56bd5492a94a96ca0469269e4f477f460579f4c"
+    },
+    "Room_Assignment": {
+      "rows": 618,
+      "sha256": "2270cf34a118d706e69f3b0fbc2dd27f6d8776291c6750d4408c074bf7b8e7b5"
+    }
+  }
+}

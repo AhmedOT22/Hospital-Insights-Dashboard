@@ -1,95 +1,72 @@
 # Hospital Insights Dashboard
 
-## Project Overview
+A five-page Power BI demonstration of hospital appointments, service activity,
+physician workload and patient patterns. It uses **synthetic data**, SQL Server and
+an editable Power BI project. No real hospital performance or clinical conclusions
+are claimed.
 
-A hospital database management and analytics solution that combines structured data storage with interactive visual dashboards. The project is designed to enable efficient data management and provide actionable insights into hospital operations, patient management, and resource utilization.
+## Open the redesigned project
 
-## This project includes:
+The current source is **[PowerBI/Hospital.pbip](PowerBI/Hospital.pbip)**. It contains
+an eleven-table semantic model and five 1280 × 720 report pages:
 
-- A SQL database model to manage hospital data.
+| Page | Purpose |
+| --- | --- |
+| Executive Overview | Activity, patients served, collected and outstanding amounts |
+| Appointments | Completed/cancelled outcomes, future bookings and monthly activity |
+| Departments | Service activity, attributed amounts, workforce and room snapshot |
+| Doctors | Recorded workload and patients served, without arbitrary performance targets |
+| Patients | Age/gender patterns, repeat attendance and synthetic visit scenarios |
 
-- Pre-populated database rows for testing and demonstration.
+The redesign uses a neutral background, blue/teal theme, consistent cards, titles,
+page navigation and department/month slicers. Native visuals replace the original
+custom histogram. Measures use linked records rather than disconnected summary tables.
 
-- Power BI dashboards to visualize key performance indicators (KPIs).
+**Power BI Desktop acceptance is pending:** the project files pass structural and
+published PBIR schema checks, but they have not been opened, refreshed or rendered in
+Desktop here. Native DAX evaluation, navigation behavior and visual layout still need
+that check. The original `PowerBI/Hospital.pbix` and `screenshots/` remain historical
+references; they do not show the redesigned project or corrected dataset.
 
-## Features
+## Reproduce
 
-### 1. Database Design:
+1. Use SQL Server 2022+ and select an empty user database named `HospitalInsights`.
+2. Execute `sql/model.sql`, then `sql/inserts.sql` using SSMS or `sqlcmd -b`.
+3. Open `PowerBI/Hospital.pbip` in current Power BI Desktop with project/enhanced
+   report format support enabled as needed.
+4. In **Transform data → Edit parameters**, set `ServerName` and `DatabaseName` to
+   your SQL Server instance/database. Authenticate locally and refresh.
+5. Run `PowerBI/Hospital.SemanticModel/DAXQueries/Acceptance.dax` in DAX Query View;
+   all 374 checks must pass. Review all five pages and save a newly compiled PBIX.
 
-A relational SQL Server schema for managing hospital operations. The database includes the following key tables:
-
-**Patient:** Stores demographic details of patients.
-
-**Doctor:** Stores the details of doctors, including their specialization and contact details.
-
-**Department:** Defines different hospital departments such as Cardiology, Neurology, etc.
-
-**Appointment:** Manages patient appointments with doctors.
-
-**Medical Records:** Records all patient medical history, including diagnosis and treatment.
-
-**Prescription:** Keeps track of prescribed medicines for each patient's medical record.
-
-**Medicine:** Stores information about available medicines.
-
-**Billing:** Handles billing and payments for hospital services.
-
-**Staff:** Stores information about non-medical staff (nurses, administrative staff, technicians, etc.).
-
-**Room:** Maintains information about hospital rooms and their status.
-
-**Room Assignment:** Records patient room assignments
-
-### 2. Data Visualization:
-
-</br></br></br>
-![](screenshots/department.png)
-</br></br></br>
-![](screenshots/appointments.png)
-</br></br></br>
-![](screenshots/doctors.png)
-</br></br></br>
-![](screenshots/patients.png)
-</br></br></br>
-![](screenshots/performance.png)
-
-## Setup Instructions
-
-### Prerequisites
-
-- **Database Management System**: Microsoft SQL Server 2022+ (SSMS or `sqlcmd`).
-
-- **Power BI Desktop**: For viewing and interacting with dashboards.
-
-### Steps to Recreate the Project
-
-**1. Clone the repository:**
+The data snapshot is **December 31, 2025**. Bookings extend into January 2026;
+completed outcomes, payments and occupancy stop at the snapshot. Currency amounts
+are illustrative units. The sample uses single-person rooms and non-clinical scenario
+labels/medicines. It is an analytical demonstration, not a hospital scheduling system.
 
 ```bash
-git clone https://github.com/AhmedOT22/Hospital-Insights-Dashboard.git
+python -m pip install -r requirements-dev.txt
+python scripts/generate_data.py
+python scripts/build_powerbi.py
+python -m scripts.reconcile_metrics
+python -m unittest discover -s tests -v
+python scripts/validate_report.py
 ```
 
-**2. Set up the database:**
+Generation uses seed 42 and exports matching CSV/SQL inputs plus checksums. It
+replaces the original inconsistent inserts; those are archived in
+`sql/legacy/inserts.sql`. The bootstrap and seed are for an empty database; they
+never silently reset an existing installation. See [SQL rules](sql/README.md).
 
-- Open your SQL management tool.
+## Evidence and limits
 
-- Select an empty **user database** and execute `sql/model.sql`. The script creates
-  the schema in a transaction and refuses to overwrite existing hospital tables.
-- Read [schema rules and seed compatibility](sql/README.md) before loading data.
-  The original `sql/inserts.sql` is retained for review: its inconsistent billing
-  and appointment rows **do not pass the strengthened constraints**. It is not yet
-  a clean, supported seed for the revised schema.
-- For a verified miniature fixture and constraint checks, run `tests/schema.sql`
-  after schema creation in a disposable database. CI runs this on SQL Server 2022.
+CI runs the schema, 28 rejection cases, the full generated seed and reconciliation
+queries on SQL Server 2022, including 374 metric comparisons across 17 filter contexts. It also checks reproducibility, eleven Python tests,
+report field bindings, filter paths and Microsoft PBIR JSON schemas. These checks
+cover data and source structure, not Desktop rendering or DAX engine correctness.
 
-**3. Open the dashboard:**
+[Metric definitions and filter behavior](docs/metrics.md) ·
+[Design and acceptance checklist](docs/dashboard.md) ·
+[CI runs](https://github.com/AhmedOT22/Hospital-Insights-Dashboard/actions)
 
-- Open `PowerBI/Hospital.pbix` in Power BI Desktop.
-
-- Update the Power BI connection to your database and review the refreshed model.
-  The PBIX was not changed or validated against this schema update.
-
-## Contributors:
-
-Ahmed Ouazzani
-
+Developed by [Ahmed Ouazzani](https://github.com/AhmedOT22).

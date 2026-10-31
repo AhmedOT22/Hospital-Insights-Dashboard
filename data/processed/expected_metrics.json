@@ -1,0 +1,513 @@
+[
+  {
+    "context": {
+      "name": "All"
+    },
+    "metrics": {
+      "Appointments": "4338.00000000",
+      "Completed appointments": "3519.00000000",
+      "Cancelled appointments": "763.00000000",
+      "Scheduled appointments": "56.00000000",
+      "Completion rate": "0.82181224",
+      "Cancellation rate": "0.17818776",
+      "Patients served": "200.00000000",
+      "Visits": "3519.00000000",
+      "Prescriptions": "3002.00000000",
+      "Billed amount": "2324435.77000000",
+      "Collected amount": "1960519.62000000",
+      "Outstanding amount": "363916.15000000",
+      "Collection rate": "0.84343893",
+      "Doctors with appointments": "20.00000000",
+      "Department doctors": "20.00000000",
+      "Department staff": "50.00000000",
+      "Rooms": "20.00000000",
+      "Occupied rooms": "4.00000000",
+      "Snapshot occupancy": "0.20000000",
+      "Completed stays": "614.00000000",
+      "Average completed stay": "3.44951140",
+      "Repeat patients": "200.00000000"
+    }
+  },
+  {
+    "context": {
+      "name": "Department 1",
+      "department": 1
+    },
+    "metrics": {
+      "Appointments": "855.00000000",
+      "Completed appointments": "690.00000000",
+      "Cancelled appointments": "154.00000000",
+      "Scheduled appointments": "11.00000000",
+      "Completion rate": "0.81753555",
+      "Cancellation rate": "0.18246445",
+      "Patients served": "149.00000000",
+      "Visits": "690.00000000",
+      "Prescriptions": "604.00000000",
+      "Billed amount": "386918.94000000",
+      "Collected amount": "322479.65000000",
+      "Outstanding amount": "64439.29000000",
+      "Collection rate": "0.83345532",
+      "Doctors with appointments": "4.00000000",
+      "Department doctors": "4.00000000",
+      "Department staff": "10.00000000",
+      "Rooms": "4.00000000",
+      "Occupied rooms": null,
+      "Snapshot occupancy": "0E-8",
+      "Completed stays": "110.00000000",
+      "Average completed stay": "3.51818182",
+      "Repeat patients": "141.00000000"
+    }
+  },
+  {
+    "context": {
+      "name": "Department 2",
+      "department": 2
+    },
+    "metrics": {
+      "Appointments": "614.00000000",
+      "Completed appointments": "503.00000000",
+      "Cancelled appointments": "106.00000000",
+      "Scheduled appointments": "5.00000000",
+      "Completion rate": "0.82594417",
+      "Cancellation rate": "0.17405583",
+      "Patients served": "50.00000000",
+      "Visits": "503.00000000",
+      "Prescriptions": "440.00000000",
+      "Billed amount": "303765.81000000",
+      "Collected amount": "251561.57000000",
+      "Outstanding amount": "52204.24000000",
+      "Collection rate": "0.82814313",
+      "Doctors with appointments": "4.00000000",
+      "Department doctors": "4.00000000",
+      "Department staff": "10.00000000",
+      "Rooms": "4.00000000",
+      "Occupied rooms": null,
+      "Snapshot occupancy": "0E-8",
+      "Completed stays": "79.00000000",
+      "Average completed stay": "3.45569620",
+      "Repeat patients": "50.00000000"
+    }
+  },
+  {
+    "context": {
+      "name": "Department 3",
+      "department": 3
+    },
+    "metrics": {
+      "Appointments": "1533.00000000",
+      "Completed appointments": "1242.00000000",
+      "Cancelled appointments": "271.00000000",
+      "Scheduled appointments": "20.00000000",
+      "Completion rate": "0.82088566",
+      "Cancellation rate": "0.17911434",
+      "Patients served": "150.00000000",
+      "Visits": "1242.00000000",
+      "Prescriptions": "1050.00000000",
+      "Billed amount": "831139.02000000",
+      "Collected amount": "698383.61000000",
+      "Outstanding amount": "132755.41000000",
+      "Collection rate": "0.84027292",
+      "Doctors with appointments": "4.00000000",
+      "Department doctors": "4.00000000",
+      "Department staff": "10.00000000",
+      "Rooms": "4.00000000",
+      "Occupied rooms": "3.00000000",
+      "Snapshot occupancy": "0.75000000",
+      "Completed stays": "227.00000000",
+      "Average completed stay": "3.30396476",
+      "Repeat patients": "150.00000000"
+    }
+  },
+  {
+    "context": {
+      "name": "Department 4",
+      "department": 4
+    },
+    "metrics": {
+      "Appointments": "906.00000000",
+      "Completed appointments": "743.00000000",
+      "Cancelled appointments": "150.00000000",
+      "Scheduled appointments": "13.00000000",
+      "Completion rate": "0.83202688",
+      "Cancellation rate": "0.16797312",
+      "Patients served": "149.00000000",
+      "Visits": "743.00000000",
+      "Prescriptions": "627.00000000",
+      "Billed amount": "543568.56000000",
+      "Collected amount": "468819.23000000",
+      "Outstanding amount": "74749.33000000",
+      "Collection rate": "0.86248408",
+      "Doctors with appointments": "4.00000000",
+      "Department doctors": "4.00000000",
+      "Department staff": "10.00000000",
+      "Rooms": "4.00000000",
+      "Occupied rooms": null,
+      "Snapshot occupancy": "0E-8",
+      "Completed stays": "122.00000000",
+      "Average completed stay": "3.45081967",
+      "Repeat patients": "143.00000000"
+    }
+  },
+  {
+    "context": {
+      "name": "Department 5",
+      "department": 5
+    },
+    "metrics": {
+      "Appointments": "430.00000000",
+      "Completed appointments": "341.00000000",
+      "Cancelled appointments": "82.00000000",
+      "Scheduled appointments": "7.00000000",
+      "Completion rate": "0.80614657",
+      "Cancellation rate": "0.19385343",
+      "Patients served": "131.00000000",
+      "Visits": "341.00000000",
+      "Prescriptions": "281.00000000",
+      "Billed amount": "259043.44000000",
+      "Collected amount": "219275.56000000",
+      "Outstanding amount": "39767.88000000",
+      "Collection rate": "0.84648181",
+      "Doctors with appointments": "4.00000000",
+      "Department doctors": "4.00000000",
+      "Department staff": "10.00000000",
+      "Rooms": "4.00000000",
+      "Occupied rooms": "1.00000000",
+      "Snapshot occupancy": "0.25000000",
+      "Completed stays": "76.00000000",
+      "Average completed stay": "3.77631579",
+      "Repeat patients": "99.00000000"
+    }
+  },
+  {
+    "context": {
+      "name": "2024-01",
+      "month": "2024-01"
+    },
+    "metrics": {
+      "Appointments": "163.00000000",
+      "Completed appointments": "141.00000000",
+      "Cancelled appointments": "22.00000000",
+      "Scheduled appointments": null,
+      "Completion rate": "0.86503067",
+      "Cancellation rate": "0.13496933",
+      "Patients served": "96.00000000",
+      "Visits": "141.00000000",
+      "Prescriptions": "126.00000000",
+      "Billed amount": "94414.58000000",
+      "Collected amount": "84252.10000000",
+      "Outstanding amount": "10162.48000000",
+      "Collection rate": "0.89236323",
+      "Doctors with appointments": "20.00000000",
+      "Department doctors": "20.00000000",
+      "Department staff": "50.00000000",
+      "Rooms": "20.00000000",
+      "Occupied rooms": "4.00000000",
+      "Snapshot occupancy": "0.20000000",
+      "Completed stays": "614.00000000",
+      "Average completed stay": "3.44951140",
+      "Repeat patients": "33.00000000"
+    }
+  },
+  {
+    "context": {
+      "name": "2025-12",
+      "month": "2025-12"
+    },
+    "metrics": {
+      "Appointments": "175.00000000",
+      "Completed appointments": "146.00000000",
+      "Cancelled appointments": "29.00000000",
+      "Scheduled appointments": null,
+      "Completion rate": "0.83428571",
+      "Cancellation rate": "0.16571429",
+      "Patients served": "101.00000000",
+      "Visits": "146.00000000",
+      "Prescriptions": "118.00000000",
+      "Billed amount": "100282.30000000",
+      "Collected amount": "50070.13000000",
+      "Outstanding amount": "50212.17000000",
+      "Collection rate": "0.49929180",
+      "Doctors with appointments": "20.00000000",
+      "Department doctors": "20.00000000",
+      "Department staff": "50.00000000",
+      "Rooms": "20.00000000",
+      "Occupied rooms": "4.00000000",
+      "Snapshot occupancy": "0.20000000",
+      "Completed stays": "614.00000000",
+      "Average completed stay": "3.44951140",
+      "Repeat patients": "38.00000000"
+    }
+  },
+  {
+    "context": {
+      "name": "2026-01",
+      "month": "2026-01"
+    },
+    "metrics": {
+      "Appointments": "56.00000000",
+      "Completed appointments": null,
+      "Cancelled appointments": null,
+      "Scheduled appointments": "56.00000000",
+      "Completion rate": null,
+      "Cancellation rate": null,
+      "Patients served": null,
+      "Visits": null,
+      "Prescriptions": null,
+      "Billed amount": null,
+      "Collected amount": null,
+      "Outstanding amount": null,
+      "Collection rate": null,
+      "Doctors with appointments": "20.00000000",
+      "Department doctors": "20.00000000",
+      "Department staff": "50.00000000",
+      "Rooms": "20.00000000",
+      "Occupied rooms": "4.00000000",
+      "Snapshot occupancy": "0.20000000",
+      "Completed stays": "614.00000000",
+      "Average completed stay": "3.44951140",
+      "Repeat patients": null
+    }
+  },
+  {
+    "context": {
+      "name": "1900-01",
+      "month": "1900-01"
+    },
+    "metrics": {
+      "Appointments": null,
+      "Completed appointments": null,
+      "Cancelled appointments": null,
+      "Scheduled appointments": null,
+      "Completion rate": null,
+      "Cancellation rate": null,
+      "Patients served": null,
+      "Visits": null,
+      "Prescriptions": null,
+      "Billed amount": null,
+      "Collected amount": null,
+      "Outstanding amount": null,
+      "Collection rate": null,
+      "Doctors with appointments": null,
+      "Department doctors": "20.00000000",
+      "Department staff": "50.00000000",
+      "Rooms": "20.00000000",
+      "Occupied rooms": "4.00000000",
+      "Snapshot occupancy": "0.20000000",
+      "Completed stays": "614.00000000",
+      "Average completed stay": "3.44951140",
+      "Repeat patients": null
+    }
+  },
+  {
+    "context": {
+      "name": "Doctor 1",
+      "doctor": 1
+    },
+    "metrics": {
+      "Appointments": "222.00000000",
+      "Completed appointments": "183.00000000",
+      "Cancelled appointments": "35.00000000",
+      "Scheduled appointments": "4.00000000",
+      "Completion rate": "0.83944954",
+      "Cancellation rate": "0.16055046",
+      "Patients served": "106.00000000",
+      "Visits": "183.00000000",
+      "Prescriptions": "160.00000000",
+      "Billed amount": "106471.34000000",
+      "Collected amount": "91821.49000000",
+      "Outstanding amount": "14649.85000000",
+      "Collection rate": "0.86240570",
+      "Doctors with appointments": "1.00000000",
+      "Department doctors": "1.00000000",
+      "Department staff": "50.00000000",
+      "Rooms": "20.00000000",
+      "Occupied rooms": "4.00000000",
+      "Snapshot occupancy": "0.20000000",
+      "Completed stays": "614.00000000",
+      "Average completed stay": "3.44951140",
+      "Repeat patients": "56.00000000"
+    }
+  },
+  {
+    "context": {
+      "name": "Patient 1",
+      "patient": 1
+    },
+    "metrics": {
+      "Appointments": "11.00000000",
+      "Completed appointments": "8.00000000",
+      "Cancelled appointments": "2.00000000",
+      "Scheduled appointments": "1.00000000",
+      "Completion rate": "0.80000000",
+      "Cancellation rate": "0.20000000",
+      "Patients served": "1.00000000",
+      "Visits": "8.00000000",
+      "Prescriptions": "4.00000000",
+      "Billed amount": "4858.94000000",
+      "Collected amount": "1430.30000000",
+      "Outstanding amount": "3428.64000000",
+      "Collection rate": "0.29436461",
+      "Doctors with appointments": "3.00000000",
+      "Department doctors": "20.00000000",
+      "Department staff": "50.00000000",
+      "Rooms": "20.00000000",
+      "Occupied rooms": "4.00000000",
+      "Snapshot occupancy": "0.20000000",
+      "Completed stays": "1.00000000",
+      "Average completed stay": "3.00000000",
+      "Repeat patients": "1.00000000"
+    }
+  },
+  {
+    "context": {
+      "name": "Cancelled only",
+      "status": "Cancelled"
+    },
+    "metrics": {
+      "Appointments": "763.00000000",
+      "Completed appointments": null,
+      "Cancelled appointments": "763.00000000",
+      "Scheduled appointments": null,
+      "Completion rate": "0E-8",
+      "Cancellation rate": "1.00000000",
+      "Patients served": null,
+      "Visits": null,
+      "Prescriptions": null,
+      "Billed amount": null,
+      "Collected amount": null,
+      "Outstanding amount": null,
+      "Collection rate": null,
+      "Doctors with appointments": "20.00000000",
+      "Department doctors": "20.00000000",
+      "Department staff": "50.00000000",
+      "Rooms": "20.00000000",
+      "Occupied rooms": "4.00000000",
+      "Snapshot occupancy": "0.20000000",
+      "Completed stays": "614.00000000",
+      "Average completed stay": "3.44951140",
+      "Repeat patients": null
+    }
+  },
+  {
+    "context": {
+      "name": "Completed only",
+      "status": "Completed"
+    },
+    "metrics": {
+      "Appointments": "3519.00000000",
+      "Completed appointments": "3519.00000000",
+      "Cancelled appointments": null,
+      "Scheduled appointments": null,
+      "Completion rate": "1.00000000",
+      "Cancellation rate": "0E-8",
+      "Patients served": "200.00000000",
+      "Visits": "3519.00000000",
+      "Prescriptions": "3002.00000000",
+      "Billed amount": "2324435.77000000",
+      "Collected amount": "1960519.62000000",
+      "Outstanding amount": "363916.15000000",
+      "Collection rate": "0.84343893",
+      "Doctors with appointments": "20.00000000",
+      "Department doctors": "20.00000000",
+      "Department staff": "50.00000000",
+      "Rooms": "20.00000000",
+      "Occupied rooms": "4.00000000",
+      "Snapshot occupancy": "0.20000000",
+      "Completed stays": "614.00000000",
+      "Average completed stay": "3.44951140",
+      "Repeat patients": "200.00000000"
+    }
+  },
+  {
+    "context": {
+      "name": "Scheduled only",
+      "status": "Scheduled"
+    },
+    "metrics": {
+      "Appointments": "56.00000000",
+      "Completed appointments": null,
+      "Cancelled appointments": null,
+      "Scheduled appointments": "56.00000000",
+      "Completion rate": null,
+      "Cancellation rate": null,
+      "Patients served": null,
+      "Visits": null,
+      "Prescriptions": null,
+      "Billed amount": null,
+      "Collected amount": null,
+      "Outstanding amount": null,
+      "Collection rate": null,
+      "Doctors with appointments": "20.00000000",
+      "Department doctors": "20.00000000",
+      "Department staff": "50.00000000",
+      "Rooms": "20.00000000",
+      "Occupied rooms": "4.00000000",
+      "Snapshot occupancy": "0.20000000",
+      "Completed stays": "614.00000000",
+      "Average completed stay": "3.44951140",
+      "Repeat patients": null
+    }
+  },
+  {
+    "context": {
+      "name": "Pediatrics December",
+      "department": 2,
+      "month": "2025-12"
+    },
+    "metrics": {
+      "Appointments": "26.00000000",
+      "Completed appointments": "24.00000000",
+      "Cancelled appointments": "2.00000000",
+      "Scheduled appointments": null,
+      "Completion rate": "0.92307692",
+      "Cancellation rate": "0.07692308",
+      "Patients served": "21.00000000",
+      "Visits": "24.00000000",
+      "Prescriptions": "19.00000000",
+      "Billed amount": "13325.04000000",
+      "Collected amount": "8273.91000000",
+      "Outstanding amount": "5051.13000000",
+      "Collection rate": "0.62092947",
+      "Doctors with appointments": "4.00000000",
+      "Department doctors": "4.00000000",
+      "Department staff": "10.00000000",
+      "Rooms": "4.00000000",
+      "Occupied rooms": null,
+      "Snapshot occupancy": "0E-8",
+      "Completed stays": "79.00000000",
+      "Average completed stay": "3.45569620",
+      "Repeat patients": "3.00000000"
+    }
+  },
+  {
+    "context": {
+      "name": "Conflicting doctor department",
+      "department": 2,
+      "doctor": 1
+    },
+    "metrics": {
+      "Appointments": null,
+      "Completed appointments": null,
+      "Cancelled appointments": null,
+      "Scheduled appointments": null,
+      "Completion rate": null,
+      "Cancellation rate": null,
+      "Patients served": null,
+      "Visits": null,
+      "Prescriptions": null,
+      "Billed amount": null,
+      "Collected amount": null,
+      "Outstanding amount": null,
+      "Collection rate": null,
+      "Doctors with appointments": null,
+      "Department doctors": null,
+      "Department staff": "10.00000000",
+      "Rooms": "4.00000000",
+      "Occupied rooms": null,
+      "Snapshot occupancy": "0E-8",
+      "Completed stays": "79.00000000",
+      "Average completed stay": "3.45569620",
+      "Repeat patients": null
+    }
+  }
+]

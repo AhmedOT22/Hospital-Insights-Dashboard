@@ -39,6 +39,16 @@ jobs:
           docker exec "$CONTAINER" bash -c '/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "$MSSQL_SA_PASSWORD" -C -b -Q "CREATE DATABASE HospitalSchemaTest"'
           docker exec "$CONTAINER" bash -c '/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "$MSSQL_SA_PASSWORD" -C -b -d HospitalSchemaTest -i /tmp/model.sql'
           docker exec "$CONTAINER" bash -c '/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "$MSSQL_SA_PASSWORD" -C -b -d HospitalSchemaTest -i /tmp/schema-tests.sql'
+      - name: Load and validate generated seed
+        env:
+          CONTAINER: ${{ job.services.sqlserver.id }}
+        run: |
+          docker cp sql/inserts.sql "$CONTAINER":/tmp/inserts.sql
+          docker cp tests/seed.sql "$CONTAINER":/tmp/seed-tests.sql
+          docker cp tests/metrics.sql "$CONTAINER":/tmp/metric-tests.sql
+          docker exec "$CONTAINER" bash -c '/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "$MSSQL_SA_PASSWORD" -C -b -d HospitalSchemaTest -i /tmp/inserts.sql'
+          docker exec "$CONTAINER" bash -c '/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "$MSSQL_SA_PASSWORD" -C -b -d HospitalSchemaTest -i /tmp/seed-tests.sql'
+          docker exec "$CONTAINER" bash -c '/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "$MSSQL_SA_PASSWORD" -C -b -d HospitalSchemaTest -i /tmp/metric-tests.sql'
       - name: Verify rerun refuses to overwrite tables
         env:
           CONTAINER: ${{ job.services.sqlserver.id }}
@@ -51,3 +61,18 @@ jobs:
           test "$result" -ne 0
           grep -q 'Hospital tables already exist' rerun.log
           docker exec "$CONTAINER" bash -c '/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "$MSSQL_SA_PASSWORD" -C -b -d HospitalSchemaTest -h -1 -W -Q "SET NOCOUNT ON; SELECT COUNT(*) FROM sys.tables"' | grep -x '11'
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install -r requirements-dev.txt
+      - run: python scripts/generate_data.py
+      - run: python scripts/build_powerbi.py
+      - run: python -m scripts.reconcile_metrics
+      - run: git diff --exit-code
+      - run: python -m unittest discover -s tests -v
+      - run: python scripts/validate_report.py
+      - run: python -m ruff check scripts tests

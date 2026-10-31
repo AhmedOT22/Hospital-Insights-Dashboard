@@ -1,0 +1,26 @@
+{
+  "name": "Hospital Clinical",
+  "dataColors": [
+    "#176B87",
+    "#1D887D",
+    "#64A8B5",
+    "#D29A43",
+    "#77899C",
+    "#A6C8CF"
+  ],
+  "background": "#F4F7FA",
+  "foreground": "#18394A",
+  "tableAccent": "#176B87",
+  "textClasses": {
+    "title": {
+      "fontFace": "Segoe UI",
+      "fontSize": 12,
+      "color": "#18394A"
+    },
+    "label": {
+      "fontFace": "Segoe UI",
+      "fontSize": 10,
+      "color": "#496572"
+    }
+  }
+}

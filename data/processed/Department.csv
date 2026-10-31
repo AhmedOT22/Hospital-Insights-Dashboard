@@ -1,0 +1,6 @@
+DepartmentID,DepartmentName,Location,PhoneExtension,IsActive
+1,Cardiology,Wing 1,1001,1
+2,Pediatrics,Wing 2,1002,1
+3,Emergency,Wing 3,1003,1
+4,Orthopedics,Wing 4,1004,1
+5,Neurology,Wing 5,1005,1

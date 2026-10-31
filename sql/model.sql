@@ -2,7 +2,7 @@
    Bootstrap only: never drops tables or changes an existing database in place.
    Explicit IDs keep the original seed format. All deletes/updates are restricted
    when referenced: deactivate people instead of erasing clinical/financial history.
-   Existing inserts.sql needs correction before use: see sql/README.md.
+   Use the generated inserts.sql in an empty database; see sql/README.md.
 */
 SET NOCOUNT ON;
 SET XACT_ABORT ON;
