@@ -418,29 +418,31 @@ BEGIN
     SELECT * INTO #Rooms FROM dbo.Room WHERE @DepartmentID IS NULL OR DepartmentID=@DepartmentID;
     SELECT s.* INTO #Stays FROM dbo.Room_Assignment s JOIN #Rooms r ON s.RoomID=r.RoomID
         WHERE s.DischargeDate IS NOT NULL AND (@PatientID IS NULL OR s.PatientID=@PatientID);
+    -- Cast each branch before UNION: SQL decimal type unification can otherwise
+    -- reduce rate/average scale when combined with high-precision SUM amounts.
     INSERT #Actual
-    SELECT @Scenario,N'Appointments',NULLIF(COUNT(*),0) FROM #A UNION ALL
-    SELECT @Scenario,N'Completed appointments',NULLIF(COUNT(*),0) FROM #A WHERE Status='Completed' UNION ALL
-    SELECT @Scenario,N'Cancelled appointments',NULLIF(COUNT(*),0) FROM #A WHERE Status='Cancelled' UNION ALL
-    SELECT @Scenario,N'Scheduled appointments',NULLIF(COUNT(*),0) FROM #A WHERE Status='Scheduled' UNION ALL
-    SELECT @Scenario,N'Completion rate',CAST(SUM(CASE WHEN Status='Completed' THEN 1 ELSE 0 END) AS DECIMAL(28,8))/NULLIF(SUM(CASE WHEN Status IN ('Completed','Cancelled') THEN 1 ELSE 0 END),0) FROM #A UNION ALL
-    SELECT @Scenario,N'Cancellation rate',CAST(SUM(CASE WHEN Status='Cancelled' THEN 1 ELSE 0 END) AS DECIMAL(28,8))/NULLIF(SUM(CASE WHEN Status IN ('Completed','Cancelled') THEN 1 ELSE 0 END),0) FROM #A UNION ALL
-    SELECT @Scenario,N'Patients served',NULLIF(COUNT(DISTINCT PatientID),0) FROM #A WHERE Status='Completed' UNION ALL
-    SELECT @Scenario,N'Visits',NULLIF(COUNT(*),0) FROM #R UNION ALL
-    SELECT @Scenario,N'Prescriptions',NULLIF(COUNT(*),0) FROM dbo.Prescription p JOIN #R r ON p.RecordID=r.RecordID UNION ALL
-    SELECT @Scenario,N'Billed amount',SUM(TotalAmount) FROM #B UNION ALL
-    SELECT @Scenario,N'Collected amount',SUM(TotalAmount) FROM #B WHERE PaymentStatus='Paid' UNION ALL
-    SELECT @Scenario,N'Outstanding amount',SUM(TotalAmount) FROM #B WHERE PaymentStatus='Unpaid' UNION ALL
-    SELECT @Scenario,N'Collection rate',SUM(CASE WHEN PaymentStatus='Paid' THEN TotalAmount ELSE 0 END)/NULLIF(SUM(TotalAmount),0) FROM #B UNION ALL
-    SELECT @Scenario,N'Doctors with appointments',NULLIF(COUNT(DISTINCT DoctorID),0) FROM #A UNION ALL
-    SELECT @Scenario,N'Department doctors',NULLIF(COUNT(*),0) FROM dbo.Doctor WHERE (@DepartmentID IS NULL OR DepartmentID=@DepartmentID) AND (@DoctorID IS NULL OR DoctorID=@DoctorID) UNION ALL
-    SELECT @Scenario,N'Department staff',NULLIF(COUNT(*),0) FROM dbo.Staff WHERE @DepartmentID IS NULL OR DepartmentID=@DepartmentID UNION ALL
-    SELECT @Scenario,N'Rooms',NULLIF(COUNT(*),0) FROM #Rooms UNION ALL
-    SELECT @Scenario,N'Occupied rooms',NULLIF(COUNT(*),0) FROM #Rooms WHERE AvailabilityStatus='Occupied' UNION ALL
-    SELECT @Scenario,N'Snapshot occupancy',CAST(SUM(CASE WHEN AvailabilityStatus='Occupied' THEN 1 ELSE 0 END) AS DECIMAL(28,8))/NULLIF(COUNT(*),0) FROM #Rooms UNION ALL
-    SELECT @Scenario,N'Completed stays',NULLIF(COUNT(*),0) FROM #Stays UNION ALL
-    SELECT @Scenario,N'Average completed stay',AVG(CAST(DATEDIFF(DAY,AdmissionDate,DischargeDate) AS DECIMAL(28,8))) FROM #Stays UNION ALL
-    SELECT @Scenario,N'Repeat patients',NULLIF(COUNT(*),0) FROM (SELECT PatientID FROM #A WHERE Status='Completed' GROUP BY PatientID HAVING COUNT(*)>1) p;
+    SELECT @Scenario,N'Appointments',CAST((NULLIF(COUNT(*),0)) AS DECIMAL(28,8)) FROM #A UNION ALL
+    SELECT @Scenario,N'Completed appointments',CAST((NULLIF(COUNT(*),0)) AS DECIMAL(28,8)) FROM #A WHERE Status='Completed' UNION ALL
+    SELECT @Scenario,N'Cancelled appointments',CAST((NULLIF(COUNT(*),0)) AS DECIMAL(28,8)) FROM #A WHERE Status='Cancelled' UNION ALL
+    SELECT @Scenario,N'Scheduled appointments',CAST((NULLIF(COUNT(*),0)) AS DECIMAL(28,8)) FROM #A WHERE Status='Scheduled' UNION ALL
+    SELECT @Scenario,N'Completion rate',CAST((CAST(SUM(CASE WHEN Status='Completed' THEN 1 ELSE 0 END) AS DECIMAL(28,8))/NULLIF(SUM(CASE WHEN Status IN ('Completed','Cancelled') THEN 1 ELSE 0 END),0)) AS DECIMAL(28,8)) FROM #A UNION ALL
+    SELECT @Scenario,N'Cancellation rate',CAST((CAST(SUM(CASE WHEN Status='Cancelled' THEN 1 ELSE 0 END) AS DECIMAL(28,8))/NULLIF(SUM(CASE WHEN Status IN ('Completed','Cancelled') THEN 1 ELSE 0 END),0)) AS DECIMAL(28,8)) FROM #A UNION ALL
+    SELECT @Scenario,N'Patients served',CAST((NULLIF(COUNT(DISTINCT PatientID),0)) AS DECIMAL(28,8)) FROM #A WHERE Status='Completed' UNION ALL
+    SELECT @Scenario,N'Visits',CAST((NULLIF(COUNT(*),0)) AS DECIMAL(28,8)) FROM #R UNION ALL
+    SELECT @Scenario,N'Prescriptions',CAST((NULLIF(COUNT(*),0)) AS DECIMAL(28,8)) FROM dbo.Prescription p JOIN #R r ON p.RecordID=r.RecordID UNION ALL
+    SELECT @Scenario,N'Billed amount',CAST((SUM(TotalAmount)) AS DECIMAL(28,8)) FROM #B UNION ALL
+    SELECT @Scenario,N'Collected amount',CAST((SUM(TotalAmount)) AS DECIMAL(28,8)) FROM #B WHERE PaymentStatus='Paid' UNION ALL
+    SELECT @Scenario,N'Outstanding amount',CAST((SUM(TotalAmount)) AS DECIMAL(28,8)) FROM #B WHERE PaymentStatus='Unpaid' UNION ALL
+    SELECT @Scenario,N'Collection rate',CAST((SUM(CASE WHEN PaymentStatus='Paid' THEN TotalAmount ELSE 0 END)/NULLIF(SUM(TotalAmount),0)) AS DECIMAL(28,8)) FROM #B UNION ALL
+    SELECT @Scenario,N'Doctors with appointments',CAST((NULLIF(COUNT(DISTINCT DoctorID),0)) AS DECIMAL(28,8)) FROM #A UNION ALL
+    SELECT @Scenario,N'Department doctors',CAST((NULLIF(COUNT(*),0)) AS DECIMAL(28,8)) FROM dbo.Doctor WHERE (@DepartmentID IS NULL OR DepartmentID=@DepartmentID) AND (@DoctorID IS NULL OR DoctorID=@DoctorID) UNION ALL
+    SELECT @Scenario,N'Department staff',CAST((NULLIF(COUNT(*),0)) AS DECIMAL(28,8)) FROM dbo.Staff WHERE @DepartmentID IS NULL OR DepartmentID=@DepartmentID UNION ALL
+    SELECT @Scenario,N'Rooms',CAST((NULLIF(COUNT(*),0)) AS DECIMAL(28,8)) FROM #Rooms UNION ALL
+    SELECT @Scenario,N'Occupied rooms',CAST((NULLIF(COUNT(*),0)) AS DECIMAL(28,8)) FROM #Rooms WHERE AvailabilityStatus='Occupied' UNION ALL
+    SELECT @Scenario,N'Snapshot occupancy',CAST((CAST(SUM(CASE WHEN AvailabilityStatus='Occupied' THEN 1 ELSE 0 END) AS DECIMAL(28,8))/NULLIF(COUNT(*),0)) AS DECIMAL(28,8)) FROM #Rooms UNION ALL
+    SELECT @Scenario,N'Completed stays',CAST((NULLIF(COUNT(*),0)) AS DECIMAL(28,8)) FROM #Stays UNION ALL
+    SELECT @Scenario,N'Average completed stay',CAST((AVG(CAST(DATEDIFF(DAY,AdmissionDate,DischargeDate) AS DECIMAL(28,8)))) AS DECIMAL(28,8)) FROM #Stays UNION ALL
+    SELECT @Scenario,N'Repeat patients',CAST((NULLIF(COUNT(*),0)) AS DECIMAL(28,8)) FROM (SELECT PatientID FROM #A WHERE Status='Completed' GROUP BY PatientID HAVING COUNT(*)>1) p;
     DROP TABLE #A,#R,#B,#Rooms,#Stays;
     FETCH NEXT FROM cases INTO @Scenario,@DepartmentID,@DoctorID,@PatientID,@Month,@Status;
 END;
