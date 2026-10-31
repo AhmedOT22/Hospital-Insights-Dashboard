@@ -1,0 +1,53 @@
+name: SQL Server schema checks
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  schema:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    services:
+      sqlserver:
+        image: mcr.microsoft.com/mssql/server:2022-latest
+        env:
+          ACCEPT_EULA: 'Y'
+          MSSQL_PID: Developer
+          # Disposable local CI container only; never a deployment credential.
+          MSSQL_SA_PASSWORD: 'Hospital-CI-only-42!'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Wait for SQL Server
+        env:
+          CONTAINER: ${{ job.services.sqlserver.id }}
+        run: |
+          for attempt in $(seq 1 60); do
+            if docker exec "$CONTAINER" bash -c '/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "$MSSQL_SA_PASSWORD" -C -b -Q "SELECT 1"' >/dev/null 2>&1; then
+              exit 0
+            fi
+            sleep 2
+          done
+          docker logs "$CONTAINER"
+          exit 1
+      - name: Create schema and exercise constraints
+        env:
+          CONTAINER: ${{ job.services.sqlserver.id }}
+        run: |
+          docker cp sql/model.sql "$CONTAINER":/tmp/model.sql
+          docker cp tests/schema.sql "$CONTAINER":/tmp/schema-tests.sql
+          docker exec "$CONTAINER" bash -c '/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "$MSSQL_SA_PASSWORD" -C -b -Q "CREATE DATABASE HospitalSchemaTest"'
+          docker exec "$CONTAINER" bash -c '/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "$MSSQL_SA_PASSWORD" -C -b -d HospitalSchemaTest -i /tmp/model.sql'
+          docker exec "$CONTAINER" bash -c '/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "$MSSQL_SA_PASSWORD" -C -b -d HospitalSchemaTest -i /tmp/schema-tests.sql'
+      - name: Verify rerun refuses to overwrite tables
+        env:
+          CONTAINER: ${{ job.services.sqlserver.id }}
+        run: |
+          set +e
+          docker exec "$CONTAINER" bash -c '/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "$MSSQL_SA_PASSWORD" -C -b -d HospitalSchemaTest -i /tmp/model.sql' > rerun.log 2>&1
+          result=$?
+          set -e
+          cat rerun.log
+          test "$result" -ne 0
+          grep -q 'Hospital tables already exist' rerun.log
+          docker exec "$CONTAINER" bash -c '/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "$MSSQL_SA_PASSWORD" -C -b -d HospitalSchemaTest -h -1 -W -Q "SET NOCOUNT ON; SELECT COUNT(*) FROM sys.tables"' | grep -x '11'

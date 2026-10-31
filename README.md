@@ -16,7 +16,7 @@ A hospital database management and analytics solution that combines structured d
 
 ### 1. Database Design:
 
-A normalized database schema for managing hospital operations. The database includes the following key tables:
+A relational SQL Server schema for managing hospital operations. The database includes the following key tables:
 
 **Patient:** Stores demographic details of patients.
 
@@ -57,7 +57,7 @@ A normalized database schema for managing hospital operations. The database incl
 
 ### Prerequisites
 
-- **Database Management System**: MySQL, PostgreSQL SQL Server, etc...
+- **Database Management System**: Microsoft SQL Server 2022+ (SSMS or `sqlcmd`).
 
 - **Power BI Desktop**: For viewing and interacting with dashboards.
 
@@ -73,15 +73,21 @@ git clone https://github.com/AhmedOT22/Hospital-Insights-Dashboard.git
 
 - Open your SQL management tool.
 
-- Execute the model.sql script to create the schema.
-
-- Run the data_inserts.sql script to populate the tables with sample data.
+- Select an empty **user database** and execute `sql/model.sql`. The script creates
+  the schema in a transaction and refuses to overwrite existing hospital tables.
+- Read [schema rules and seed compatibility](sql/README.md) before loading data.
+  The original `sql/inserts.sql` is retained for review: its inconsistent billing
+  and appointment rows **do not pass the strengthened constraints**. It is not yet
+  a clean, supported seed for the revised schema.
+- For a verified miniature fixture and constraint checks, run `tests/schema.sql`
+  after schema creation in a disposable database. CI runs this on SQL Server 2022.
 
 **3. Open the dashboard:**
 
-- Open hospital.pbix in Power BI Desktop.
+- Open `PowerBI/Hospital.pbix` in Power BI Desktop.
 
-- Connect the dashboard to your database using the provided configuration settings.
+- Update the Power BI connection to your database and review the refreshed model.
+  The PBIX was not changed or validated against this schema update.
 
 ## Contributors:
 
