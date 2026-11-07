@@ -123,7 +123,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "Filters apply to linked appointment activity; room and workforce cards are fixed snapshots.",
+                    "value": "Service and collection rates follow appointment cohorts; room occupancy is a fixed snapshot.",
                     "textStyle": {
                       "fontFamily": "Segoe UI",
                       "fontSize": "9pt",

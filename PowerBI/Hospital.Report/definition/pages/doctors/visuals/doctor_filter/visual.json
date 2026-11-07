@@ -1,6 +1,6 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
-  "name": "month_filter",
+  "name": "doctor_filter",
   "position": {
     "x": 440,
     "y": 624,
@@ -25,7 +25,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Appointment month'"
+                  "Value": "'Select doctor'"
                 }
               }
             },
@@ -158,15 +158,15 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Appointment"
+                      "Entity": "Doctor"
                     }
                   },
-                  "Property": "Month"
+                  "Property": "Doctor name"
                 }
               },
-              "queryRef": "Appointment.Month",
-              "nativeQueryRef": "Month",
-              "displayName": "Month"
+              "queryRef": "Doctor.Doctor name",
+              "nativeQueryRef": "Doctor name",
+              "displayName": "Doctor name"
             }
           ]
         }
@@ -199,7 +199,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Appointment month'"
+                  "Value": "'Select doctor'"
                 }
               }
             },
