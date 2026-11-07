@@ -3,9 +3,9 @@
   "name": "chart2",
   "position": {
     "x": 24,
-    "y": 426,
+    "y": 434,
     "width": 608,
-    "height": 176,
+    "height": 172,
     "z": 13,
     "tabOrder": 13
   },
@@ -25,7 +25,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Workforce by home department'"
+                  "Value": "'Collection rate by service department'"
                 }
               }
             },
@@ -146,27 +146,12 @@
                       "Entity": "Appointment"
                     }
                   },
-                  "Property": "Department doctors"
+                  "Property": "Collection rate"
                 }
               },
-              "queryRef": "Appointment.Department doctors",
-              "nativeQueryRef": "Department doctors",
-              "displayName": "Department doctors"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Appointment"
-                    }
-                  },
-                  "Property": "Department staff"
-                }
-              },
-              "queryRef": "Appointment.Department staff",
-              "nativeQueryRef": "Department staff",
-              "displayName": "Department staff"
+              "queryRef": "Appointment.Collection rate",
+              "nativeQueryRef": "Collection rate",
+              "displayName": "Collection rate"
             }
           ]
         }

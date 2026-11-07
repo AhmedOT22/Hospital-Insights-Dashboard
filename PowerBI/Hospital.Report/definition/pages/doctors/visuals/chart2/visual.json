@@ -3,14 +3,14 @@
   "name": "chart2",
   "position": {
     "x": 24,
-    "y": 426,
+    "y": 434,
     "width": 608,
-    "height": 176,
+    "height": 172,
     "z": 13,
     "tabOrder": 13
   },
   "visual": {
-    "visualType": "clusteredColumnChart",
+    "visualType": "clusteredBarChart",
     "visualContainerObjects": {
       "title": [
         {
@@ -25,7 +25,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Outcomes by doctor'"
+                  "Value": "'Cancellation rate by service department'"
                 }
               }
             },
@@ -124,15 +124,15 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Doctor"
+                      "Entity": "Department"
                     }
                   },
-                  "Property": "Doctor name"
+                  "Property": "DepartmentName"
                 }
               },
-              "queryRef": "Doctor.Doctor name",
-              "nativeQueryRef": "Doctor name",
-              "displayName": "Doctor name"
+              "queryRef": "Department.DepartmentName",
+              "nativeQueryRef": "DepartmentName",
+              "displayName": "DepartmentName"
             }
           ]
         },
@@ -146,27 +146,12 @@
                       "Entity": "Appointment"
                     }
                   },
-                  "Property": "Completed appointments"
+                  "Property": "Cancellation rate"
                 }
               },
-              "queryRef": "Appointment.Completed appointments",
-              "nativeQueryRef": "Completed appointments",
-              "displayName": "Completed appointments"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Appointment"
-                    }
-                  },
-                  "Property": "Cancelled appointments"
-                }
-              },
-              "queryRef": "Appointment.Cancelled appointments",
-              "nativeQueryRef": "Cancelled appointments",
-              "displayName": "Cancelled appointments"
+              "queryRef": "Appointment.Cancellation rate",
+              "nativeQueryRef": "Cancellation rate",
+              "displayName": "Cancellation rate"
             }
           ]
         }

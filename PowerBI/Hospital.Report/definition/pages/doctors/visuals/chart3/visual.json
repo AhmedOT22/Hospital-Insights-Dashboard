@@ -3,9 +3,9 @@
   "name": "chart3",
   "position": {
     "x": 648,
-    "y": 426,
+    "y": 434,
     "width": 608,
-    "height": 176,
+    "height": 172,
     "z": 14,
     "tabOrder": 14
   },
@@ -25,7 +25,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Recorded workload over time'"
+                  "Value": "'Completed workload over time • select a doctor'"
                 }
               }
             },

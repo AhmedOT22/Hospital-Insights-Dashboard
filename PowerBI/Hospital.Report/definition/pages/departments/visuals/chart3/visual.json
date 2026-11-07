@@ -3,14 +3,14 @@
   "name": "chart3",
   "position": {
     "x": 648,
-    "y": 426,
+    "y": 434,
     "width": 608,
-    "height": 176,
+    "height": 172,
     "z": 14,
     "tabOrder": 14
   },
   "visual": {
-    "visualType": "clusteredColumnChart",
+    "visualType": "clusteredBarChart",
     "visualContainerObjects": {
       "title": [
         {
@@ -25,7 +25,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Room snapshot at Dec 31, 2025'"
+                  "Value": "'Snapshot occupancy by department'"
                 }
               }
             },
@@ -146,27 +146,12 @@
                       "Entity": "Appointment"
                     }
                   },
-                  "Property": "Rooms"
+                  "Property": "Snapshot occupancy"
                 }
               },
-              "queryRef": "Appointment.Rooms",
-              "nativeQueryRef": "Rooms",
-              "displayName": "Rooms"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Appointment"
-                    }
-                  },
-                  "Property": "Occupied rooms"
-                }
-              },
-              "queryRef": "Appointment.Occupied rooms",
-              "nativeQueryRef": "Occupied rooms",
-              "displayName": "Occupied rooms"
+              "queryRef": "Appointment.Snapshot occupancy",
+              "nativeQueryRef": "Snapshot occupancy",
+              "displayName": "Snapshot occupancy"
             }
           ]
         }
