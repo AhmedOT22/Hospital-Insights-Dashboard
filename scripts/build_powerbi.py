@@ -277,7 +277,7 @@ PAGES = [
         [
             (
                 "clusteredColumnChart",
-                "Appointments by month",
+                "Bookings by month (Jan 2026 scheduled)",
                 "Appointment",
                 "Month",
                 ["Appointments"],
@@ -298,10 +298,10 @@ PAGES = [
             ),
             (
                 "clusteredBarChart",
-                "Patients served by service department",
+                "Cancellation rate by service department",
                 "Department",
                 "DepartmentName",
-                ["Patients served"],
+                ["Cancellation rate"],
             ),
         ],
     ),
@@ -317,7 +317,7 @@ PAGES = [
         [
             (
                 "lineChart",
-                "Appointments over time",
+                "Recorded appointments by month",
                 "Appointment",
                 "Month",
                 ["Appointments"],
@@ -330,25 +330,25 @@ PAGES = [
                 ["Completed appointments", "Cancelled appointments"],
             ),
             (
-                "clusteredBarChart",
-                "Appointments by doctor",
-                "Doctor",
-                "Doctor name",
-                ["Appointments"],
+                "lineChart",
+                "Cancellation rate by month",
+                "Appointment",
+                "Month",
+                ["Cancellation rate"],
             ),
             (
-                "donutChart",
-                "Recorded appointment status",
-                "Appointment",
-                "Status",
-                ["Appointments"],
+                "clusteredBarChart",
+                "Future scheduled bookings by department",
+                "Department",
+                "DepartmentName",
+                ["Scheduled appointments"],
             ),
         ],
     ),
     (
         "departments",
         "Departments",
-        ["Department doctors", "Department staff", "Rooms", "Snapshot occupancy"],
+        ["Appointments", "Collection rate", "Rooms", "Snapshot occupancy"],
         [
             (
                 "clusteredBarChart",
@@ -366,17 +366,17 @@ PAGES = [
             ),
             (
                 "clusteredBarChart",
-                "Workforce by home department",
+                "Collection rate by service department",
                 "Department",
                 "DepartmentName",
-                ["Department doctors", "Department staff"],
+                ["Collection rate"],
             ),
             (
-                "clusteredColumnChart",
-                "Room snapshot at Dec 31, 2025",
+                "clusteredBarChart",
+                "Snapshot occupancy by department",
                 "Department",
                 "DepartmentName",
-                ["Rooms", "Occupied rooms"],
+                ["Snapshot occupancy"],
             ),
         ],
     ),
@@ -392,28 +392,28 @@ PAGES = [
         [
             (
                 "clusteredBarChart",
-                "Completed workload by doctor",
+                "Completed workload • busiest five doctors",
                 "Doctor",
                 "Doctor name",
                 ["Completed appointments"],
             ),
             (
                 "clusteredBarChart",
-                "Patients served by doctor",
+                "Patients served • busiest five doctors",
                 "Doctor",
                 "Doctor name",
                 ["Patients served"],
             ),
             (
-                "clusteredColumnChart",
-                "Outcomes by doctor",
-                "Doctor",
-                "Doctor name",
-                ["Completed appointments", "Cancelled appointments"],
+                "clusteredBarChart",
+                "Cancellation rate by service department",
+                "Department",
+                "DepartmentName",
+                ["Cancellation rate"],
             ),
             (
                 "lineChart",
-                "Recorded workload over time",
+                "Completed workload over time • select a doctor",
                 "Appointment",
                 "Month",
                 ["Completed appointments"],
@@ -440,11 +440,11 @@ PAGES = [
                 ["Patients served"],
             ),
             (
-                "clusteredBarChart",
-                "Visits by synthetic scenario",
-                "Medical_Record",
-                "Diagnosis",
-                ["Visits"],
+                "clusteredColumnChart",
+                "Completed vs cancelled by age cohort",
+                "Patient",
+                "Age group at snapshot",
+                ["Completed appointments", "Cancelled appointments"],
             ),
             (
                 "lineChart",
@@ -508,7 +508,7 @@ def visual(page, name, kind, title, x, y, w, h, roles=None, objects=None):
                             "field": field(t, n, m),
                             "queryRef": t + "." + n,
                             "nativeQueryRef": n,
-                            "displayName": n,
+                            "displayName": ({"Completed appointments": "Completed", "Cancelled appointments": "Cancelled", "Scheduled appointments": "Scheduled", "Doctors with appointments": "Doctors with bookings", "Outstanding amount": "Outstanding", "Collected amount": "Collected"}.get(n, n) if kind == "cardVisual" else n),
                         }
                         for t, n, m in fields
                     ]
@@ -640,6 +640,10 @@ def report():
         },
     )
     save(
+        REPORT / "definition/version.json",
+        {"$schema": SCHEMA + "definition/versionMetadata/1.0.0/schema.json", "version": "2.0.0"},
+    )
+    save(
         REPORT / "definition/pages/pages.json",
         {
             "$schema": SCHEMA + "definition/pagesMetadata/1.0.0/schema.json",
@@ -705,12 +709,12 @@ def report():
                 },
             )
 
-        text("heading", label, 24, 12, 720, 40, 24)
+        text("heading", label, 24, 9, 970, 46, 21)
         text(
             "context",
             "Synthetic hospital demonstration • Outcomes through Dec 31, 2025 • Amounts in demo currency units",
             24,
-            55,
+            61,
             1232,
             26,
             10,
@@ -722,7 +726,7 @@ def report():
                 "actionButton",
                 target_label,
                 24 + i * 248,
-                89,
+                98,
                 236,
                 44,
                 objects={
@@ -785,7 +789,7 @@ def report():
                 "cardVisual",
                 measure,
                 24 + i * 312,
-                144,
+                156,
                 296,
                 card_height,
                 {"Data": [("Appointment", measure, True)]},
@@ -813,9 +817,9 @@ def report():
                 kind,
                 title,
                 24 + (i % 2) * 624,
-                238 + (i // 2) * 188,
+                250 + (i // 2) * 184,
                 608,
-                176,
+                172,
                 roles,
             )
         visual(
@@ -829,7 +833,7 @@ def report():
             80,
             {"Values": [("Department", "DepartmentName", False)]},
         )
-        if page in ("overview", "appointments", "doctors", "patients"):
+        if page in ("overview", "appointments", "patients"):
             visual(
                 page,
                 "month_filter",
@@ -841,9 +845,21 @@ def report():
                 80,
                 {"Values": [("Appointment", "Month", False)]},
             )
+        if page == "doctors":
+            visual(
+                page,
+                "doctor_filter",
+                "slicer",
+                "Select doctor",
+                440,
+                624,
+                400,
+                80,
+                {"Values": [("Doctor", "Doctor name", False)]},
+            )
         text(
             "footnote",
-            "Filters apply to linked appointment activity; room and workforce cards are fixed snapshots."
+            "Service and collection rates follow appointment cohorts; room occupancy is a fixed snapshot."
             if page == "departments"
             else "Rates exclude future scheduled outcomes. Financial measures follow visit cohorts, not payment-date cash flow.",
             856,
