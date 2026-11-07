@@ -25,7 +25,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Department staff'"
+                  "Value": "'Collection rate'"
                 }
               }
             },
@@ -187,12 +187,12 @@
                       "Entity": "Appointment"
                     }
                   },
-                  "Property": "Department staff"
+                  "Property": "Collection rate"
                 }
               },
-              "queryRef": "Appointment.Department staff",
-              "nativeQueryRef": "Department staff",
-              "displayName": "Department staff"
+              "queryRef": "Appointment.Collection rate",
+              "nativeQueryRef": "Collection rate",
+              "displayName": "Collection rate"
             }
           ]
         }

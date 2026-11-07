@@ -192,7 +192,7 @@
               },
               "queryRef": "Appointment.Outstanding amount",
               "nativeQueryRef": "Outstanding amount",
-              "displayName": "Outstanding amount"
+              "displayName": "Outstanding"
             }
           ]
         }

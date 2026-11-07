@@ -25,7 +25,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Department doctors'"
+                  "Value": "'Appointments'"
                 }
               }
             },
@@ -187,12 +187,12 @@
                       "Entity": "Appointment"
                     }
                   },
-                  "Property": "Department doctors"
+                  "Property": "Appointments"
                 }
               },
-              "queryRef": "Appointment.Department doctors",
-              "nativeQueryRef": "Department doctors",
-              "displayName": "Department doctors"
+              "queryRef": "Appointment.Appointments",
+              "nativeQueryRef": "Appointments",
+              "displayName": "Appointments"
             }
           ]
         }
