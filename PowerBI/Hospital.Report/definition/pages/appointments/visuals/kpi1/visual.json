@@ -192,7 +192,7 @@
               },
               "queryRef": "Appointment.Cancelled appointments",
               "nativeQueryRef": "Cancelled appointments",
-              "displayName": "Cancelled appointments"
+              "displayName": "Cancelled"
             }
           ]
         }
