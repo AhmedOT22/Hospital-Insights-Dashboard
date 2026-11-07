@@ -392,14 +392,14 @@ PAGES = [
         [
             (
                 "clusteredBarChart",
-                "Completed workload • busiest five doctors",
+                "Completed workload by doctor",
                 "Doctor",
                 "Doctor name",
                 ["Completed appointments"],
             ),
             (
                 "clusteredBarChart",
-                "Patients served • busiest five doctors",
+                "Patients served by doctor",
                 "Doctor",
                 "Doctor name",
                 ["Patients served"],
