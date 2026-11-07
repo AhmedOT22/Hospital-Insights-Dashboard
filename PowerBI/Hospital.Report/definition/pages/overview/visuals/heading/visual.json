@@ -3,9 +3,9 @@
   "name": "heading",
   "position": {
     "x": 24,
-    "y": 12,
-    "width": 720,
-    "height": 40,
+    "y": 9,
+    "width": 970,
+    "height": 46,
     "z": 0,
     "tabOrder": 0
   },
@@ -126,7 +126,7 @@
                     "value": "Executive Overview",
                     "textStyle": {
                       "fontFamily": "Segoe UI",
-                      "fontSize": "24pt",
+                      "fontSize": "21pt",
                       "color": "#18394A"
                     }
                   }

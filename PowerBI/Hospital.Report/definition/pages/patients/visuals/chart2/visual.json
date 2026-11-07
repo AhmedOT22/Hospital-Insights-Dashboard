@@ -3,14 +3,14 @@
   "name": "chart2",
   "position": {
     "x": 24,
-    "y": 426,
+    "y": 434,
     "width": 608,
-    "height": 176,
+    "height": 172,
     "z": 13,
     "tabOrder": 13
   },
   "visual": {
-    "visualType": "clusteredBarChart",
+    "visualType": "clusteredColumnChart",
     "visualContainerObjects": {
       "title": [
         {
@@ -25,7 +25,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Visits by synthetic scenario'"
+                  "Value": "'Completed vs cancelled by age cohort'"
                 }
               }
             },
@@ -124,15 +124,15 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Medical_Record"
+                      "Entity": "Patient"
                     }
                   },
-                  "Property": "Diagnosis"
+                  "Property": "Age group at snapshot"
                 }
               },
-              "queryRef": "Medical_Record.Diagnosis",
-              "nativeQueryRef": "Diagnosis",
-              "displayName": "Diagnosis"
+              "queryRef": "Patient.Age group at snapshot",
+              "nativeQueryRef": "Age group at snapshot",
+              "displayName": "Age group at snapshot"
             }
           ]
         },
@@ -146,12 +146,27 @@
                       "Entity": "Appointment"
                     }
                   },
-                  "Property": "Visits"
+                  "Property": "Completed appointments"
                 }
               },
-              "queryRef": "Appointment.Visits",
-              "nativeQueryRef": "Visits",
-              "displayName": "Visits"
+              "queryRef": "Appointment.Completed appointments",
+              "nativeQueryRef": "Completed appointments",
+              "displayName": "Completed appointments"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Appointment"
+                    }
+                  },
+                  "Property": "Cancelled appointments"
+                }
+              },
+              "queryRef": "Appointment.Cancelled appointments",
+              "nativeQueryRef": "Cancelled appointments",
+              "displayName": "Cancelled appointments"
             }
           ]
         }
