@@ -3,9 +3,9 @@
   "name": "chart0",
   "position": {
     "x": 24,
-    "y": 238,
+    "y": 250,
     "width": 608,
-    "height": 176,
+    "height": 172,
     "z": 11,
     "tabOrder": 11
   },
@@ -25,7 +25,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Appointments over time'"
+                  "Value": "'Recorded appointments by month'"
                 }
               }
             },

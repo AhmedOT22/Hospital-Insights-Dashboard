@@ -3,14 +3,14 @@
   "name": "chart2",
   "position": {
     "x": 24,
-    "y": 426,
+    "y": 434,
     "width": 608,
-    "height": 176,
+    "height": 172,
     "z": 13,
     "tabOrder": 13
   },
   "visual": {
-    "visualType": "clusteredBarChart",
+    "visualType": "lineChart",
     "visualContainerObjects": {
       "title": [
         {
@@ -25,7 +25,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Appointments by doctor'"
+                  "Value": "'Cancellation rate by month'"
                 }
               }
             },
@@ -124,15 +124,15 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Doctor"
+                      "Entity": "Appointment"
                     }
                   },
-                  "Property": "Doctor name"
+                  "Property": "Month"
                 }
               },
-              "queryRef": "Doctor.Doctor name",
-              "nativeQueryRef": "Doctor name",
-              "displayName": "Doctor name"
+              "queryRef": "Appointment.Month",
+              "nativeQueryRef": "Month",
+              "displayName": "Month"
             }
           ]
         },
@@ -146,15 +146,33 @@
                       "Entity": "Appointment"
                     }
                   },
-                  "Property": "Appointments"
+                  "Property": "Cancellation rate"
                 }
               },
-              "queryRef": "Appointment.Appointments",
-              "nativeQueryRef": "Appointments",
-              "displayName": "Appointments"
+              "queryRef": "Appointment.Cancellation rate",
+              "nativeQueryRef": "Cancellation rate",
+              "displayName": "Cancellation rate"
             }
           ]
         }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Appointment"
+                  }
+                },
+                "Property": "Month"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ],
+        "isDefaultSort": false
       }
     }
   }

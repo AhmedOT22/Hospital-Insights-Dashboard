@@ -3,14 +3,14 @@
   "name": "chart3",
   "position": {
     "x": 648,
-    "y": 426,
+    "y": 434,
     "width": 608,
-    "height": 176,
+    "height": 172,
     "z": 14,
     "tabOrder": 14
   },
   "visual": {
-    "visualType": "donutChart",
+    "visualType": "clusteredBarChart",
     "visualContainerObjects": {
       "title": [
         {
@@ -25,7 +25,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Recorded appointment status'"
+                  "Value": "'Future scheduled bookings by department'"
                 }
               }
             },
@@ -124,15 +124,15 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Appointment"
+                      "Entity": "Department"
                     }
                   },
-                  "Property": "Status"
+                  "Property": "DepartmentName"
                 }
               },
-              "queryRef": "Appointment.Status",
-              "nativeQueryRef": "Status",
-              "displayName": "Status"
+              "queryRef": "Department.DepartmentName",
+              "nativeQueryRef": "DepartmentName",
+              "displayName": "DepartmentName"
             }
           ]
         },
@@ -146,12 +146,12 @@
                       "Entity": "Appointment"
                     }
                   },
-                  "Property": "Appointments"
+                  "Property": "Scheduled appointments"
                 }
               },
-              "queryRef": "Appointment.Appointments",
-              "nativeQueryRef": "Appointments",
-              "displayName": "Appointments"
+              "queryRef": "Appointment.Scheduled appointments",
+              "nativeQueryRef": "Scheduled appointments",
+              "displayName": "Scheduled appointments"
             }
           ]
         }
