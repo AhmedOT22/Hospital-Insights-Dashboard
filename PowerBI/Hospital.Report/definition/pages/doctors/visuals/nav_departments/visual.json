@@ -7,7 +7,7 @@
     "width": 236,
     "height": 44,
     "z": 4,
-    "tabOrder": 4
+    "tabOrder": 14000
   },
   "visual": {
     "visualType": "actionButton",
@@ -96,6 +96,19 @@
           }
         }
       ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Departments page button.'"
+                }
+              }
+            }
+          }
+        }
+      ],
       "visualLink": [
         {
           "properties": {
@@ -117,6 +130,13 @@
               "expr": {
                 "Literal": {
                   "Value": "'departments'"
+                }
+              }
+            },
+            "tooltip": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Go to the Departments page'"
                 }
               }
             }

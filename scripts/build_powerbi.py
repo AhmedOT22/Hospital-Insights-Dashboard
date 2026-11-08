@@ -458,16 +458,45 @@ PAGES = [
 ]
 
 
-def visual(page, name, kind, title, x, y, w, h, roles=None, objects=None):
+CARD_LABELS = {
+    "Completed appointments": "Completed",
+    "Cancelled appointments": "Cancelled",
+    "Scheduled appointments": "Scheduled",
+    "Doctors with appointments": "Doctors with bookings",
+    "Outstanding amount": "Outstanding",
+    "Collected amount": "Collected",
+}
+CHART_NAMES = {
+    "clusteredBarChart": "Bar chart",
+    "clusteredColumnChart": "Column chart",
+    "lineChart": "Line chart",
+    "donutChart": "Donut chart",
+}
+
+
+def assign_tab_order(page):
+    """Power BI focuses the highest tabOrder first. Visuals are created in
+    reading order (top to bottom, left to right; z records that order), so the
+    first visual gets N * 1000 and the last gets 1000."""
+    paths = list((REPORT / "definition/pages" / page / "visuals").glob("*/visual.json"))
+    docs = sorted(
+        ((path, json.loads(path.read_text())) for path in paths),
+        key=lambda item: item[1]["position"]["z"],
+    )
+    for rank, (path, doc) in enumerate(docs):
+        doc["position"]["tabOrder"] = (len(docs) - rank) * 1000
+        save(path, doc)
+
+
+def visual(page, name, kind, title, x, y, w, h, roles=None, objects=None, alt=None):
+    index = len(list((REPORT / "definition/pages" / page / "visuals").glob("*")))
     pos = {
         "x": x,
         "y": y,
         "width": w,
         "height": h,
-        "z": len(list((REPORT / "definition/pages" / page / "visuals").glob("*"))),
-        "tabOrder": len(
-            list((REPORT / "definition/pages" / page / "visuals").glob("*"))
-        ),
+        "z": index,
+        "tabOrder": 0,  # final value set by assign_tab_order()
     }
     cfg = {
         "visualType": kind,
@@ -499,6 +528,11 @@ def visual(page, name, kind, title, x, y, w, h, roles=None, objects=None):
             "visualHeader": [{"properties": {"show": literal(False)}}],
         },
     }
+    if alt:
+        # Screen readers announce altText; keep it short and describe the content.
+        cfg["visualContainerObjects"]["general"] = [
+            {"properties": {"altText": literal(alt)}}
+        ]
     if roles:
         cfg["query"] = {
             "queryState": {
@@ -508,7 +542,9 @@ def visual(page, name, kind, title, x, y, w, h, roles=None, objects=None):
                             "field": field(t, n, m),
                             "queryRef": t + "." + n,
                             "nativeQueryRef": n,
-                            "displayName": ({"Completed appointments": "Completed", "Cancelled appointments": "Cancelled", "Scheduled appointments": "Scheduled", "Doctors with appointments": "Doctors with bookings", "Outstanding amount": "Outstanding", "Collected amount": "Collected"}.get(n, n) if kind == "cardVisual" else n),
+                            "displayName": (
+                                CARD_LABELS.get(n, n) if kind == "cardVisual" else n
+                            ),
                         }
                         for t, n, m in fields
                     ]
@@ -563,6 +599,7 @@ def visual(page, name, kind, title, x, y, w, h, roles=None, objects=None):
             }
         ]
     if kind == "actionButton":
+        target = name.removeprefix("nav_")
         cfg["visualContainerObjects"]["background"] = [
             {"properties": {"show": literal(False)}}
         ]
@@ -571,7 +608,12 @@ def visual(page, name, kind, title, x, y, w, h, roles=None, objects=None):
                 "properties": {
                     "show": literal(True),
                     "type": literal("PageNavigation"),
-                    "navigationSection": literal(name.removeprefix("nav_")),
+                    "navigationSection": literal(target),
+                    "tooltip": literal(
+                        f"{title} (current page)"
+                        if target == page
+                        else f"Go to the {title} page"
+                    ),
                 }
             }
         ]
@@ -685,6 +727,7 @@ def report():
                 y,
                 w,
                 h,
+                alt=value,
                 objects={
                     "general": [
                         {
@@ -729,6 +772,7 @@ def report():
                 89,
                 236,
                 44,
+                alt=f"{target_label} page button.",
                 objects={
                     "text": [
                         {"properties": {"show": literal(True)}},
@@ -793,6 +837,8 @@ def report():
                 296,
                 card_height,
                 {"Data": [("Appointment", measure, True)]},
+                alt=f"KPI card showing {CARD_LABELS.get(measure, measure).lower()}"
+                " for the current selection.",
                 objects={
                     obj: [{"properties": props, "selector": {"id": "default"}}]
                     for obj, props in {
@@ -821,6 +867,7 @@ def report():
                 608,
                 172,
                 roles,
+                alt=f"{CHART_NAMES[kind]}: {title}.",
             )
         visual(
             page,
@@ -832,6 +879,7 @@ def report():
             400,
             80,
             {"Values": [("Department", "DepartmentName", False)]},
+            alt="Dropdown filter to select a service department.",
         )
         if page in ("overview", "appointments", "patients"):
             visual(
@@ -844,6 +892,7 @@ def report():
                 400,
                 80,
                 {"Values": [("Appointment", "Month", False)]},
+                alt="Dropdown filter to select an appointment month.",
             )
         if page == "doctors":
             visual(
@@ -856,6 +905,7 @@ def report():
                 400,
                 80,
                 {"Values": [("Doctor", "Doctor name", False)]},
+                alt="Dropdown filter to select a doctor.",
             )
         text(
             "footnote",
@@ -868,6 +918,7 @@ def report():
             64,
             9,
         )
+        assign_tab_order(page)
     save(
         REPORT / "definition.pbir",
         {

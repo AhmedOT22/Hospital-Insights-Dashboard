@@ -7,7 +7,7 @@
     "width": 236,
     "height": 44,
     "z": 3,
-    "tabOrder": 3
+    "tabOrder": 15000
   },
   "visual": {
     "visualType": "actionButton",
@@ -96,6 +96,19 @@
           }
         }
       ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Appointments page button.'"
+                }
+              }
+            }
+          }
+        }
+      ],
       "visualLink": [
         {
           "properties": {
@@ -117,6 +130,13 @@
               "expr": {
                 "Literal": {
                   "Value": "'appointments'"
+                }
+              }
+            },
+            "tooltip": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Appointments (current page)'"
                 }
               }
             }

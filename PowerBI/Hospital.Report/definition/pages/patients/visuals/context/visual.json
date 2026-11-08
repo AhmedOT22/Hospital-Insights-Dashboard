@@ -7,7 +7,7 @@
     "width": 1232,
     "height": 26,
     "z": 1,
-    "tabOrder": 1
+    "tabOrder": 17000
   },
   "visual": {
     "visualType": "textbox",
@@ -108,6 +108,19 @@
               "expr": {
                 "Literal": {
                   "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Synthetic hospital demonstration • Outcomes through Dec 31, 2025 • Amounts in demo currency units'"
                 }
               }
             }

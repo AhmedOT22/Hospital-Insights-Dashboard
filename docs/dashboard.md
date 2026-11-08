@@ -44,6 +44,17 @@ Until these steps pass, this is implemented **source awaiting Desktop acceptance
 not a claim that the compiled dashboard is finished. The original PBIX/screenshots
 remain historical and intentionally have not been relabelled as new screenshots.
 
+## Accessibility
+
+Every visual carries alt text (`visualContainerObjects.general.altText`): charts
+name their type and title, cards their measure, slicers the field they filter and
+textboxes their visible text. Navigation buttons also have a `visualLink` tooltip
+("Go to the … page" / "… (current page)"). Power BI focuses the **highest**
+`tabOrder` first, so the generator assigns values from N × 1000 down to 1000 in
+reading order: heading, context line, navigation, KPI cards, charts, slicers,
+footnote. `tests/test_pipeline.py` enforces all three. Screen-reader output and
+focus order still need a manual check in Desktop (step 4 above).
+
 ## Final source audit
 
 The cards use the native `cardVisual` / `Data` binding. Navigation uses explicit

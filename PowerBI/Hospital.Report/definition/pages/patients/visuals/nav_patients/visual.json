@@ -7,7 +7,7 @@
     "width": 236,
     "height": 44,
     "z": 6,
-    "tabOrder": 6
+    "tabOrder": 12000
   },
   "visual": {
     "visualType": "actionButton",
@@ -96,6 +96,19 @@
           }
         }
       ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Patients page button.'"
+                }
+              }
+            }
+          }
+        }
+      ],
       "visualLink": [
         {
           "properties": {
@@ -117,6 +130,13 @@
               "expr": {
                 "Literal": {
                   "Value": "'patients'"
+                }
+              }
+            },
+            "tooltip": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Patients (current page)'"
                 }
               }
             }

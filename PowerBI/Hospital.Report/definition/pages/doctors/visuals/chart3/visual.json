@@ -7,7 +7,7 @@
     "width": 608,
     "height": 172,
     "z": 14,
-    "tabOrder": 14
+    "tabOrder": 4000
   },
   "visual": {
     "visualType": "lineChart",
@@ -108,6 +108,19 @@
               "expr": {
                 "Literal": {
                   "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Line chart: Completed workload over time • select a doctor.'"
                 }
               }
             }

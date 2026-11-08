@@ -7,7 +7,7 @@
     "width": 296,
     "height": 82,
     "z": 9,
-    "tabOrder": 9
+    "tabOrder": 9000
   },
   "visual": {
     "visualType": "cardVisual",
@@ -108,6 +108,19 @@
               "expr": {
                 "Literal": {
                   "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'KPI card showing patients served for the current selection.'"
                 }
               }
             }

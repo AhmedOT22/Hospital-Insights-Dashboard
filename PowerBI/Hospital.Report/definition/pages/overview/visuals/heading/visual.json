@@ -7,7 +7,7 @@
     "width": 970,
     "height": 46,
     "z": 0,
-    "tabOrder": 0
+    "tabOrder": 18000
   },
   "visual": {
     "visualType": "textbox",
@@ -108,6 +108,19 @@
               "expr": {
                 "Literal": {
                   "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Executive Overview'"
                 }
               }
             }

@@ -7,7 +7,7 @@
     "width": 236,
     "height": 44,
     "z": 5,
-    "tabOrder": 5
+    "tabOrder": 13000
   },
   "visual": {
     "visualType": "actionButton",
@@ -96,6 +96,19 @@
           }
         }
       ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Doctors page button.'"
+                }
+              }
+            }
+          }
+        }
+      ],
       "visualLink": [
         {
           "properties": {
@@ -117,6 +130,13 @@
               "expr": {
                 "Literal": {
                   "Value": "'doctors'"
+                }
+              }
+            },
+            "tooltip": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Doctors (current page)'"
                 }
               }
             }

@@ -7,7 +7,7 @@
     "width": 296,
     "height": 82,
     "z": 7,
-    "tabOrder": 7
+    "tabOrder": 11000
   },
   "visual": {
     "visualType": "cardVisual",
@@ -108,6 +108,19 @@
               "expr": {
                 "Literal": {
                   "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'KPI card showing appointments for the current selection.'"
                 }
               }
             }

@@ -61,8 +61,8 @@ never silently reset an existing installation. See [SQL rules](sql/README.md).
 ## Evidence and limits
 
 CI runs the schema, 28 rejection cases, the full generated seed and reconciliation
-queries on SQL Server 2022, including 374 metric comparisons across 17 filter contexts. It also checks reproducibility, eleven Python tests,
-report field bindings, filter paths and Microsoft PBIR JSON schemas. These checks
+queries on SQL Server 2022, including 374 metric comparisons across 17 filter contexts. It also checks reproducibility, twelve Python tests,
+report field bindings, accessibility metadata, filter paths and Microsoft PBIR JSON schemas. These checks
 cover data and source structure, not Desktop rendering or DAX engine correctness.
 
 [Metric definitions and filter behavior](docs/metrics.md) ·

@@ -220,6 +220,34 @@ class PipelineTests(unittest.TestCase):
                     self.assertFalse(overlap, (page, p.parent.name, name))
                 boxes.append((p.parent.name, box))
 
+    def test_accessibility_alt_text_tooltips_and_tab_order(self):
+        def text(prop):
+            return prop["expr"]["Literal"]["Value"].strip("'")
+
+        pages = ROOT / "PowerBI/Hospital.Report/definition/pages"
+        for page in pages.glob("*/page.json"):
+            visuals = [
+                json.loads(p.read_text())
+                for p in page.parent.glob("visuals/*/visual.json")
+            ]
+            for d in visuals:
+                objects = d["visual"]["visualContainerObjects"]
+                alt = text(objects["general"][0]["properties"]["altText"])
+                self.assertTrue(alt.strip(), d["name"])
+                self.assertLessEqual(len(alt), 150, d["name"])
+                if d["visual"]["visualType"] == "actionButton":
+                    tooltip = text(objects["visualLink"][0]["properties"]["tooltip"])
+                    self.assertTrue(tooltip.strip(), d["name"])
+            # Power BI focuses the highest tabOrder first: reading order
+            # (top to bottom, then left to right) must have descending values.
+            reading = sorted(
+                visuals, key=lambda d: (d["position"]["y"], d["position"]["x"])
+            )
+            orders = [d["position"]["tabOrder"] for d in reading]
+            self.assertEqual(orders, sorted(orders, reverse=True), page.parent.name)
+            self.assertEqual(len(set(orders)), len(orders), page.parent.name)
+            self.assertEqual(reading[0]["name"], "heading")
+
     def test_metric_oracle_cohorts_blanks_and_resource_scope(self):
         tables = load()
         cases = {c["name"]: metrics(tables, c) for c in CONTEXTS}

@@ -7,7 +7,7 @@
     "width": 236,
     "height": 44,
     "z": 2,
-    "tabOrder": 2
+    "tabOrder": 16000
   },
   "visual": {
     "visualType": "actionButton",
@@ -96,6 +96,19 @@
           }
         }
       ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Executive Overview page button.'"
+                }
+              }
+            }
+          }
+        }
+      ],
       "visualLink": [
         {
           "properties": {
@@ -117,6 +130,13 @@
               "expr": {
                 "Literal": {
                   "Value": "'overview'"
+                }
+              }
+            },
+            "tooltip": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Go to the Executive Overview page'"
                 }
               }
             }
