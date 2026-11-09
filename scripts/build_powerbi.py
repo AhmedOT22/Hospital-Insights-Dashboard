@@ -689,6 +689,10 @@ def visual(page, name, kind, title, x, y, w, h, roles=None, objects=None, alt=No
                 "sort": [{"field": field(t, n, m), "direction": "Ascending"}],
                 "isDefaultSort": False,
             }
+    if kind == "textbox":
+        cfg["visualContainerObjects"]["padding"] = [
+            {"properties": {side: literal(0) for side in ("top", "bottom", "left", "right")}}
+        ]
     if kind == "slicer":
         cfg["visualContainerObjects"]["padding"] = [
             {
@@ -928,14 +932,16 @@ def report():
                 },
             )
 
-        text("heading", label, 24, 9, 970, 46, 21)
+        # Boxes leave room for a full line at each size (21 pt needs ~38 px, 10 pt
+        # ~18 px); with Desktop's default padding they clipped and showed scrollbars.
+        text("heading", label, 24, 2, 970, 52, 21)
         text(
             "context",
             "Synthetic hospital demonstration • Outcomes through Dec 31, 2025 • Amounts in demo currency units",
             24,
-            55,
+            54,
             1232,
-            26,
+            32,
             10,
         )
         for i, (target, target_label, _, _) in enumerate(PAGES):

@@ -3,9 +3,9 @@
   "name": "context",
   "position": {
     "x": 24,
-    "y": 55,
+    "y": 54,
     "width": 1232,
-    "height": 26,
+    "height": 32,
     "z": 1,
     "tabOrder": 20000
   },
@@ -121,6 +121,40 @@
               "expr": {
                 "Literal": {
                   "Value": "'Synthetic hospital demonstration • Outcomes through Dec 31, 2025 • Amounts in demo currency units'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "padding": [
+        {
+          "properties": {
+            "top": {
+              "expr": {
+                "Literal": {
+                  "Value": "0"
+                }
+              }
+            },
+            "bottom": {
+              "expr": {
+                "Literal": {
+                  "Value": "0"
+                }
+              }
+            },
+            "left": {
+              "expr": {
+                "Literal": {
+                  "Value": "0"
+                }
+              }
+            },
+            "right": {
+              "expr": {
+                "Literal": {
+                  "Value": "0"
                 }
               }
             }

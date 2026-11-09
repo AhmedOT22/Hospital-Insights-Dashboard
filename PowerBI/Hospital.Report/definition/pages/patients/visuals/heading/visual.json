@@ -3,9 +3,9 @@
   "name": "heading",
   "position": {
     "x": 24,
-    "y": 9,
+    "y": 2,
     "width": 970,
-    "height": 46,
+    "height": 52,
     "z": 0,
     "tabOrder": 19000
   },
@@ -121,6 +121,40 @@
               "expr": {
                 "Literal": {
                   "Value": "'Patients'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "padding": [
+        {
+          "properties": {
+            "top": {
+              "expr": {
+                "Literal": {
+                  "Value": "0"
+                }
+              }
+            },
+            "bottom": {
+              "expr": {
+                "Literal": {
+                  "Value": "0"
+                }
+              }
+            },
+            "left": {
+              "expr": {
+                "Literal": {
+                  "Value": "0"
+                }
+              }
+            },
+            "right": {
+              "expr": {
+                "Literal": {
+                  "Value": "0"
                 }
               }
             }
