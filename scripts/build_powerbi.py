@@ -263,21 +263,17 @@ def semantic_model():
             if kind == "TIME":
                 col["formatString"] = "HH:mm"
             columns.append(col)
-        # Power Query explicitly converts SQL time to datetime as expected by the tabular model.
+        # Every table loads with the same two-step query. SQL time columns arrive as
+        # M time values and the model stores them as dateTime by itself; an extra
+        # Table.TransformColumnTypes step on Appointment made Desktop refresh fail
+        # with "A cyclic reference was encountered during evaluation".
         expr = [
             "let",
             "    Source = Sql.Database(ServerName, DatabaseName, [CreateNavigationProperties=false]),",
             f'    Rows = Source{{[Schema="dbo", Item="{table}"]}}[Data]',
+            "in",
+            "    Rows",
         ]
-        if table == "Appointment":
-            expr[-1] += ","
-            expr += [
-                '    Typed = Table.TransformColumnTypes(Rows, {{"AppointmentTime", type datetime}})',
-                "in",
-                "    Typed",
-            ]
-        else:
-            expr += ["in", "    Rows"]
         t = {
             "name": table,
             "columns": columns,

@@ -151,6 +151,23 @@ class PipelineTests(unittest.TestCase):
 
             walk(root)
 
+    def test_every_table_loads_with_the_plain_sql_query(self):
+        model = json.loads(
+            (ROOT / "PowerBI/Hospital.SemanticModel/model.bim").read_text()
+        )["model"]
+        for table in model["tables"]:
+            expression = table["partitions"][0]["source"]["expression"]
+            self.assertEqual(
+                expression,
+                [
+                    "let",
+                    "    Source = Sql.Database(ServerName, DatabaseName, [CreateNavigationProperties=false]),",
+                    f'    Rows = Source{{[Schema="dbo", Item="{table['name']}"]}}[Data]',
+                    "in",
+                    "    Rows",
+                ],
+            )
+
     def test_every_visual_field_exists_and_layout_stays_on_page(self):
         model = json.loads(
             (ROOT / "PowerBI/Hospital.SemanticModel/model.bim").read_text()

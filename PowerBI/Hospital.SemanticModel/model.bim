@@ -488,10 +488,9 @@
               "expression": [
                 "let",
                 "    Source = Sql.Database(ServerName, DatabaseName, [CreateNavigationProperties=false]),",
-                "    Rows = Source{[Schema=\"dbo\", Item=\"Appointment\"]}[Data],",
-                "    Typed = Table.TransformColumnTypes(Rows, {{\"AppointmentTime\", type datetime}})",
+                "    Rows = Source{[Schema=\"dbo\", Item=\"Appointment\"]}[Data]",
                 "in",
-                "    Typed"
+                "    Rows"
               ]
             }
           }
