@@ -34,6 +34,10 @@ Desktop here. Native DAX evaluation, navigation behavior and visual layout still
 that check. The original `PowerBI/Hospital.pbix` and `screenshots/` remain historical
 references; they do not show the redesigned project or corrected dataset.
 
+## Dashboard preview
+
+[View the five-page Ward theme preview](docs/hospital-insights-preview.html). This is an illustrative HTML rendering of the uploaded PBIR layout and synthetic data, not a Power BI Desktop screenshot; slicers and filters are not interactive. The validated source of truth remains `PowerBI/Hospital.pbip`.
+
 ## Reproduce
 
 1. Use SQL Server 2022+ and select an empty user database named `HospitalInsights`.
