@@ -156,13 +156,14 @@ class PipelineTests(unittest.TestCase):
             (ROOT / "PowerBI/Hospital.SemanticModel/model.bim").read_text()
         )["model"]
         for table in model["tables"]:
+            name = table["name"]
             expression = table["partitions"][0]["source"]["expression"]
             self.assertEqual(
                 expression,
                 [
                     "let",
                     "    Source = Sql.Database(ServerName, DatabaseName, [CreateNavigationProperties=false]),",
-                    f'    Rows = Source{{[Schema="dbo", Item="{table['name']}"]}}[Data]',
+                    f'    Rows = Source{{[Schema="dbo", Item="{name}"]}}[Data]',
                     "in",
                     "    Rows",
                 ],
