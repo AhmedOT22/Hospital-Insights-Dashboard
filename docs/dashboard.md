@@ -29,8 +29,8 @@ appointment-month slicers replace repeated hard-coded department charts.
 1. Open Hospital.pbip; confirm the semantic model loads without metadata errors.
 2. Set SQL parameters, refresh and compare row counts with data/processed/manifest.json.
 3. Run `DAXQueries/Acceptance.dax` from the semantic model folder in Desktop DAX
-   Query View after refresh. All **374 rows** must return `Passed = TRUE`. The
-   independent CSV oracle covers all 22 measures across 17 contexts: departments,
+   Query View after refresh. All **544 rows** must return `Passed = TRUE`. The
+   independent CSV oracle covers all 32 numeric measures across 17 contexts: departments,
    months, doctor/patient/status selections, a future-only period, an empty period
    and an incompatible doctor/department. It distinguishes BLANK from zero.
    `tests/metrics.sql` runs matching SQL checks in CI; passing SQL does not prove DAX.
@@ -47,8 +47,8 @@ remain historical and intentionally have not been relabelled as new screenshots.
 ## Chart selection
 
 Every chart answers a different question: no category/measure pair appears twice in
-the report. Monthly trends use completed/cancelled outcomes, patients served,
-prescriptions or outstanding amounts, never total bookings, because January 2026
+the report. Monthly trends use completed/cancelled outcomes, patients served or
+prescriptions, never total bookings, because January 2026
 contains only future scheduled appointments and would read as a collapse. Future
 bookings have their own department chart on the Appointments page.
 
@@ -61,6 +61,28 @@ acceptance checks. The Doctors page gives its two charts the full chart-area hei
 so all 20 doctors fit without scrolling. Theme series colors keep at least 3:1
 contrast on white. `tests/test_pipeline.py` enforces these rules.
 
+## KPI emphasis
+
+Each KPI card has a second, smaller card beneath it showing a context measure from
+the *Card notes* folder, so a value always comes with a share, comparison, range or
+average. Visits and prescriptions on the Patients page have no note: no context
+measure in the data adds information to them. One headline value per page is amber
+(outstanding amount, cancelled appointments or cancellation rate); departments has
+none, because no single department figure there signals a problem. Money cards use a
+whole-number format so Power BI's automatic display units show 1.96M, not cents.
+
+Category bar and column charts show data labels and hide the value axis and
+gridlines; monthly charts keep their axis, because 25 labels would collide. Doctor
+charts color each bar through a field-value measure: amber above the hospital-wide
+figure, slate otherwise, and their titles say so, so the meaning never depends on
+color alone. Months with only future bookings drop out of outcome charts because
+their measures are blank.
+
+The Executive Overview replaces the outcome donut (81% / 18% / 1%) with a stacked bar
+of collected and unpaid amounts by department, and replaces unpaid amount by visit
+month with an aging chart: paid bills settle in about 11 days, yet 81% of the unpaid
+amount comes from visits more than 90 days old.
+
 ## Accessibility
 
 Every visual carries alt text (`visualContainerObjects.general.altText`): charts
@@ -68,7 +90,7 @@ name their type and title, cards their measure, slicers the field they filter an
 textboxes their visible text. Navigation buttons also have a `visualLink` tooltip
 ("Go to the … page" / "… (current page)"). Power BI focuses the **highest**
 `tabOrder` first, so the generator assigns values from N × 1000 down to 1000 in
-reading order: heading, context line, navigation, KPI cards, charts, slicers,
+reading order: heading, context line, navigation, KPI cards, card notes, charts, slicers,
 footnote. `tests/test_pipeline.py` enforces all three. Screen-reader output and
 focus order still need a manual check in Desktop (step 4 above).
 

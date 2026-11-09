@@ -24,6 +24,32 @@ There is no SPARCS or real patient data. All amounts are demo currency units.
 | Snapshot occupancy | Occupied room count divided by room count; not a historical occupancy trend |
 | Completed stays / average completed stay | Closed stay count / mean discharge-minus-admission days; open stays excluded |
 
+## KPI context and highlight measures
+
+These feed the context line under each KPI card and the above-average bar colors.
+They are ordinary numeric measures, checked by the CSV, SQL and DAX acceptance cases
+like every KPI above.
+
+| Measure | Definition |
+| --- | --- |
+| Completed YoY change | Completed appointments in 2025 versus 2024, as a change ratio; blank when the selection holds no 2024 completions; −100% when it holds 2024 but not 2025 |
+| Outstanding over 90 days | Unpaid amount for visits more than 90 days before the Dec 31, 2025 snapshot (visit date before Oct 2, 2025) |
+| Outstanding over 90 days share | Outstanding over 90 days divided by outstanding amount |
+| Average bill per visit | Billed amount divided by visits |
+| Visits per patient | Completed appointments divided by patients served |
+| Highest / lowest doctor workload | Largest / smallest completed-appointment count among doctors in the selection; doctors with no completions are ignored |
+| Average completed per doctor | Completed appointments divided by doctors with appointments, ignoring any doctor filter |
+| Highest doctor cancellation rate | Largest per-doctor cancellation rate in the selection |
+| Cancellation rate all doctors | Cancellation rate ignoring any doctor filter: the hospital-wide benchmark |
+
+Card notes (display folder *Card notes*) are text measures that format the values
+above, for example "81% is over 90 days old"; they return "No data for this
+selection" instead of a fragment when their input is blank. The two *Highlight colors*
+measures return amber when a doctor's completed appointments or cancellation rate
+exceeds the hospital-wide figure, and slate otherwise; they color bars per data point.
+`Billing[Visit age band]` groups bills by the age of their linked visit at the snapshot
+(0–30, 31–90, 91–365, over 365 days) for the unpaid-amount aging chart.
+
 Monthly charts and month slicers use a full `yyyy-MM` appointment month, sorted
 chronologically. Activity filters flow from appointments to medical records, then
 prescriptions and bills. Financial measures therefore describe **appointment cohorts

@@ -6,11 +6,11 @@
     "y": 250,
     "width": 608,
     "height": 172,
-    "z": 12,
+    "z": 16,
     "tabOrder": 5000
   },
   "visual": {
-    "visualType": "clusteredColumnChart",
+    "visualType": "clusteredBarChart",
     "visualContainerObjects": {
       "title": [
         {
@@ -25,7 +25,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Billed and collected by service department'"
+                  "Value": "'Average bill per visit by department'"
                 }
               }
             },
@@ -120,7 +120,7 @@
             "altText": {
               "expr": {
                 "Literal": {
-                  "Value": "'Column chart: Billed and collected by service department.'"
+                  "Value": "'Bar chart: Average bill per visit by department.'"
                 }
               }
             }
@@ -159,31 +159,51 @@
                       "Entity": "Appointment"
                     }
                   },
-                  "Property": "Billed amount"
+                  "Property": "Average bill per visit"
                 }
               },
-              "queryRef": "Appointment.Billed amount",
-              "nativeQueryRef": "Billed amount",
-              "displayName": "Billed amount"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Appointment"
-                    }
-                  },
-                  "Property": "Collected amount"
-                }
-              },
-              "queryRef": "Appointment.Collected amount",
-              "nativeQueryRef": "Collected amount",
-              "displayName": "Collected amount"
+              "queryRef": "Appointment.Average bill per visit",
+              "nativeQueryRef": "Average bill per visit",
+              "displayName": "Average bill per visit"
             }
           ]
         }
       }
+    },
+    "objects": {
+      "labels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "valueAxis": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "gridlineShow": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
     }
   }
 }

@@ -5,9 +5,9 @@
     "x": 960,
     "y": 144,
     "width": 296,
-    "height": 82,
+    "height": 68,
     "z": 10,
-    "tabOrder": 7000
+    "tabOrder": 11000
   },
   "visual": {
     "visualType": "cardVisual",
@@ -25,7 +25,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Average completed stay'"
+                  "Value": "'Completed stays'"
                 }
               }
             },
@@ -120,7 +120,7 @@
             "altText": {
               "expr": {
                 "Literal": {
-                  "Value": "'KPI card showing average completed stay for the current selection.'"
+                  "Value": "'KPI card showing completed stays for the current selection.'"
                 }
               }
             }
@@ -200,12 +200,12 @@
                       "Entity": "Appointment"
                     }
                   },
-                  "Property": "Average completed stay"
+                  "Property": "Completed stays"
                 }
               },
-              "queryRef": "Appointment.Average completed stay",
-              "nativeQueryRef": "Average completed stay",
-              "displayName": "Average completed stay"
+              "queryRef": "Appointment.Completed stays",
+              "nativeQueryRef": "Completed stays",
+              "displayName": "Completed stays"
             }
           ]
         }

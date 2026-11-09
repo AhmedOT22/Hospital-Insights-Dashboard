@@ -5,9 +5,9 @@
     "x": 648,
     "y": 144,
     "width": 296,
-    "height": 82,
+    "height": 68,
     "z": 9,
-    "tabOrder": 8000
+    "tabOrder": 12000
   },
   "visual": {
     "visualType": "cardVisual",
@@ -25,7 +25,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Completed stays'"
+                  "Value": "'Collection rate'"
                 }
               }
             },
@@ -120,7 +120,7 @@
             "altText": {
               "expr": {
                 "Literal": {
-                  "Value": "'KPI card showing completed stays for the current selection.'"
+                  "Value": "'KPI card showing collection rate for the current selection.'"
                 }
               }
             }
@@ -200,12 +200,12 @@
                       "Entity": "Appointment"
                     }
                   },
-                  "Property": "Completed stays"
+                  "Property": "Collection rate"
                 }
               },
-              "queryRef": "Appointment.Completed stays",
-              "nativeQueryRef": "Completed stays",
-              "displayName": "Completed stays"
+              "queryRef": "Appointment.Collection rate",
+              "nativeQueryRef": "Collection rate",
+              "displayName": "Collection rate"
             }
           ]
         }

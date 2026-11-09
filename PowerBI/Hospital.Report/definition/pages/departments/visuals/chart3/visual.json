@@ -6,7 +6,7 @@
     "y": 434,
     "width": 608,
     "height": 172,
-    "z": 14,
+    "z": 18,
     "tabOrder": 3000
   },
   "visual": {
@@ -25,7 +25,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Prescriptions by service department'"
+                  "Value": "'Completed room stays by department'"
                 }
               }
             },
@@ -120,7 +120,7 @@
             "altText": {
               "expr": {
                 "Literal": {
-                  "Value": "'Bar chart: Prescriptions by service department.'"
+                  "Value": "'Bar chart: Completed room stays by department.'"
                 }
               }
             }
@@ -159,16 +159,51 @@
                       "Entity": "Appointment"
                     }
                   },
-                  "Property": "Prescriptions"
+                  "Property": "Completed stays"
                 }
               },
-              "queryRef": "Appointment.Prescriptions",
-              "nativeQueryRef": "Prescriptions",
-              "displayName": "Prescriptions"
+              "queryRef": "Appointment.Completed stays",
+              "nativeQueryRef": "Completed stays",
+              "displayName": "Completed stays"
             }
           ]
         }
       }
+    },
+    "objects": {
+      "labels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "valueAxis": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "gridlineShow": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
     }
   }
 }

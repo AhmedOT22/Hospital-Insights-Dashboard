@@ -5,9 +5,9 @@
     "x": 960,
     "y": 144,
     "width": 296,
-    "height": 82,
+    "height": 68,
     "z": 10,
-    "tabOrder": 8000
+    "tabOrder": 12000
   },
   "visual": {
     "visualType": "cardVisual",

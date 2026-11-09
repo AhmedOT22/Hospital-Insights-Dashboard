@@ -44,6 +44,9 @@ def field(table, name, measure=False):
     }
 
 
+SNAPSHOT = "DATE(2025, 12, 31)"
+AGED_CUTOFF = "DATE(2025, 10, 2)"  # visits more than 90 days before the snapshot
+
 MEASURES = {
     "Appointments": ("COUNTROWS(Appointment)", "#,0"),
     "Completed appointments": (
@@ -72,14 +75,14 @@ MEASURES = {
     ),
     "Visits": ("COUNTROWS(Medical_Record)", "#,0"),
     "Prescriptions": ("COUNTROWS(Prescription)", "#,0"),
-    "Billed amount": ("SUM(Billing[TotalAmount])", "#,0.00"),
+    "Billed amount": ("SUM(Billing[TotalAmount])", "#,0"),
     "Collected amount": (
         'CALCULATE([Billed amount], KEEPFILTERS(Billing[PaymentStatus] = "Paid"))',
-        "#,0.00",
+        "#,0",
     ),
     "Outstanding amount": (
         'CALCULATE([Billed amount], KEEPFILTERS(Billing[PaymentStatus] = "Unpaid"))',
-        "#,0.00",
+        "#,0",
     ),
     "Collection rate": (
         "DIVIDE(COALESCE([Collected amount], 0), [Billed amount])",
@@ -109,6 +112,104 @@ MEASURES = {
         "COUNTROWS(FILTER(VALUES(Appointment[PatientID]), CALCULATE([Completed appointments]) > 1))",
         "#,0",
     ),
+    # Context measures behind the KPI card notes and highlight colors. They are
+    # numeric so the CSV/SQL/DAX acceptance checks cover them like every other KPI.
+    "Completed YoY change": (
+        "VAR CurrentYear = CALCULATE([Completed appointments], KEEPFILTERS(YEAR(Appointment[AppointmentDate]) = 2025)) "
+        "VAR PriorYear = CALCULATE([Completed appointments], KEEPFILTERS(YEAR(Appointment[AppointmentDate]) = 2024)) "
+        "RETURN DIVIDE(CurrentYear - PriorYear, PriorYear)",
+        "+0.0%;-0.0%;0.0%",
+    ),
+    "Outstanding over 90 days": (
+        f"CALCULATE([Outstanding amount], KEEPFILTERS(Appointment[AppointmentDate] < {AGED_CUTOFF}))",
+        "#,0",
+    ),
+    "Outstanding over 90 days share": (
+        "DIVIDE(COALESCE([Outstanding over 90 days], 0), [Outstanding amount])",
+        "0.0%",
+    ),
+    "Average bill per visit": ("DIVIDE([Billed amount], [Visits])", "#,0"),
+    "Visits per patient": (
+        "DIVIDE([Completed appointments], [Patients served])",
+        "0.0",
+    ),
+    "Highest doctor workload": (
+        "MAXX(VALUES(Appointment[DoctorID]), [Completed appointments])",
+        "#,0",
+    ),
+    "Lowest doctor workload": (
+        "MINX(VALUES(Appointment[DoctorID]), [Completed appointments])",
+        "#,0",
+    ),
+    "Average completed per doctor": (
+        "CALCULATE(DIVIDE([Completed appointments], [Doctors with appointments]), REMOVEFILTERS(Doctor))",
+        "#,0.0",
+    ),
+    "Highest doctor cancellation rate": (
+        "MAXX(VALUES(Appointment[DoctorID]), [Cancellation rate])",
+        "0.0%",
+    ),
+    "Cancellation rate all doctors": (
+        "CALCULATE([Cancellation rate], REMOVEFILTERS(Doctor))",
+        "0.0%",
+    ),
+}
+
+ATTENTION = "#B3741D"  # amber: above average / needs attention
+MUTED = "#6F8896"  # slate: at or below average; 3.6:1 on white
+
+
+def note(measure, template):
+    """Text for a KPI card's context line; BLANK-safe so cards never read ' of billed'."""
+    return f'IF(ISBLANK([{measure}]), "No data for this selection", {template})'
+
+
+# Text measures shown under KPI values. Built only from oracle-checked measures.
+NOTES = {
+    "Appointments note": 'FORMAT(COALESCE([Scheduled appointments], 0), "#,0") & " future bookings included"',
+    "Patients served note": note(
+        "Visits per patient",
+        'FORMAT([Visits per patient], "0.0") & " completed visits per patient"',
+    ),
+    "Collected note": note(
+        "Collection rate", 'FORMAT([Collection rate], "0%") & " of billed amount"'
+    ),
+    "Outstanding note": note(
+        "Outstanding over 90 days share",
+        'FORMAT([Outstanding over 90 days share], "0%") & " is over 90 days old"',
+    ),
+    "Completed note": 'IF(ISBLANK([Completed YoY change]), "Select both 2024 and 2025 months to compare years", FORMAT([Completed YoY change], "+0.0%;-0.0%;0.0%") & " in 2025 vs 2024")',
+    "Cancelled note": note(
+        "Highest doctor cancellation rate",
+        '"Highest doctor rate " & FORMAT([Highest doctor cancellation rate], "0.0%")',
+    ),
+    "Scheduled note": '"Booked after the Dec 31, 2025 snapshot"',
+    "Completion rate note": '"Future bookings excluded"',
+    "Doctors note": note(
+        "Highest doctor workload",
+        'FORMAT([Lowest doctor workload], "#,0") & "–" & FORMAT([Highest doctor workload], "#,0") & " completed per doctor"',
+    ),
+    "Cancellation rate note": note(
+        "Highest doctor cancellation rate",
+        '"Highest doctor " & FORMAT([Highest doctor cancellation rate], "0.0%")',
+    ),
+    "Billed note": note(
+        "Average bill per visit",
+        'FORMAT([Average bill per visit], "#,0") & " per visit on average"',
+    ),
+    "Collection rate note": note(
+        "Outstanding amount", 'FORMAT([Outstanding amount], "#,0") & " still unpaid"'
+    ),
+    "Completed stays note": note(
+        "Average completed stay",
+        '"Average stay " & FORMAT([Average completed stay], "0.0") & " days"',
+    ),
+}
+
+# Field-value colors: amber marks the doctors above the hospital-wide average.
+COLORS = {
+    "Doctor workload color": f'IF([Completed appointments] > [Average completed per doctor], "{ATTENTION}", "{MUTED}")',
+    "Doctor cancellation color": f'IF([Cancellation rate] > [Cancellation rate all doctors], "{ATTENTION}", "{MUTED}")',
 }
 
 # Each fact has one active path from a given dimension. Extra operational foreign
@@ -206,7 +307,25 @@ def semantic_model():
                     "displayFolder": "Hospital KPIs",
                 }
                 for n, (e, fmt) in MEASURES.items()
+            ] + [
+                {"name": n, "expression": e, "displayFolder": folder}
+                for folder, group in (("Card notes", NOTES), ("Highlight colors", COLORS))
+                for n, e in group.items()
             ]
+        if table == "Billing":
+            # Age of the linked visit at the snapshot; drives the receivables aging chart.
+            # Labels sort correctly as text: 0–30, 31–90, 91–365, Over 365.
+            t["columns"].append(
+                {
+                    "name": "Visit age band",
+                    "dataType": "string",
+                    "type": "calculated",
+                    "expression": f"VAR Age = INT({SNAPSHOT} - RELATED(Appointment[AppointmentDate])) "
+                    'RETURN SWITCH(TRUE(), Age <= 30, "0–30 days", Age <= 90, "31–90 days", '
+                    'Age <= 365, "91–365 days", "Over 365 days")',
+                    "summarizeBy": "none",
+                }
+            )
         if table == "Doctor":
             t["columns"].append(
                 {
@@ -223,7 +342,7 @@ def semantic_model():
                     "name": "Age group at snapshot",
                     "dataType": "string",
                     "type": "calculated",
-                    "expression": 'VAR Age = INT(YEARFRAC(Patient[DateOfBirth], DATE(2025,12,31), 1)) RETURN SWITCH(TRUE(), Age < 18, "0–17", Age < 30, "18–29", Age < 50, "30–49", Age < 70, "50–69", "70+")',
+                    "expression": 'VAR Age = INT(YEARFRAC(Patient[DateOfBirth], ' + SNAPSHOT + ', 1)) RETURN SWITCH(TRUE(), Age < 18, "0–17", Age < 30, "18–29", Age < 50, "30–49", Age < 70, "50–69", "70+")',
                     "summarizeBy": "none",
                 }
             )
@@ -269,19 +388,39 @@ def semantic_model():
     save(MODEL / "definition.pbism", {"version": "1.0", "settings": {}})
 
 
-# Each chart is (visual type, title, category table, category column, measures).
-# Pages with two charts give each one the full chart-area height, so long
-# category lists (20 doctors) fit without scrolling; with three, the last chart
-# spans the bottom row. Charts were chosen so that
-# no title/axis/measure combination repeats and each one shows real variation in
-# the generated data; flat comparisons (gender, weekday, department collection
-# rate, room occupancy) are deliberately left out.
+# Each page is (id, title, KPI cards, charts). A card is (measure, note measure or
+# None); the note is a context line under the value ("84% of billed amount"). Each
+# chart is (visual type, title, category table, category column, measures). Pages
+# with two charts give each one the full chart-area height, so 20 doctors fit
+# without scrolling; with three, the last chart spans the bottom row. No
+# category/measure pair repeats, and every chart shows real variation in the
+# generated data; flat comparisons (gender, weekday, department collection rate,
+# room occupancy, repeat patients) are deliberately left out.
 PAGES = [
     (
         "overview",
         "Executive Overview",
-        ["Appointments", "Patients served", "Collected amount", "Outstanding amount"],
         [
+            ("Appointments", "Appointments note"),
+            ("Patients served", "Patients served note"),
+            ("Collected amount", "Collected note"),
+            ("Outstanding amount", "Outstanding note"),
+        ],
+        [
+            (
+                "clusteredColumnChart",
+                "Unpaid amount by age of visit",
+                "Billing",
+                "Visit age band",
+                ["Outstanding amount"],
+            ),
+            (
+                "barChart",
+                "Collected and unpaid by service department",
+                "Department",
+                "DepartmentName",
+                ["Collected amount", "Outstanding amount"],
+            ),
             (
                 "clusteredColumnChart",
                 "Patients served by month",
@@ -289,37 +428,16 @@ PAGES = [
                 "Month",
                 ["Patients served"],
             ),
-            (
-                "clusteredBarChart",
-                "Collected amount by service department",
-                "Department",
-                "DepartmentName",
-                ["Collected amount"],
-            ),
-            (
-                "donutChart",
-                "Appointment outcomes",
-                "Appointment",
-                "Status",
-                ["Appointments"],
-            ),
-            (
-                "clusteredColumnChart",
-                "Outstanding amount by visit month",
-                "Appointment",
-                "Month",
-                ["Outstanding amount"],
-            ),
         ],
     ),
     (
         "appointments",
         "Appointments",
         [
-            "Completed appointments",
-            "Cancelled appointments",
-            "Scheduled appointments",
-            "Completion rate",
+            ("Completed appointments", "Completed note"),
+            ("Cancelled appointments", "Cancelled note"),
+            ("Scheduled appointments", "Scheduled note"),
+            ("Completion rate", "Completion rate note"),
         ],
         [
             (
@@ -355,7 +473,12 @@ PAGES = [
     (
         "departments",
         "Departments",
-        ["Appointments", "Billed amount", "Completed stays", "Average completed stay"],
+        [
+            ("Appointments", "Appointments note"),
+            ("Billed amount", "Billed note"),
+            ("Collection rate", "Collection rate note"),
+            ("Completed stays", "Completed stays note"),
+        ],
         [
             (
                 "clusteredBarChart",
@@ -365,11 +488,18 @@ PAGES = [
                 ["Appointments"],
             ),
             (
-                "clusteredColumnChart",
-                "Billed and collected by service department",
+                "clusteredBarChart",
+                "Average bill per visit by department",
                 "Department",
                 "DepartmentName",
-                ["Billed amount", "Collected amount"],
+                ["Average bill per visit"],
+            ),
+            (
+                "clusteredBarChart",
+                "Unpaid over 90 days by department",
+                "Department",
+                "DepartmentName",
+                ["Outstanding over 90 days"],
             ),
             (
                 "clusteredBarChart",
@@ -378,35 +508,28 @@ PAGES = [
                 "DepartmentName",
                 ["Completed stays"],
             ),
-            (
-                "clusteredBarChart",
-                "Prescriptions by service department",
-                "Department",
-                "DepartmentName",
-                ["Prescriptions"],
-            ),
         ],
     ),
     (
         "doctors",
         "Doctors",
         [
-            "Doctors with appointments",
-            "Completed appointments",
-            "Patients served",
-            "Cancellation rate",
+            ("Doctors with appointments", "Doctors note"),
+            ("Completed appointments", "Completed note"),
+            ("Patients served", "Patients served note"),
+            ("Cancellation rate", "Cancellation rate note"),
         ],
         [
             (
                 "clusteredBarChart",
-                "Completed appointments by doctor",
+                "Completed appointments by doctor • amber = above average",
                 "Doctor",
                 "Doctor name",
                 ["Completed appointments"],
             ),
             (
                 "clusteredBarChart",
-                "Cancellation rate by doctor",
+                "Cancellation rate by doctor • amber = above average",
                 "Doctor",
                 "Doctor name",
                 ["Cancellation rate"],
@@ -416,9 +539,12 @@ PAGES = [
     (
         "patients",
         "Patients",
-        # Every generated patient has 2+ completed visits, so "Repeat patients"
-        # would always equal "Patients served"; it stays in the model only.
-        ["Patients served", "Visits", "Prescriptions", "Cancellation rate"],
+        [
+            ("Patients served", "Patients served note"),
+            ("Visits", None),
+            ("Prescriptions", None),
+            ("Cancellation rate", "Cancellation rate note"),
+        ],
         [
             (
                 "clusteredColumnChart",
@@ -445,6 +571,21 @@ PAGES = [
     ),
 ]
 
+# One headline card per page, drawn in amber: the number that needs attention.
+HEADLINES = {
+    "overview": "Outstanding amount",
+    "appointments": "Cancelled appointments",
+    "doctors": "Cancellation rate",
+    "patients": "Cancellation rate",
+}
+# Bars colored per data point from a field-value color measure.
+CHART_COLORS = {
+    "Completed appointments by doctor • amber = above average": "Doctor workload color",
+    "Cancellation rate by doctor • amber = above average": "Doctor cancellation color",
+}
+# Categories shown in natural order instead of sorted by value.
+NATURAL_ORDER = ("Month", "Age group at snapshot", "Visit age band")
+
 
 CARD_LABELS = {
     "Completed appointments": "Completed",
@@ -458,6 +599,7 @@ CHART_NAMES = {
     "clusteredBarChart": "Bar chart",
     "clusteredColumnChart": "Column chart",
     "lineChart": "Line chart",
+    "barChart": "Stacked bar chart",
     "donutChart": "Donut chart",
 }
 
@@ -542,7 +684,7 @@ def visual(page, name, kind, title, x, y, w, h, roles=None, objects=None, alt=No
         }
     if roles and "Category" in roles:
         t, n, m = roles["Category"][0]
-        if n in ("Month", "Age group at snapshot"):  # natural order, not by value
+        if n in NATURAL_ORDER:
             cfg["query"]["sortDefinition"] = {
                 "sort": [{"field": field(t, n, m), "direction": "Ascending"}],
                 "isDefaultSort": False,
@@ -616,6 +758,50 @@ def visual(page, name, kind, title, x, y, w, h, roles=None, objects=None, alt=No
             "visual": cfg,
         },
     )
+
+
+def card_objects(value, label, padding=8):
+    return {
+        obj: [{"properties": props, "selector": {"id": "default"}}]
+        for obj, props in {
+            "value": value,
+            "label": label,
+            "padding": {"paddingUniform": literal(padding)},
+            "layout": {"paddingUniform": literal(0)},
+        }.items()
+    }
+
+
+def chart_objects(kind, category, color_measure=None):
+    """Value labels replace the value axis on category charts (months keep the
+    axis: 25 labels would collide). A color measure colors each data point."""
+    objects = {}
+    if kind != "lineChart" and category != "Month":
+        objects["labels"] = [{"properties": {"show": literal(True)}}]
+        objects["valueAxis"] = [
+            {
+                "properties": {
+                    "show": literal(False),
+                    "gridlineShow": literal(False),
+                }
+            }
+        ]
+    if color_measure:
+        objects["dataPoint"] = [
+            {
+                "properties": {
+                    "fill": {
+                        "solid": {
+                            "color": {
+                                "expr": field("Appointment", color_measure, True)
+                            }
+                        }
+                    }
+                },
+                "selector": {"data": [{"dataViewWildcard": {"matchingOption": 1}}]},
+            }
+        ]
+    return objects or None
 
 
 def report():
@@ -813,10 +999,9 @@ def report():
             )
         value_size = min(28, max(12, math.floor(720 * 0.028)))
         label_size = min(14, max(8, math.floor(value_size * 0.55)))
-        card_height = (
-            34 + math.ceil(value_size * 1.5) + math.ceil(max(label_size, 12) * 1.5)
-        )
-        for i, measure in enumerate(cards):
+        for i, (measure, note_measure) in enumerate(cards):
+            label = CARD_LABELS.get(measure, measure)
+            highlight = HEADLINES.get(page) == measure
             visual(
                 page,
                 f"kpi{i}",
@@ -825,22 +1010,39 @@ def report():
                 24 + i * 312,
                 144,
                 296,
-                card_height,
+                68,
                 {"Data": [("Appointment", measure, True)]},
-                alt=f"KPI card showing {CARD_LABELS.get(measure, measure).lower()}"
-                " for the current selection.",
-                objects={
-                    obj: [{"properties": props, "selector": {"id": "default"}}]
-                    for obj, props in {
-                        "value": {
-                            "fontSize": literal(value_size),
-                            "fontColor": fill("#176B87"),
-                        },
-                        "label": {"fontSize": literal(label_size)},
-                        "padding": {"paddingUniform": literal(8)},
-                        "layout": {"paddingUniform": literal(0)},
-                    }.items()
-                },
+                alt=f"KPI card showing {label.lower()} for the current selection"
+                + (", highlighted as this page's headline." if highlight else "."),
+                objects=card_objects(
+                    {
+                        "fontSize": literal(value_size),
+                        "fontColor": fill(ATTENTION if highlight else "#176B87"),
+                    },
+                    {"fontSize": literal(label_size)},
+                ),
+            )
+        # Context lines sit in a second row so reading order stays top to bottom.
+        for i, (measure, note_measure) in enumerate(cards):
+            if not note_measure:
+                continue
+            label = CARD_LABELS.get(measure, measure)
+            visual(
+                page,
+                f"kpi{i}_note",
+                "cardVisual",
+                note_measure,
+                24 + i * 312,
+                212,
+                296,
+                32,
+                {"Data": [("Appointment", note_measure, True)]},
+                alt=f"Context for {label.lower()}, such as share, comparison or average.",
+                objects=card_objects(
+                    {"fontSize": literal(10), "fontColor": fill("#496572")},
+                    {"show": literal(False)},
+                    padding=4,
+                ),
             )
         tall = len(charts) == 2
         for i, (kind, title, table, category, measures) in enumerate(charts):
@@ -860,7 +1062,8 @@ def report():
                 1232 if wide else 608,
                 356 if tall else 172,
                 roles,
-                alt=f"{CHART_NAMES[kind]}: {title}.",
+                alt=f"{CHART_NAMES[kind]}: {title.split(' • ')[0]}.",
+                objects=chart_objects(kind, category, CHART_COLORS.get(title)),
             )
         visual(
             page,

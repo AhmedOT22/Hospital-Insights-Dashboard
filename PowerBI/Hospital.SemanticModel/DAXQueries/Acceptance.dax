@@ -1,5 +1,5 @@
 // Generated CSV oracle; run in Desktop DAX Query View after refresh.
-// All 374 rows must have Passed = TRUE; BLANK is checked separately from zero.
+// All 544 rows must have Passed = TRUE; BLANK is checked separately from zero.
 EVALUATE
 UNION(
     VAR Actual = CALCULATE([Appointments])
@@ -90,6 +90,46 @@ UNION(
     VAR Expected = 200.00000000
     RETURN ROW("Scenario", "All", "Metric", "Repeat patients", "Expected", Expected, "Actual", Actual,
         "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Completed YoY change])
+    VAR Expected = 0.03763752
+    RETURN ROW("Scenario", "All", "Metric", "Completed YoY change", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Outstanding over 90 days])
+    VAR Expected = 294001.00000000
+    RETURN ROW("Scenario", "All", "Metric", "Outstanding over 90 days", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Outstanding over 90 days share])
+    VAR Expected = 0.80788116
+    RETURN ROW("Scenario", "All", "Metric", "Outstanding over 90 days share", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Average bill per visit])
+    VAR Expected = 660.53872407
+    RETURN ROW("Scenario", "All", "Metric", "Average bill per visit", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Visits per patient])
+    VAR Expected = 17.59500000
+    RETURN ROW("Scenario", "All", "Metric", "Visits per patient", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Highest doctor workload])
+    VAR Expected = 335.00000000
+    RETURN ROW("Scenario", "All", "Metric", "Highest doctor workload", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Lowest doctor workload])
+    VAR Expected = 83.00000000
+    RETURN ROW("Scenario", "All", "Metric", "Lowest doctor workload", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Average completed per doctor])
+    VAR Expected = 175.95000000
+    RETURN ROW("Scenario", "All", "Metric", "Average completed per doctor", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Highest doctor cancellation rate])
+    VAR Expected = 0.22297297
+    RETURN ROW("Scenario", "All", "Metric", "Highest doctor cancellation rate", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Cancellation rate all doctors])
+    VAR Expected = 0.17818776
+    RETURN ROW("Scenario", "All", "Metric", "Cancellation rate all doctors", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
     VAR Actual = CALCULATE([Appointments], TREATAS({1}, 'Department'[DepartmentID]))
     VAR Expected = 855.00000000
     RETURN ROW("Scenario", "Department 1", "Metric", "Appointments", "Expected", Expected, "Actual", Actual,
@@ -177,6 +217,46 @@ UNION(
     VAR Actual = CALCULATE([Repeat patients], TREATAS({1}, 'Department'[DepartmentID]))
     VAR Expected = 141.00000000
     RETURN ROW("Scenario", "Department 1", "Metric", "Repeat patients", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Completed YoY change], TREATAS({1}, 'Department'[DepartmentID]))
+    VAR Expected = -0.09917355
+    RETURN ROW("Scenario", "Department 1", "Metric", "Completed YoY change", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Outstanding over 90 days], TREATAS({1}, 'Department'[DepartmentID]))
+    VAR Expected = 53262.74000000
+    RETURN ROW("Scenario", "Department 1", "Metric", "Outstanding over 90 days", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Outstanding over 90 days share], TREATAS({1}, 'Department'[DepartmentID]))
+    VAR Expected = 0.82655690
+    RETURN ROW("Scenario", "Department 1", "Metric", "Outstanding over 90 days share", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Average bill per visit], TREATAS({1}, 'Department'[DepartmentID]))
+    VAR Expected = 560.75208696
+    RETURN ROW("Scenario", "Department 1", "Metric", "Average bill per visit", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Visits per patient], TREATAS({1}, 'Department'[DepartmentID]))
+    VAR Expected = 4.63087248
+    RETURN ROW("Scenario", "Department 1", "Metric", "Visits per patient", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Highest doctor workload], TREATAS({1}, 'Department'[DepartmentID]))
+    VAR Expected = 194.00000000
+    RETURN ROW("Scenario", "Department 1", "Metric", "Highest doctor workload", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Lowest doctor workload], TREATAS({1}, 'Department'[DepartmentID]))
+    VAR Expected = 153.00000000
+    RETURN ROW("Scenario", "Department 1", "Metric", "Lowest doctor workload", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Average completed per doctor], TREATAS({1}, 'Department'[DepartmentID]))
+    VAR Expected = 172.50000000
+    RETURN ROW("Scenario", "Department 1", "Metric", "Average completed per doctor", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Highest doctor cancellation rate], TREATAS({1}, 'Department'[DepartmentID]))
+    VAR Expected = 0.21182266
+    RETURN ROW("Scenario", "Department 1", "Metric", "Highest doctor cancellation rate", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Cancellation rate all doctors], TREATAS({1}, 'Department'[DepartmentID]))
+    VAR Expected = 0.18246445
+    RETURN ROW("Scenario", "Department 1", "Metric", "Cancellation rate all doctors", "Expected", Expected, "Actual", Actual,
         "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
     VAR Actual = CALCULATE([Appointments], TREATAS({2}, 'Department'[DepartmentID]))
     VAR Expected = 614.00000000
@@ -266,6 +346,46 @@ UNION(
     VAR Expected = 50.00000000
     RETURN ROW("Scenario", "Department 2", "Metric", "Repeat patients", "Expected", Expected, "Actual", Actual,
         "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Completed YoY change], TREATAS({2}, 'Department'[DepartmentID]))
+    VAR Expected = 0.02008032
+    RETURN ROW("Scenario", "Department 2", "Metric", "Completed YoY change", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Outstanding over 90 days], TREATAS({2}, 'Department'[DepartmentID]))
+    VAR Expected = 40615.49000000
+    RETURN ROW("Scenario", "Department 2", "Metric", "Outstanding over 90 days", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Outstanding over 90 days share], TREATAS({2}, 'Department'[DepartmentID]))
+    VAR Expected = 0.77801133
+    RETURN ROW("Scenario", "Department 2", "Metric", "Outstanding over 90 days share", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Average bill per visit], TREATAS({2}, 'Department'[DepartmentID]))
+    VAR Expected = 603.90817097
+    RETURN ROW("Scenario", "Department 2", "Metric", "Average bill per visit", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Visits per patient], TREATAS({2}, 'Department'[DepartmentID]))
+    VAR Expected = 10.06000000
+    RETURN ROW("Scenario", "Department 2", "Metric", "Visits per patient", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Highest doctor workload], TREATAS({2}, 'Department'[DepartmentID]))
+    VAR Expected = 133.00000000
+    RETURN ROW("Scenario", "Department 2", "Metric", "Highest doctor workload", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Lowest doctor workload], TREATAS({2}, 'Department'[DepartmentID]))
+    VAR Expected = 115.00000000
+    RETURN ROW("Scenario", "Department 2", "Metric", "Lowest doctor workload", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Average completed per doctor], TREATAS({2}, 'Department'[DepartmentID]))
+    VAR Expected = 125.75000000
+    RETURN ROW("Scenario", "Department 2", "Metric", "Average completed per doctor", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Highest doctor cancellation rate], TREATAS({2}, 'Department'[DepartmentID]))
+    VAR Expected = 0.22297297
+    RETURN ROW("Scenario", "Department 2", "Metric", "Highest doctor cancellation rate", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Cancellation rate all doctors], TREATAS({2}, 'Department'[DepartmentID]))
+    VAR Expected = 0.17405583
+    RETURN ROW("Scenario", "Department 2", "Metric", "Cancellation rate all doctors", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
     VAR Actual = CALCULATE([Appointments], TREATAS({3}, 'Department'[DepartmentID]))
     VAR Expected = 1533.00000000
     RETURN ROW("Scenario", "Department 3", "Metric", "Appointments", "Expected", Expected, "Actual", Actual,
@@ -353,6 +473,46 @@ UNION(
     VAR Actual = CALCULATE([Repeat patients], TREATAS({3}, 'Department'[DepartmentID]))
     VAR Expected = 150.00000000
     RETURN ROW("Scenario", "Department 3", "Metric", "Repeat patients", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Completed YoY change], TREATAS({3}, 'Department'[DepartmentID]))
+    VAR Expected = 0.09443508
+    RETURN ROW("Scenario", "Department 3", "Metric", "Completed YoY change", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Outstanding over 90 days], TREATAS({3}, 'Department'[DepartmentID]))
+    VAR Expected = 111873.52000000
+    RETURN ROW("Scenario", "Department 3", "Metric", "Outstanding over 90 days", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Outstanding over 90 days share], TREATAS({3}, 'Department'[DepartmentID]))
+    VAR Expected = 0.84270404
+    RETURN ROW("Scenario", "Department 3", "Metric", "Outstanding over 90 days share", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Average bill per visit], TREATAS({3}, 'Department'[DepartmentID]))
+    VAR Expected = 669.19405797
+    RETURN ROW("Scenario", "Department 3", "Metric", "Average bill per visit", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Visits per patient], TREATAS({3}, 'Department'[DepartmentID]))
+    VAR Expected = 8.28000000
+    RETURN ROW("Scenario", "Department 3", "Metric", "Visits per patient", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Highest doctor workload], TREATAS({3}, 'Department'[DepartmentID]))
+    VAR Expected = 335.00000000
+    RETURN ROW("Scenario", "Department 3", "Metric", "Highest doctor workload", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Lowest doctor workload], TREATAS({3}, 'Department'[DepartmentID]))
+    VAR Expected = 299.00000000
+    RETURN ROW("Scenario", "Department 3", "Metric", "Lowest doctor workload", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Average completed per doctor], TREATAS({3}, 'Department'[DepartmentID]))
+    VAR Expected = 310.50000000
+    RETURN ROW("Scenario", "Department 3", "Metric", "Average completed per doctor", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Highest doctor cancellation rate], TREATAS({3}, 'Department'[DepartmentID]))
+    VAR Expected = 0.19893899
+    RETURN ROW("Scenario", "Department 3", "Metric", "Highest doctor cancellation rate", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Cancellation rate all doctors], TREATAS({3}, 'Department'[DepartmentID]))
+    VAR Expected = 0.17911434
+    RETURN ROW("Scenario", "Department 3", "Metric", "Cancellation rate all doctors", "Expected", Expected, "Actual", Actual,
         "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
     VAR Actual = CALCULATE([Appointments], TREATAS({4}, 'Department'[DepartmentID]))
     VAR Expected = 906.00000000
@@ -442,6 +602,46 @@ UNION(
     VAR Expected = 143.00000000
     RETURN ROW("Scenario", "Department 4", "Metric", "Repeat patients", "Expected", Expected, "Actual", Actual,
         "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Completed YoY change], TREATAS({4}, 'Department'[DepartmentID]))
+    VAR Expected = 0.15362319
+    RETURN ROW("Scenario", "Department 4", "Metric", "Completed YoY change", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Outstanding over 90 days], TREATAS({4}, 'Department'[DepartmentID]))
+    VAR Expected = 56378.69000000
+    RETURN ROW("Scenario", "Department 4", "Metric", "Outstanding over 90 days", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Outstanding over 90 days share], TREATAS({4}, 'Department'[DepartmentID]))
+    VAR Expected = 0.75423673
+    RETURN ROW("Scenario", "Department 4", "Metric", "Outstanding over 90 days share", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Average bill per visit], TREATAS({4}, 'Department'[DepartmentID]))
+    VAR Expected = 731.58621803
+    RETURN ROW("Scenario", "Department 4", "Metric", "Average bill per visit", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Visits per patient], TREATAS({4}, 'Department'[DepartmentID]))
+    VAR Expected = 4.98657718
+    RETURN ROW("Scenario", "Department 4", "Metric", "Visits per patient", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Highest doctor workload], TREATAS({4}, 'Department'[DepartmentID]))
+    VAR Expected = 197.00000000
+    RETURN ROW("Scenario", "Department 4", "Metric", "Highest doctor workload", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Lowest doctor workload], TREATAS({4}, 'Department'[DepartmentID]))
+    VAR Expected = 179.00000000
+    RETURN ROW("Scenario", "Department 4", "Metric", "Lowest doctor workload", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Average completed per doctor], TREATAS({4}, 'Department'[DepartmentID]))
+    VAR Expected = 185.75000000
+    RETURN ROW("Scenario", "Department 4", "Metric", "Average completed per doctor", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Highest doctor cancellation rate], TREATAS({4}, 'Department'[DepartmentID]))
+    VAR Expected = 0.18834081
+    RETURN ROW("Scenario", "Department 4", "Metric", "Highest doctor cancellation rate", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Cancellation rate all doctors], TREATAS({4}, 'Department'[DepartmentID]))
+    VAR Expected = 0.16797312
+    RETURN ROW("Scenario", "Department 4", "Metric", "Cancellation rate all doctors", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
     VAR Actual = CALCULATE([Appointments], TREATAS({5}, 'Department'[DepartmentID]))
     VAR Expected = 430.00000000
     RETURN ROW("Scenario", "Department 5", "Metric", "Appointments", "Expected", Expected, "Actual", Actual,
@@ -529,6 +729,46 @@ UNION(
     VAR Actual = CALCULATE([Repeat patients], TREATAS({5}, 'Department'[DepartmentID]))
     VAR Expected = 99.00000000
     RETURN ROW("Scenario", "Department 5", "Metric", "Repeat patients", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Completed YoY change], TREATAS({5}, 'Department'[DepartmentID]))
+    VAR Expected = -0.07344633
+    RETURN ROW("Scenario", "Department 5", "Metric", "Completed YoY change", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Outstanding over 90 days], TREATAS({5}, 'Department'[DepartmentID]))
+    VAR Expected = 31870.56000000
+    RETURN ROW("Scenario", "Department 5", "Metric", "Outstanding over 90 days", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Outstanding over 90 days share], TREATAS({5}, 'Department'[DepartmentID]))
+    VAR Expected = 0.80141461
+    RETURN ROW("Scenario", "Department 5", "Metric", "Outstanding over 90 days share", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Average bill per visit], TREATAS({5}, 'Department'[DepartmentID]))
+    VAR Expected = 759.65818182
+    RETURN ROW("Scenario", "Department 5", "Metric", "Average bill per visit", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Visits per patient], TREATAS({5}, 'Department'[DepartmentID]))
+    VAR Expected = 2.60305344
+    RETURN ROW("Scenario", "Department 5", "Metric", "Visits per patient", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Highest doctor workload], TREATAS({5}, 'Department'[DepartmentID]))
+    VAR Expected = 88.00000000
+    RETURN ROW("Scenario", "Department 5", "Metric", "Highest doctor workload", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Lowest doctor workload], TREATAS({5}, 'Department'[DepartmentID]))
+    VAR Expected = 83.00000000
+    RETURN ROW("Scenario", "Department 5", "Metric", "Lowest doctor workload", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Average completed per doctor], TREATAS({5}, 'Department'[DepartmentID]))
+    VAR Expected = 85.25000000
+    RETURN ROW("Scenario", "Department 5", "Metric", "Average completed per doctor", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Highest doctor cancellation rate], TREATAS({5}, 'Department'[DepartmentID]))
+    VAR Expected = 0.20000000
+    RETURN ROW("Scenario", "Department 5", "Metric", "Highest doctor cancellation rate", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Cancellation rate all doctors], TREATAS({5}, 'Department'[DepartmentID]))
+    VAR Expected = 0.19385343
+    RETURN ROW("Scenario", "Department 5", "Metric", "Cancellation rate all doctors", "Expected", Expected, "Actual", Actual,
         "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
     VAR Actual = CALCULATE([Appointments], TREATAS({"2024-01"}, 'Appointment'[Month]))
     VAR Expected = 163.00000000
@@ -618,6 +858,46 @@ UNION(
     VAR Expected = 33.00000000
     RETURN ROW("Scenario", "2024-01", "Metric", "Repeat patients", "Expected", Expected, "Actual", Actual,
         "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Completed YoY change], TREATAS({"2024-01"}, 'Appointment'[Month]))
+    VAR Expected = -1.00000000
+    RETURN ROW("Scenario", "2024-01", "Metric", "Completed YoY change", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Outstanding over 90 days], TREATAS({"2024-01"}, 'Appointment'[Month]))
+    VAR Expected = 10162.48000000
+    RETURN ROW("Scenario", "2024-01", "Metric", "Outstanding over 90 days", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Outstanding over 90 days share], TREATAS({"2024-01"}, 'Appointment'[Month]))
+    VAR Expected = 1.00000000
+    RETURN ROW("Scenario", "2024-01", "Metric", "Outstanding over 90 days share", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Average bill per visit], TREATAS({"2024-01"}, 'Appointment'[Month]))
+    VAR Expected = 669.60695035
+    RETURN ROW("Scenario", "2024-01", "Metric", "Average bill per visit", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Visits per patient], TREATAS({"2024-01"}, 'Appointment'[Month]))
+    VAR Expected = 1.46875000
+    RETURN ROW("Scenario", "2024-01", "Metric", "Visits per patient", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Highest doctor workload], TREATAS({"2024-01"}, 'Appointment'[Month]))
+    VAR Expected = 18.00000000
+    RETURN ROW("Scenario", "2024-01", "Metric", "Highest doctor workload", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Lowest doctor workload], TREATAS({"2024-01"}, 'Appointment'[Month]))
+    VAR Expected = 2.00000000
+    RETURN ROW("Scenario", "2024-01", "Metric", "Lowest doctor workload", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Average completed per doctor], TREATAS({"2024-01"}, 'Appointment'[Month]))
+    VAR Expected = 7.05000000
+    RETURN ROW("Scenario", "2024-01", "Metric", "Average completed per doctor", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Highest doctor cancellation rate], TREATAS({"2024-01"}, 'Appointment'[Month]))
+    VAR Expected = 0.66666667
+    RETURN ROW("Scenario", "2024-01", "Metric", "Highest doctor cancellation rate", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Cancellation rate all doctors], TREATAS({"2024-01"}, 'Appointment'[Month]))
+    VAR Expected = 0.13496933
+    RETURN ROW("Scenario", "2024-01", "Metric", "Cancellation rate all doctors", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
     VAR Actual = CALCULATE([Appointments], TREATAS({"2025-12"}, 'Appointment'[Month]))
     VAR Expected = 175.00000000
     RETURN ROW("Scenario", "2025-12", "Metric", "Appointments", "Expected", Expected, "Actual", Actual,
@@ -705,6 +985,46 @@ UNION(
     VAR Actual = CALCULATE([Repeat patients], TREATAS({"2025-12"}, 'Appointment'[Month]))
     VAR Expected = 38.00000000
     RETURN ROW("Scenario", "2025-12", "Metric", "Repeat patients", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Completed YoY change], TREATAS({"2025-12"}, 'Appointment'[Month]))
+    VAR Expected = BLANK()
+    RETURN ROW("Scenario", "2025-12", "Metric", "Completed YoY change", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Outstanding over 90 days], TREATAS({"2025-12"}, 'Appointment'[Month]))
+    VAR Expected = BLANK()
+    RETURN ROW("Scenario", "2025-12", "Metric", "Outstanding over 90 days", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Outstanding over 90 days share], TREATAS({"2025-12"}, 'Appointment'[Month]))
+    VAR Expected = 0E-8
+    RETURN ROW("Scenario", "2025-12", "Metric", "Outstanding over 90 days share", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Average bill per visit], TREATAS({"2025-12"}, 'Appointment'[Month]))
+    VAR Expected = 686.86506849
+    RETURN ROW("Scenario", "2025-12", "Metric", "Average bill per visit", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Visits per patient], TREATAS({"2025-12"}, 'Appointment'[Month]))
+    VAR Expected = 1.44554455
+    RETURN ROW("Scenario", "2025-12", "Metric", "Visits per patient", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Highest doctor workload], TREATAS({"2025-12"}, 'Appointment'[Month]))
+    VAR Expected = 16.00000000
+    RETURN ROW("Scenario", "2025-12", "Metric", "Highest doctor workload", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Lowest doctor workload], TREATAS({"2025-12"}, 'Appointment'[Month]))
+    VAR Expected = 1.00000000
+    RETURN ROW("Scenario", "2025-12", "Metric", "Lowest doctor workload", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Average completed per doctor], TREATAS({"2025-12"}, 'Appointment'[Month]))
+    VAR Expected = 7.30000000
+    RETURN ROW("Scenario", "2025-12", "Metric", "Average completed per doctor", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Highest doctor cancellation rate], TREATAS({"2025-12"}, 'Appointment'[Month]))
+    VAR Expected = 0.50000000
+    RETURN ROW("Scenario", "2025-12", "Metric", "Highest doctor cancellation rate", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Cancellation rate all doctors], TREATAS({"2025-12"}, 'Appointment'[Month]))
+    VAR Expected = 0.16571429
+    RETURN ROW("Scenario", "2025-12", "Metric", "Cancellation rate all doctors", "Expected", Expected, "Actual", Actual,
         "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
     VAR Actual = CALCULATE([Appointments], TREATAS({"2026-01"}, 'Appointment'[Month]))
     VAR Expected = 56.00000000
@@ -794,6 +1114,46 @@ UNION(
     VAR Expected = BLANK()
     RETURN ROW("Scenario", "2026-01", "Metric", "Repeat patients", "Expected", Expected, "Actual", Actual,
         "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Completed YoY change], TREATAS({"2026-01"}, 'Appointment'[Month]))
+    VAR Expected = BLANK()
+    RETURN ROW("Scenario", "2026-01", "Metric", "Completed YoY change", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Outstanding over 90 days], TREATAS({"2026-01"}, 'Appointment'[Month]))
+    VAR Expected = BLANK()
+    RETURN ROW("Scenario", "2026-01", "Metric", "Outstanding over 90 days", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Outstanding over 90 days share], TREATAS({"2026-01"}, 'Appointment'[Month]))
+    VAR Expected = BLANK()
+    RETURN ROW("Scenario", "2026-01", "Metric", "Outstanding over 90 days share", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Average bill per visit], TREATAS({"2026-01"}, 'Appointment'[Month]))
+    VAR Expected = BLANK()
+    RETURN ROW("Scenario", "2026-01", "Metric", "Average bill per visit", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Visits per patient], TREATAS({"2026-01"}, 'Appointment'[Month]))
+    VAR Expected = BLANK()
+    RETURN ROW("Scenario", "2026-01", "Metric", "Visits per patient", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Highest doctor workload], TREATAS({"2026-01"}, 'Appointment'[Month]))
+    VAR Expected = BLANK()
+    RETURN ROW("Scenario", "2026-01", "Metric", "Highest doctor workload", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Lowest doctor workload], TREATAS({"2026-01"}, 'Appointment'[Month]))
+    VAR Expected = BLANK()
+    RETURN ROW("Scenario", "2026-01", "Metric", "Lowest doctor workload", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Average completed per doctor], TREATAS({"2026-01"}, 'Appointment'[Month]))
+    VAR Expected = BLANK()
+    RETURN ROW("Scenario", "2026-01", "Metric", "Average completed per doctor", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Highest doctor cancellation rate], TREATAS({"2026-01"}, 'Appointment'[Month]))
+    VAR Expected = BLANK()
+    RETURN ROW("Scenario", "2026-01", "Metric", "Highest doctor cancellation rate", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Cancellation rate all doctors], TREATAS({"2026-01"}, 'Appointment'[Month]))
+    VAR Expected = BLANK()
+    RETURN ROW("Scenario", "2026-01", "Metric", "Cancellation rate all doctors", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
     VAR Actual = CALCULATE([Appointments], TREATAS({"1900-01"}, 'Appointment'[Month]))
     VAR Expected = BLANK()
     RETURN ROW("Scenario", "1900-01", "Metric", "Appointments", "Expected", Expected, "Actual", Actual,
@@ -881,6 +1241,46 @@ UNION(
     VAR Actual = CALCULATE([Repeat patients], TREATAS({"1900-01"}, 'Appointment'[Month]))
     VAR Expected = BLANK()
     RETURN ROW("Scenario", "1900-01", "Metric", "Repeat patients", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Completed YoY change], TREATAS({"1900-01"}, 'Appointment'[Month]))
+    VAR Expected = BLANK()
+    RETURN ROW("Scenario", "1900-01", "Metric", "Completed YoY change", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Outstanding over 90 days], TREATAS({"1900-01"}, 'Appointment'[Month]))
+    VAR Expected = BLANK()
+    RETURN ROW("Scenario", "1900-01", "Metric", "Outstanding over 90 days", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Outstanding over 90 days share], TREATAS({"1900-01"}, 'Appointment'[Month]))
+    VAR Expected = BLANK()
+    RETURN ROW("Scenario", "1900-01", "Metric", "Outstanding over 90 days share", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Average bill per visit], TREATAS({"1900-01"}, 'Appointment'[Month]))
+    VAR Expected = BLANK()
+    RETURN ROW("Scenario", "1900-01", "Metric", "Average bill per visit", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Visits per patient], TREATAS({"1900-01"}, 'Appointment'[Month]))
+    VAR Expected = BLANK()
+    RETURN ROW("Scenario", "1900-01", "Metric", "Visits per patient", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Highest doctor workload], TREATAS({"1900-01"}, 'Appointment'[Month]))
+    VAR Expected = BLANK()
+    RETURN ROW("Scenario", "1900-01", "Metric", "Highest doctor workload", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Lowest doctor workload], TREATAS({"1900-01"}, 'Appointment'[Month]))
+    VAR Expected = BLANK()
+    RETURN ROW("Scenario", "1900-01", "Metric", "Lowest doctor workload", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Average completed per doctor], TREATAS({"1900-01"}, 'Appointment'[Month]))
+    VAR Expected = BLANK()
+    RETURN ROW("Scenario", "1900-01", "Metric", "Average completed per doctor", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Highest doctor cancellation rate], TREATAS({"1900-01"}, 'Appointment'[Month]))
+    VAR Expected = BLANK()
+    RETURN ROW("Scenario", "1900-01", "Metric", "Highest doctor cancellation rate", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Cancellation rate all doctors], TREATAS({"1900-01"}, 'Appointment'[Month]))
+    VAR Expected = BLANK()
+    RETURN ROW("Scenario", "1900-01", "Metric", "Cancellation rate all doctors", "Expected", Expected, "Actual", Actual,
         "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
     VAR Actual = CALCULATE([Appointments], TREATAS({1}, 'Doctor'[DoctorID]))
     VAR Expected = 222.00000000
@@ -970,6 +1370,46 @@ UNION(
     VAR Expected = 56.00000000
     RETURN ROW("Scenario", "Doctor 1", "Metric", "Repeat patients", "Expected", Expected, "Actual", Actual,
         "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Completed YoY change], TREATAS({1}, 'Doctor'[DoctorID]))
+    VAR Expected = -0.20588235
+    RETURN ROW("Scenario", "Doctor 1", "Metric", "Completed YoY change", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Outstanding over 90 days], TREATAS({1}, 'Doctor'[DoctorID]))
+    VAR Expected = 12922.97000000
+    RETURN ROW("Scenario", "Doctor 1", "Metric", "Outstanding over 90 days", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Outstanding over 90 days share], TREATAS({1}, 'Doctor'[DoctorID]))
+    VAR Expected = 0.88212303
+    RETURN ROW("Scenario", "Doctor 1", "Metric", "Outstanding over 90 days share", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Average bill per visit], TREATAS({1}, 'Doctor'[DoctorID]))
+    VAR Expected = 581.81060109
+    RETURN ROW("Scenario", "Doctor 1", "Metric", "Average bill per visit", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Visits per patient], TREATAS({1}, 'Doctor'[DoctorID]))
+    VAR Expected = 1.72641509
+    RETURN ROW("Scenario", "Doctor 1", "Metric", "Visits per patient", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Highest doctor workload], TREATAS({1}, 'Doctor'[DoctorID]))
+    VAR Expected = 183.00000000
+    RETURN ROW("Scenario", "Doctor 1", "Metric", "Highest doctor workload", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Lowest doctor workload], TREATAS({1}, 'Doctor'[DoctorID]))
+    VAR Expected = 183.00000000
+    RETURN ROW("Scenario", "Doctor 1", "Metric", "Lowest doctor workload", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Average completed per doctor], TREATAS({1}, 'Doctor'[DoctorID]))
+    VAR Expected = 175.95000000
+    RETURN ROW("Scenario", "Doctor 1", "Metric", "Average completed per doctor", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Highest doctor cancellation rate], TREATAS({1}, 'Doctor'[DoctorID]))
+    VAR Expected = 0.16055046
+    RETURN ROW("Scenario", "Doctor 1", "Metric", "Highest doctor cancellation rate", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Cancellation rate all doctors], TREATAS({1}, 'Doctor'[DoctorID]))
+    VAR Expected = 0.17818776
+    RETURN ROW("Scenario", "Doctor 1", "Metric", "Cancellation rate all doctors", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
     VAR Actual = CALCULATE([Appointments], TREATAS({1}, 'Patient'[PatientID]))
     VAR Expected = 11.00000000
     RETURN ROW("Scenario", "Patient 1", "Metric", "Appointments", "Expected", Expected, "Actual", Actual,
@@ -1057,6 +1497,46 @@ UNION(
     VAR Actual = CALCULATE([Repeat patients], TREATAS({1}, 'Patient'[PatientID]))
     VAR Expected = 1.00000000
     RETURN ROW("Scenario", "Patient 1", "Metric", "Repeat patients", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Completed YoY change], TREATAS({1}, 'Patient'[PatientID]))
+    VAR Expected = 2.00000000
+    RETURN ROW("Scenario", "Patient 1", "Metric", "Completed YoY change", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Outstanding over 90 days], TREATAS({1}, 'Patient'[PatientID]))
+    VAR Expected = 2095.43000000
+    RETURN ROW("Scenario", "Patient 1", "Metric", "Outstanding over 90 days", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Outstanding over 90 days share], TREATAS({1}, 'Patient'[PatientID]))
+    VAR Expected = 0.61115486
+    RETURN ROW("Scenario", "Patient 1", "Metric", "Outstanding over 90 days share", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Average bill per visit], TREATAS({1}, 'Patient'[PatientID]))
+    VAR Expected = 607.36750000
+    RETURN ROW("Scenario", "Patient 1", "Metric", "Average bill per visit", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Visits per patient], TREATAS({1}, 'Patient'[PatientID]))
+    VAR Expected = 8.00000000
+    RETURN ROW("Scenario", "Patient 1", "Metric", "Visits per patient", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Highest doctor workload], TREATAS({1}, 'Patient'[PatientID]))
+    VAR Expected = 5.00000000
+    RETURN ROW("Scenario", "Patient 1", "Metric", "Highest doctor workload", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Lowest doctor workload], TREATAS({1}, 'Patient'[PatientID]))
+    VAR Expected = 3.00000000
+    RETURN ROW("Scenario", "Patient 1", "Metric", "Lowest doctor workload", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Average completed per doctor], TREATAS({1}, 'Patient'[PatientID]))
+    VAR Expected = 2.66666667
+    RETURN ROW("Scenario", "Patient 1", "Metric", "Average completed per doctor", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Highest doctor cancellation rate], TREATAS({1}, 'Patient'[PatientID]))
+    VAR Expected = 1.00000000
+    RETURN ROW("Scenario", "Patient 1", "Metric", "Highest doctor cancellation rate", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Cancellation rate all doctors], TREATAS({1}, 'Patient'[PatientID]))
+    VAR Expected = 0.20000000
+    RETURN ROW("Scenario", "Patient 1", "Metric", "Cancellation rate all doctors", "Expected", Expected, "Actual", Actual,
         "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
     VAR Actual = CALCULATE([Appointments], TREATAS({"Cancelled"}, 'Appointment'[Status]))
     VAR Expected = 763.00000000
@@ -1146,6 +1626,46 @@ UNION(
     VAR Expected = BLANK()
     RETURN ROW("Scenario", "Cancelled only", "Metric", "Repeat patients", "Expected", Expected, "Actual", Actual,
         "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Completed YoY change], TREATAS({"Cancelled"}, 'Appointment'[Status]))
+    VAR Expected = BLANK()
+    RETURN ROW("Scenario", "Cancelled only", "Metric", "Completed YoY change", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Outstanding over 90 days], TREATAS({"Cancelled"}, 'Appointment'[Status]))
+    VAR Expected = BLANK()
+    RETURN ROW("Scenario", "Cancelled only", "Metric", "Outstanding over 90 days", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Outstanding over 90 days share], TREATAS({"Cancelled"}, 'Appointment'[Status]))
+    VAR Expected = BLANK()
+    RETURN ROW("Scenario", "Cancelled only", "Metric", "Outstanding over 90 days share", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Average bill per visit], TREATAS({"Cancelled"}, 'Appointment'[Status]))
+    VAR Expected = BLANK()
+    RETURN ROW("Scenario", "Cancelled only", "Metric", "Average bill per visit", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Visits per patient], TREATAS({"Cancelled"}, 'Appointment'[Status]))
+    VAR Expected = BLANK()
+    RETURN ROW("Scenario", "Cancelled only", "Metric", "Visits per patient", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Highest doctor workload], TREATAS({"Cancelled"}, 'Appointment'[Status]))
+    VAR Expected = BLANK()
+    RETURN ROW("Scenario", "Cancelled only", "Metric", "Highest doctor workload", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Lowest doctor workload], TREATAS({"Cancelled"}, 'Appointment'[Status]))
+    VAR Expected = BLANK()
+    RETURN ROW("Scenario", "Cancelled only", "Metric", "Lowest doctor workload", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Average completed per doctor], TREATAS({"Cancelled"}, 'Appointment'[Status]))
+    VAR Expected = BLANK()
+    RETURN ROW("Scenario", "Cancelled only", "Metric", "Average completed per doctor", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Highest doctor cancellation rate], TREATAS({"Cancelled"}, 'Appointment'[Status]))
+    VAR Expected = 1.00000000
+    RETURN ROW("Scenario", "Cancelled only", "Metric", "Highest doctor cancellation rate", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Cancellation rate all doctors], TREATAS({"Cancelled"}, 'Appointment'[Status]))
+    VAR Expected = 1.00000000
+    RETURN ROW("Scenario", "Cancelled only", "Metric", "Cancellation rate all doctors", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
     VAR Actual = CALCULATE([Appointments], TREATAS({"Completed"}, 'Appointment'[Status]))
     VAR Expected = 3519.00000000
     RETURN ROW("Scenario", "Completed only", "Metric", "Appointments", "Expected", Expected, "Actual", Actual,
@@ -1233,6 +1753,46 @@ UNION(
     VAR Actual = CALCULATE([Repeat patients], TREATAS({"Completed"}, 'Appointment'[Status]))
     VAR Expected = 200.00000000
     RETURN ROW("Scenario", "Completed only", "Metric", "Repeat patients", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Completed YoY change], TREATAS({"Completed"}, 'Appointment'[Status]))
+    VAR Expected = 0.03763752
+    RETURN ROW("Scenario", "Completed only", "Metric", "Completed YoY change", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Outstanding over 90 days], TREATAS({"Completed"}, 'Appointment'[Status]))
+    VAR Expected = 294001.00000000
+    RETURN ROW("Scenario", "Completed only", "Metric", "Outstanding over 90 days", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Outstanding over 90 days share], TREATAS({"Completed"}, 'Appointment'[Status]))
+    VAR Expected = 0.80788116
+    RETURN ROW("Scenario", "Completed only", "Metric", "Outstanding over 90 days share", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Average bill per visit], TREATAS({"Completed"}, 'Appointment'[Status]))
+    VAR Expected = 660.53872407
+    RETURN ROW("Scenario", "Completed only", "Metric", "Average bill per visit", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Visits per patient], TREATAS({"Completed"}, 'Appointment'[Status]))
+    VAR Expected = 17.59500000
+    RETURN ROW("Scenario", "Completed only", "Metric", "Visits per patient", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Highest doctor workload], TREATAS({"Completed"}, 'Appointment'[Status]))
+    VAR Expected = 335.00000000
+    RETURN ROW("Scenario", "Completed only", "Metric", "Highest doctor workload", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Lowest doctor workload], TREATAS({"Completed"}, 'Appointment'[Status]))
+    VAR Expected = 83.00000000
+    RETURN ROW("Scenario", "Completed only", "Metric", "Lowest doctor workload", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Average completed per doctor], TREATAS({"Completed"}, 'Appointment'[Status]))
+    VAR Expected = 175.95000000
+    RETURN ROW("Scenario", "Completed only", "Metric", "Average completed per doctor", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Highest doctor cancellation rate], TREATAS({"Completed"}, 'Appointment'[Status]))
+    VAR Expected = 0E-8
+    RETURN ROW("Scenario", "Completed only", "Metric", "Highest doctor cancellation rate", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Cancellation rate all doctors], TREATAS({"Completed"}, 'Appointment'[Status]))
+    VAR Expected = 0E-8
+    RETURN ROW("Scenario", "Completed only", "Metric", "Cancellation rate all doctors", "Expected", Expected, "Actual", Actual,
         "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
     VAR Actual = CALCULATE([Appointments], TREATAS({"Scheduled"}, 'Appointment'[Status]))
     VAR Expected = 56.00000000
@@ -1322,6 +1882,46 @@ UNION(
     VAR Expected = BLANK()
     RETURN ROW("Scenario", "Scheduled only", "Metric", "Repeat patients", "Expected", Expected, "Actual", Actual,
         "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Completed YoY change], TREATAS({"Scheduled"}, 'Appointment'[Status]))
+    VAR Expected = BLANK()
+    RETURN ROW("Scenario", "Scheduled only", "Metric", "Completed YoY change", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Outstanding over 90 days], TREATAS({"Scheduled"}, 'Appointment'[Status]))
+    VAR Expected = BLANK()
+    RETURN ROW("Scenario", "Scheduled only", "Metric", "Outstanding over 90 days", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Outstanding over 90 days share], TREATAS({"Scheduled"}, 'Appointment'[Status]))
+    VAR Expected = BLANK()
+    RETURN ROW("Scenario", "Scheduled only", "Metric", "Outstanding over 90 days share", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Average bill per visit], TREATAS({"Scheduled"}, 'Appointment'[Status]))
+    VAR Expected = BLANK()
+    RETURN ROW("Scenario", "Scheduled only", "Metric", "Average bill per visit", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Visits per patient], TREATAS({"Scheduled"}, 'Appointment'[Status]))
+    VAR Expected = BLANK()
+    RETURN ROW("Scenario", "Scheduled only", "Metric", "Visits per patient", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Highest doctor workload], TREATAS({"Scheduled"}, 'Appointment'[Status]))
+    VAR Expected = BLANK()
+    RETURN ROW("Scenario", "Scheduled only", "Metric", "Highest doctor workload", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Lowest doctor workload], TREATAS({"Scheduled"}, 'Appointment'[Status]))
+    VAR Expected = BLANK()
+    RETURN ROW("Scenario", "Scheduled only", "Metric", "Lowest doctor workload", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Average completed per doctor], TREATAS({"Scheduled"}, 'Appointment'[Status]))
+    VAR Expected = BLANK()
+    RETURN ROW("Scenario", "Scheduled only", "Metric", "Average completed per doctor", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Highest doctor cancellation rate], TREATAS({"Scheduled"}, 'Appointment'[Status]))
+    VAR Expected = BLANK()
+    RETURN ROW("Scenario", "Scheduled only", "Metric", "Highest doctor cancellation rate", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Cancellation rate all doctors], TREATAS({"Scheduled"}, 'Appointment'[Status]))
+    VAR Expected = BLANK()
+    RETURN ROW("Scenario", "Scheduled only", "Metric", "Cancellation rate all doctors", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
     VAR Actual = CALCULATE([Appointments], TREATAS({2}, 'Department'[DepartmentID]), TREATAS({"2025-12"}, 'Appointment'[Month]))
     VAR Expected = 26.00000000
     RETURN ROW("Scenario", "Pediatrics December", "Metric", "Appointments", "Expected", Expected, "Actual", Actual,
@@ -1410,6 +2010,46 @@ UNION(
     VAR Expected = 3.00000000
     RETURN ROW("Scenario", "Pediatrics December", "Metric", "Repeat patients", "Expected", Expected, "Actual", Actual,
         "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Completed YoY change], TREATAS({2}, 'Department'[DepartmentID]), TREATAS({"2025-12"}, 'Appointment'[Month]))
+    VAR Expected = BLANK()
+    RETURN ROW("Scenario", "Pediatrics December", "Metric", "Completed YoY change", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Outstanding over 90 days], TREATAS({2}, 'Department'[DepartmentID]), TREATAS({"2025-12"}, 'Appointment'[Month]))
+    VAR Expected = BLANK()
+    RETURN ROW("Scenario", "Pediatrics December", "Metric", "Outstanding over 90 days", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Outstanding over 90 days share], TREATAS({2}, 'Department'[DepartmentID]), TREATAS({"2025-12"}, 'Appointment'[Month]))
+    VAR Expected = 0E-8
+    RETURN ROW("Scenario", "Pediatrics December", "Metric", "Outstanding over 90 days share", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Average bill per visit], TREATAS({2}, 'Department'[DepartmentID]), TREATAS({"2025-12"}, 'Appointment'[Month]))
+    VAR Expected = 555.21000000
+    RETURN ROW("Scenario", "Pediatrics December", "Metric", "Average bill per visit", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Visits per patient], TREATAS({2}, 'Department'[DepartmentID]), TREATAS({"2025-12"}, 'Appointment'[Month]))
+    VAR Expected = 1.14285714
+    RETURN ROW("Scenario", "Pediatrics December", "Metric", "Visits per patient", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Highest doctor workload], TREATAS({2}, 'Department'[DepartmentID]), TREATAS({"2025-12"}, 'Appointment'[Month]))
+    VAR Expected = 10.00000000
+    RETURN ROW("Scenario", "Pediatrics December", "Metric", "Highest doctor workload", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Lowest doctor workload], TREATAS({2}, 'Department'[DepartmentID]), TREATAS({"2025-12"}, 'Appointment'[Month]))
+    VAR Expected = 4.00000000
+    RETURN ROW("Scenario", "Pediatrics December", "Metric", "Lowest doctor workload", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Average completed per doctor], TREATAS({2}, 'Department'[DepartmentID]), TREATAS({"2025-12"}, 'Appointment'[Month]))
+    VAR Expected = 6.00000000
+    RETURN ROW("Scenario", "Pediatrics December", "Metric", "Average completed per doctor", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Highest doctor cancellation rate], TREATAS({2}, 'Department'[DepartmentID]), TREATAS({"2025-12"}, 'Appointment'[Month]))
+    VAR Expected = 0.25000000
+    RETURN ROW("Scenario", "Pediatrics December", "Metric", "Highest doctor cancellation rate", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Cancellation rate all doctors], TREATAS({2}, 'Department'[DepartmentID]), TREATAS({"2025-12"}, 'Appointment'[Month]))
+    VAR Expected = 0.07692308
+    RETURN ROW("Scenario", "Pediatrics December", "Metric", "Cancellation rate all doctors", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
     VAR Actual = CALCULATE([Appointments], TREATAS({2}, 'Department'[DepartmentID]), TREATAS({1}, 'Doctor'[DoctorID]))
     VAR Expected = BLANK()
     RETURN ROW("Scenario", "Conflicting doctor department", "Metric", "Appointments", "Expected", Expected, "Actual", Actual,
@@ -1497,6 +2137,46 @@ UNION(
     VAR Actual = CALCULATE([Repeat patients], TREATAS({2}, 'Department'[DepartmentID]), TREATAS({1}, 'Doctor'[DoctorID]))
     VAR Expected = BLANK()
     RETURN ROW("Scenario", "Conflicting doctor department", "Metric", "Repeat patients", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Completed YoY change], TREATAS({2}, 'Department'[DepartmentID]), TREATAS({1}, 'Doctor'[DoctorID]))
+    VAR Expected = BLANK()
+    RETURN ROW("Scenario", "Conflicting doctor department", "Metric", "Completed YoY change", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Outstanding over 90 days], TREATAS({2}, 'Department'[DepartmentID]), TREATAS({1}, 'Doctor'[DoctorID]))
+    VAR Expected = BLANK()
+    RETURN ROW("Scenario", "Conflicting doctor department", "Metric", "Outstanding over 90 days", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Outstanding over 90 days share], TREATAS({2}, 'Department'[DepartmentID]), TREATAS({1}, 'Doctor'[DoctorID]))
+    VAR Expected = BLANK()
+    RETURN ROW("Scenario", "Conflicting doctor department", "Metric", "Outstanding over 90 days share", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Average bill per visit], TREATAS({2}, 'Department'[DepartmentID]), TREATAS({1}, 'Doctor'[DoctorID]))
+    VAR Expected = BLANK()
+    RETURN ROW("Scenario", "Conflicting doctor department", "Metric", "Average bill per visit", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Visits per patient], TREATAS({2}, 'Department'[DepartmentID]), TREATAS({1}, 'Doctor'[DoctorID]))
+    VAR Expected = BLANK()
+    RETURN ROW("Scenario", "Conflicting doctor department", "Metric", "Visits per patient", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Highest doctor workload], TREATAS({2}, 'Department'[DepartmentID]), TREATAS({1}, 'Doctor'[DoctorID]))
+    VAR Expected = BLANK()
+    RETURN ROW("Scenario", "Conflicting doctor department", "Metric", "Highest doctor workload", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Lowest doctor workload], TREATAS({2}, 'Department'[DepartmentID]), TREATAS({1}, 'Doctor'[DoctorID]))
+    VAR Expected = BLANK()
+    RETURN ROW("Scenario", "Conflicting doctor department", "Metric", "Lowest doctor workload", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Average completed per doctor], TREATAS({2}, 'Department'[DepartmentID]), TREATAS({1}, 'Doctor'[DoctorID]))
+    VAR Expected = 125.75000000
+    RETURN ROW("Scenario", "Conflicting doctor department", "Metric", "Average completed per doctor", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Highest doctor cancellation rate], TREATAS({2}, 'Department'[DepartmentID]), TREATAS({1}, 'Doctor'[DoctorID]))
+    VAR Expected = BLANK()
+    RETURN ROW("Scenario", "Conflicting doctor department", "Metric", "Highest doctor cancellation rate", "Expected", Expected, "Actual", Actual,
+        "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001)),
+    VAR Actual = CALCULATE([Cancellation rate all doctors], TREATAS({2}, 'Department'[DepartmentID]), TREATAS({1}, 'Doctor'[DoctorID]))
+    VAR Expected = 0.17405583
+    RETURN ROW("Scenario", "Conflicting doctor department", "Metric", "Cancellation rate all doctors", "Expected", Expected, "Actual", Actual,
         "Passed", IF(ISBLANK(Expected), ISBLANK(Actual), NOT ISBLANK(Actual) && ABS(Actual - Expected) < 0.000001))
 )
 ORDER BY [Passed] ASC, [Scenario], [Metric]

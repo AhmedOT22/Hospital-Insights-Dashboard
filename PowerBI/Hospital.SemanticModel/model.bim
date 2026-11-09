@@ -185,7 +185,7 @@
             "name": "Age group at snapshot",
             "dataType": "string",
             "type": "calculated",
-            "expression": "VAR Age = INT(YEARFRAC(Patient[DateOfBirth], DATE(2025,12,31), 1)) RETURN SWITCH(TRUE(), Age < 18, \"0–17\", Age < 30, \"18–29\", Age < 50, \"30–49\", Age < 70, \"50–69\", \"70+\")",
+            "expression": "VAR Age = INT(YEARFRAC(Patient[DateOfBirth], DATE(2025, 12, 31), 1)) RETURN SWITCH(TRUE(), Age < 18, \"0–17\", Age < 30, \"18–29\", Age < 50, \"30–49\", Age < 70, \"50–69\", \"70+\")",
             "summarizeBy": "none"
           }
         ],
@@ -554,19 +554,19 @@
           {
             "name": "Billed amount",
             "expression": "SUM(Billing[TotalAmount])",
-            "formatString": "#,0.00",
+            "formatString": "#,0",
             "displayFolder": "Hospital KPIs"
           },
           {
             "name": "Collected amount",
             "expression": "CALCULATE([Billed amount], KEEPFILTERS(Billing[PaymentStatus] = \"Paid\"))",
-            "formatString": "#,0.00",
+            "formatString": "#,0",
             "displayFolder": "Hospital KPIs"
           },
           {
             "name": "Outstanding amount",
             "expression": "CALCULATE([Billed amount], KEEPFILTERS(Billing[PaymentStatus] = \"Unpaid\"))",
-            "formatString": "#,0.00",
+            "formatString": "#,0",
             "displayFolder": "Hospital KPIs"
           },
           {
@@ -628,6 +628,141 @@
             "expression": "COUNTROWS(FILTER(VALUES(Appointment[PatientID]), CALCULATE([Completed appointments]) > 1))",
             "formatString": "#,0",
             "displayFolder": "Hospital KPIs"
+          },
+          {
+            "name": "Completed YoY change",
+            "expression": "VAR CurrentYear = CALCULATE([Completed appointments], KEEPFILTERS(YEAR(Appointment[AppointmentDate]) = 2025)) VAR PriorYear = CALCULATE([Completed appointments], KEEPFILTERS(YEAR(Appointment[AppointmentDate]) = 2024)) RETURN DIVIDE(CurrentYear - PriorYear, PriorYear)",
+            "formatString": "+0.0%;-0.0%;0.0%",
+            "displayFolder": "Hospital KPIs"
+          },
+          {
+            "name": "Outstanding over 90 days",
+            "expression": "CALCULATE([Outstanding amount], KEEPFILTERS(Appointment[AppointmentDate] < DATE(2025, 10, 2)))",
+            "formatString": "#,0",
+            "displayFolder": "Hospital KPIs"
+          },
+          {
+            "name": "Outstanding over 90 days share",
+            "expression": "DIVIDE(COALESCE([Outstanding over 90 days], 0), [Outstanding amount])",
+            "formatString": "0.0%",
+            "displayFolder": "Hospital KPIs"
+          },
+          {
+            "name": "Average bill per visit",
+            "expression": "DIVIDE([Billed amount], [Visits])",
+            "formatString": "#,0",
+            "displayFolder": "Hospital KPIs"
+          },
+          {
+            "name": "Visits per patient",
+            "expression": "DIVIDE([Completed appointments], [Patients served])",
+            "formatString": "0.0",
+            "displayFolder": "Hospital KPIs"
+          },
+          {
+            "name": "Highest doctor workload",
+            "expression": "MAXX(VALUES(Appointment[DoctorID]), [Completed appointments])",
+            "formatString": "#,0",
+            "displayFolder": "Hospital KPIs"
+          },
+          {
+            "name": "Lowest doctor workload",
+            "expression": "MINX(VALUES(Appointment[DoctorID]), [Completed appointments])",
+            "formatString": "#,0",
+            "displayFolder": "Hospital KPIs"
+          },
+          {
+            "name": "Average completed per doctor",
+            "expression": "CALCULATE(DIVIDE([Completed appointments], [Doctors with appointments]), REMOVEFILTERS(Doctor))",
+            "formatString": "#,0.0",
+            "displayFolder": "Hospital KPIs"
+          },
+          {
+            "name": "Highest doctor cancellation rate",
+            "expression": "MAXX(VALUES(Appointment[DoctorID]), [Cancellation rate])",
+            "formatString": "0.0%",
+            "displayFolder": "Hospital KPIs"
+          },
+          {
+            "name": "Cancellation rate all doctors",
+            "expression": "CALCULATE([Cancellation rate], REMOVEFILTERS(Doctor))",
+            "formatString": "0.0%",
+            "displayFolder": "Hospital KPIs"
+          },
+          {
+            "name": "Appointments note",
+            "expression": "FORMAT(COALESCE([Scheduled appointments], 0), \"#,0\") & \" future bookings included\"",
+            "displayFolder": "Card notes"
+          },
+          {
+            "name": "Patients served note",
+            "expression": "IF(ISBLANK([Visits per patient]), \"No data for this selection\", FORMAT([Visits per patient], \"0.0\") & \" completed visits per patient\")",
+            "displayFolder": "Card notes"
+          },
+          {
+            "name": "Collected note",
+            "expression": "IF(ISBLANK([Collection rate]), \"No data for this selection\", FORMAT([Collection rate], \"0%\") & \" of billed amount\")",
+            "displayFolder": "Card notes"
+          },
+          {
+            "name": "Outstanding note",
+            "expression": "IF(ISBLANK([Outstanding over 90 days share]), \"No data for this selection\", FORMAT([Outstanding over 90 days share], \"0%\") & \" is over 90 days old\")",
+            "displayFolder": "Card notes"
+          },
+          {
+            "name": "Completed note",
+            "expression": "IF(ISBLANK([Completed YoY change]), \"Select both 2024 and 2025 months to compare years\", FORMAT([Completed YoY change], \"+0.0%;-0.0%;0.0%\") & \" in 2025 vs 2024\")",
+            "displayFolder": "Card notes"
+          },
+          {
+            "name": "Cancelled note",
+            "expression": "IF(ISBLANK([Highest doctor cancellation rate]), \"No data for this selection\", \"Highest doctor rate \" & FORMAT([Highest doctor cancellation rate], \"0.0%\"))",
+            "displayFolder": "Card notes"
+          },
+          {
+            "name": "Scheduled note",
+            "expression": "\"Booked after the Dec 31, 2025 snapshot\"",
+            "displayFolder": "Card notes"
+          },
+          {
+            "name": "Completion rate note",
+            "expression": "\"Future bookings excluded\"",
+            "displayFolder": "Card notes"
+          },
+          {
+            "name": "Doctors note",
+            "expression": "IF(ISBLANK([Highest doctor workload]), \"No data for this selection\", FORMAT([Lowest doctor workload], \"#,0\") & \"–\" & FORMAT([Highest doctor workload], \"#,0\") & \" completed per doctor\")",
+            "displayFolder": "Card notes"
+          },
+          {
+            "name": "Cancellation rate note",
+            "expression": "IF(ISBLANK([Highest doctor cancellation rate]), \"No data for this selection\", \"Highest doctor \" & FORMAT([Highest doctor cancellation rate], \"0.0%\"))",
+            "displayFolder": "Card notes"
+          },
+          {
+            "name": "Billed note",
+            "expression": "IF(ISBLANK([Average bill per visit]), \"No data for this selection\", FORMAT([Average bill per visit], \"#,0\") & \" per visit on average\")",
+            "displayFolder": "Card notes"
+          },
+          {
+            "name": "Collection rate note",
+            "expression": "IF(ISBLANK([Outstanding amount]), \"No data for this selection\", FORMAT([Outstanding amount], \"#,0\") & \" still unpaid\")",
+            "displayFolder": "Card notes"
+          },
+          {
+            "name": "Completed stays note",
+            "expression": "IF(ISBLANK([Average completed stay]), \"No data for this selection\", \"Average stay \" & FORMAT([Average completed stay], \"0.0\") & \" days\")",
+            "displayFolder": "Card notes"
+          },
+          {
+            "name": "Doctor workload color",
+            "expression": "IF([Completed appointments] > [Average completed per doctor], \"#B3741D\", \"#6F8896\")",
+            "displayFolder": "Highlight colors"
+          },
+          {
+            "name": "Doctor cancellation color",
+            "expression": "IF([Cancellation rate] > [Cancellation rate all doctors], \"#B3741D\", \"#6F8896\")",
+            "displayFolder": "Highlight colors"
           }
         ]
       },
@@ -813,6 +948,13 @@
             "sourceColumn": "RecordID",
             "summarizeBy": "none",
             "isHidden": true
+          },
+          {
+            "name": "Visit age band",
+            "dataType": "string",
+            "type": "calculated",
+            "expression": "VAR Age = INT(DATE(2025, 12, 31) - RELATED(Appointment[AppointmentDate])) RETURN SWITCH(TRUE(), Age <= 30, \"0–30 days\", Age <= 90, \"31–90 days\", Age <= 365, \"91–365 days\", \"Over 365 days\")",
+            "summarizeBy": "none"
           }
         ],
         "partitions": [

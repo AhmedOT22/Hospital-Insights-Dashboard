@@ -6,7 +6,7 @@
     "y": 434,
     "width": 608,
     "height": 172,
-    "z": 13,
+    "z": 17,
     "tabOrder": 4000
   },
   "visual": {
@@ -25,7 +25,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Completed room stays by department'"
+                  "Value": "'Unpaid over 90 days by department'"
                 }
               }
             },
@@ -120,7 +120,7 @@
             "altText": {
               "expr": {
                 "Literal": {
-                  "Value": "'Bar chart: Completed room stays by department.'"
+                  "Value": "'Bar chart: Unpaid over 90 days by department.'"
                 }
               }
             }
@@ -159,16 +159,51 @@
                       "Entity": "Appointment"
                     }
                   },
-                  "Property": "Completed stays"
+                  "Property": "Outstanding over 90 days"
                 }
               },
-              "queryRef": "Appointment.Completed stays",
-              "nativeQueryRef": "Completed stays",
-              "displayName": "Completed stays"
+              "queryRef": "Appointment.Outstanding over 90 days",
+              "nativeQueryRef": "Outstanding over 90 days",
+              "displayName": "Outstanding over 90 days"
             }
           ]
         }
       }
+    },
+    "objects": {
+      "labels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "valueAxis": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "gridlineShow": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
     }
   }
 }

@@ -6,11 +6,11 @@
     "y": 250,
     "width": 608,
     "height": 172,
-    "z": 12,
-    "tabOrder": 6000
+    "z": 16,
+    "tabOrder": 5000
   },
   "visual": {
-    "visualType": "clusteredBarChart",
+    "visualType": "barChart",
     "visualContainerObjects": {
       "title": [
         {
@@ -25,7 +25,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Collected amount by service department'"
+                  "Value": "'Collected and unpaid by service department'"
                 }
               }
             },
@@ -120,7 +120,7 @@
             "altText": {
               "expr": {
                 "Literal": {
-                  "Value": "'Bar chart: Collected amount by service department.'"
+                  "Value": "'Stacked bar chart: Collected and unpaid by service department.'"
                 }
               }
             }
@@ -165,10 +165,60 @@
               "queryRef": "Appointment.Collected amount",
               "nativeQueryRef": "Collected amount",
               "displayName": "Collected amount"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Appointment"
+                    }
+                  },
+                  "Property": "Outstanding amount"
+                }
+              },
+              "queryRef": "Appointment.Outstanding amount",
+              "nativeQueryRef": "Outstanding amount",
+              "displayName": "Outstanding amount"
             }
           ]
         }
       }
+    },
+    "objects": {
+      "labels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "valueAxis": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "gridlineShow": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
     }
   }
 }

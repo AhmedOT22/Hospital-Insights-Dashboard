@@ -12,11 +12,17 @@ an eleven-table semantic model and five 1280 × 720 report pages:
 
 | Page | Purpose |
 | --- | --- |
-| Executive Overview | Patients served by month, collected amount by department, outcomes, outstanding amount by visit month |
+| Executive Overview | Unpaid amount by visit age, collected vs unpaid by department, patients served by month |
 | Appointments | Completed and cancelled trends, cancellation rate by month, future bookings by department |
-| Departments | Activity, billed and collected amounts, completed room stays and prescriptions by department |
-| Doctors | Completed appointments and cancellation rate for all 20 doctors, without arbitrary targets |
+| Departments | Activity, average bill per visit, unpaid over 90 days and completed room stays by department |
+| Doctors | Workload and cancellation rate for all 20 doctors; amber marks above the hospital average |
 | Patients | Patients served and outcomes by age; prescriptions by visit month across the full period |
+
+Every KPI card carries a context line under its value: a share ("81% is over 90
+days old"), a comparison ("+3.8% in 2025 vs 2024") or a range ("83–335 completed per
+doctor"). One headline card per page is drawn in amber. Bar and column charts print
+their values instead of a value axis, and doctor charts color the bars above the
+hospital-wide average in amber.
 
 The redesign uses a neutral background, blue/teal theme, consistent cards, titles,
 page navigation and department/month/doctor slicers. Native visuals replace the original
@@ -37,7 +43,7 @@ references; they do not show the redesigned project or corrected dataset.
 4. In **Transform data → Edit parameters**, set `ServerName` and `DatabaseName` to
    your SQL Server instance/database. Authenticate locally and refresh.
 5. Run `PowerBI/Hospital.SemanticModel/DAXQueries/Acceptance.dax` in DAX Query View;
-   all 374 checks must pass. Review all five pages and save a newly compiled PBIX.
+   all 544 checks must pass. Review all five pages and save a newly compiled PBIX.
 
 The data snapshot is **December 31, 2025**. Bookings extend into January 2026;
 completed outcomes, payments and occupancy stop at the snapshot. Currency amounts
@@ -61,7 +67,7 @@ never silently reset an existing installation. See [SQL rules](sql/README.md).
 ## Evidence and limits
 
 CI runs the schema, 28 rejection cases, the full generated seed and reconciliation
-queries on SQL Server 2022, including 374 metric comparisons across 17 filter contexts. It also checks reproducibility, fourteen Python tests,
+queries on SQL Server 2022, including 544 metric comparisons across 17 filter contexts. It also checks reproducibility, fifteen Python tests,
 report field bindings, accessibility metadata, filter paths and Microsoft PBIR JSON schemas. These checks
 cover data and source structure, not Desktop rendering or DAX engine correctness.
 

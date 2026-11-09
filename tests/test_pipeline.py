@@ -4,10 +4,18 @@ import csv
 from datetime import date
 import hashlib
 import json
+import re
 from pathlib import Path
 import unittest
 from scripts.generate_data import generate, AS_OF
-from scripts.build_powerbi import RELATIONS, MEASURES, PAGES
+from scripts.build_powerbi import (
+    CHART_COLORS,
+    HEADLINES,
+    MEASURES,
+    NOTES,
+    PAGES,
+    RELATIONS,
+)
 from scripts.reconcile_metrics import metrics, load, CONTEXTS
 from decimal import Decimal
 
@@ -179,6 +187,7 @@ class PipelineTests(unittest.TestCase):
             "cardVisual": {"Data"},
             "slicer": {"Values"},
             "clusteredBarChart": {"Category", "Y"},
+            "barChart": {"Category", "Y"},
             "clusteredColumnChart": {"Category", "Y"},
             "lineChart": {"Category", "Y"},
             "donutChart": {"Category", "Y"},
@@ -234,7 +243,7 @@ class PipelineTests(unittest.TestCase):
                         {"Appointments", "Scheduled appointments"} & set(measures),
                         title,
                     )
-        doctors = len(list(csv.DictReader((ROOT / "data/processed/Doctor.csv").open())))
+        doctors = len((ROOT / "data/processed/Doctor.csv").read_text().splitlines()) - 1
         pages = ROOT / "PowerBI/Hospital.Report/definition/pages"
         for p in pages.glob("*/visuals/chart*/visual.json"):
             d = json.loads(p.read_text())
@@ -242,6 +251,39 @@ class PipelineTests(unittest.TestCase):
             if category["nativeQueryRef"] == "Doctor name":
                 # About 16 px per bar after the title, so all doctors fit unscrolled.
                 self.assertGreaterEqual(d["position"]["height"] - 40, doctors * 15)
+
+    def test_every_referenced_measure_exists_and_cards_have_context(self):
+        model = json.loads(
+            (ROOT / "PowerBI/Hospital.SemanticModel/model.bim").read_text()
+        )["model"]
+        defined = {m["name"] for t in model["tables"] for m in t.get("measures", [])}
+
+        def measures(node):
+            if isinstance(node, dict):
+                if "Measure" in node:
+                    yield node["Measure"]["Property"]
+                for value in node.values():
+                    yield from measures(value)
+            elif isinstance(node, list):
+                for value in node:
+                    yield from measures(value)
+
+        pages = ROOT / "PowerBI/Hospital.Report/definition/pages"
+        for p in pages.glob("*/visuals/*/visual.json"):
+            for name in measures(json.loads(p.read_text())):
+                self.assertIn(name, defined, p.parent.name)
+        # Text and color measures must only build on oracle-checked measures.
+        for expression in [*NOTES.values()]:
+            for name in re.findall(r"\[([^\]]+)\]", expression):
+                self.assertIn(name, MEASURES, expression)
+        titles = {title for _, _, _, charts in PAGES for _, title, *_ in charts}
+        self.assertLessEqual(set(CHART_COLORS), titles)
+        for page, _, cards, charts in PAGES:
+            card_measures = [measure for measure, _ in cards]
+            if page in HEADLINES:
+                self.assertIn(HEADLINES[page], card_measures)
+            for measure, note in cards:
+                self.assertTrue(note is None or note in NOTES, note)
 
     def test_theme_series_colors_have_graphic_contrast(self):
         def luminance(color):

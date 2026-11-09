@@ -6,7 +6,7 @@
     "y": 250,
     "width": 608,
     "height": 172,
-    "z": 12,
+    "z": 14,
     "tabOrder": 5000
   },
   "visual": {
@@ -202,6 +202,41 @@
         ],
         "isDefaultSort": false
       }
+    },
+    "objects": {
+      "labels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "valueAxis": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "gridlineShow": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
     }
   }
 }

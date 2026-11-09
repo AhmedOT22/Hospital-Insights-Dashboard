@@ -5,9 +5,9 @@
     "x": 960,
     "y": 144,
     "width": 296,
-    "height": 82,
+    "height": 68,
     "z": 10,
-    "tabOrder": 7000
+    "tabOrder": 9000
   },
   "visual": {
     "visualType": "cardVisual",
@@ -120,7 +120,7 @@
             "altText": {
               "expr": {
                 "Literal": {
-                  "Value": "'KPI card showing cancellation rate for the current selection.'"
+                  "Value": "'KPI card showing cancellation rate for the current selection, highlighted as this page''s headline.'"
                 }
               }
             }
@@ -227,7 +227,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#176B87'"
+                      "Value": "'#B3741D'"
                     }
                   }
                 }

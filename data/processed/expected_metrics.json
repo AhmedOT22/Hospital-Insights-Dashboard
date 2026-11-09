@@ -25,7 +25,17 @@
       "Snapshot occupancy": "0.20000000",
       "Completed stays": "614.00000000",
       "Average completed stay": "3.44951140",
-      "Repeat patients": "200.00000000"
+      "Repeat patients": "200.00000000",
+      "Completed YoY change": "0.03763752",
+      "Outstanding over 90 days": "294001.00000000",
+      "Outstanding over 90 days share": "0.80788116",
+      "Average bill per visit": "660.53872407",
+      "Visits per patient": "17.59500000",
+      "Highest doctor workload": "335.00000000",
+      "Lowest doctor workload": "83.00000000",
+      "Average completed per doctor": "175.95000000",
+      "Highest doctor cancellation rate": "0.22297297",
+      "Cancellation rate all doctors": "0.17818776"
     }
   },
   {
@@ -55,7 +65,17 @@
       "Snapshot occupancy": "0E-8",
       "Completed stays": "110.00000000",
       "Average completed stay": "3.51818182",
-      "Repeat patients": "141.00000000"
+      "Repeat patients": "141.00000000",
+      "Completed YoY change": "-0.09917355",
+      "Outstanding over 90 days": "53262.74000000",
+      "Outstanding over 90 days share": "0.82655690",
+      "Average bill per visit": "560.75208696",
+      "Visits per patient": "4.63087248",
+      "Highest doctor workload": "194.00000000",
+      "Lowest doctor workload": "153.00000000",
+      "Average completed per doctor": "172.50000000",
+      "Highest doctor cancellation rate": "0.21182266",
+      "Cancellation rate all doctors": "0.18246445"
     }
   },
   {
@@ -85,7 +105,17 @@
       "Snapshot occupancy": "0E-8",
       "Completed stays": "79.00000000",
       "Average completed stay": "3.45569620",
-      "Repeat patients": "50.00000000"
+      "Repeat patients": "50.00000000",
+      "Completed YoY change": "0.02008032",
+      "Outstanding over 90 days": "40615.49000000",
+      "Outstanding over 90 days share": "0.77801133",
+      "Average bill per visit": "603.90817097",
+      "Visits per patient": "10.06000000",
+      "Highest doctor workload": "133.00000000",
+      "Lowest doctor workload": "115.00000000",
+      "Average completed per doctor": "125.75000000",
+      "Highest doctor cancellation rate": "0.22297297",
+      "Cancellation rate all doctors": "0.17405583"
     }
   },
   {
@@ -115,7 +145,17 @@
       "Snapshot occupancy": "0.75000000",
       "Completed stays": "227.00000000",
       "Average completed stay": "3.30396476",
-      "Repeat patients": "150.00000000"
+      "Repeat patients": "150.00000000",
+      "Completed YoY change": "0.09443508",
+      "Outstanding over 90 days": "111873.52000000",
+      "Outstanding over 90 days share": "0.84270404",
+      "Average bill per visit": "669.19405797",
+      "Visits per patient": "8.28000000",
+      "Highest doctor workload": "335.00000000",
+      "Lowest doctor workload": "299.00000000",
+      "Average completed per doctor": "310.50000000",
+      "Highest doctor cancellation rate": "0.19893899",
+      "Cancellation rate all doctors": "0.17911434"
     }
   },
   {
@@ -145,7 +185,17 @@
       "Snapshot occupancy": "0E-8",
       "Completed stays": "122.00000000",
       "Average completed stay": "3.45081967",
-      "Repeat patients": "143.00000000"
+      "Repeat patients": "143.00000000",
+      "Completed YoY change": "0.15362319",
+      "Outstanding over 90 days": "56378.69000000",
+      "Outstanding over 90 days share": "0.75423673",
+      "Average bill per visit": "731.58621803",
+      "Visits per patient": "4.98657718",
+      "Highest doctor workload": "197.00000000",
+      "Lowest doctor workload": "179.00000000",
+      "Average completed per doctor": "185.75000000",
+      "Highest doctor cancellation rate": "0.18834081",
+      "Cancellation rate all doctors": "0.16797312"
     }
   },
   {
@@ -175,7 +225,17 @@
       "Snapshot occupancy": "0.25000000",
       "Completed stays": "76.00000000",
       "Average completed stay": "3.77631579",
-      "Repeat patients": "99.00000000"
+      "Repeat patients": "99.00000000",
+      "Completed YoY change": "-0.07344633",
+      "Outstanding over 90 days": "31870.56000000",
+      "Outstanding over 90 days share": "0.80141461",
+      "Average bill per visit": "759.65818182",
+      "Visits per patient": "2.60305344",
+      "Highest doctor workload": "88.00000000",
+      "Lowest doctor workload": "83.00000000",
+      "Average completed per doctor": "85.25000000",
+      "Highest doctor cancellation rate": "0.20000000",
+      "Cancellation rate all doctors": "0.19385343"
     }
   },
   {
@@ -205,7 +265,17 @@
       "Snapshot occupancy": "0.20000000",
       "Completed stays": "614.00000000",
       "Average completed stay": "3.44951140",
-      "Repeat patients": "33.00000000"
+      "Repeat patients": "33.00000000",
+      "Completed YoY change": "-1.00000000",
+      "Outstanding over 90 days": "10162.48000000",
+      "Outstanding over 90 days share": "1.00000000",
+      "Average bill per visit": "669.60695035",
+      "Visits per patient": "1.46875000",
+      "Highest doctor workload": "18.00000000",
+      "Lowest doctor workload": "2.00000000",
+      "Average completed per doctor": "7.05000000",
+      "Highest doctor cancellation rate": "0.66666667",
+      "Cancellation rate all doctors": "0.13496933"
     }
   },
   {
@@ -235,7 +305,17 @@
       "Snapshot occupancy": "0.20000000",
       "Completed stays": "614.00000000",
       "Average completed stay": "3.44951140",
-      "Repeat patients": "38.00000000"
+      "Repeat patients": "38.00000000",
+      "Completed YoY change": null,
+      "Outstanding over 90 days": null,
+      "Outstanding over 90 days share": "0E-8",
+      "Average bill per visit": "686.86506849",
+      "Visits per patient": "1.44554455",
+      "Highest doctor workload": "16.00000000",
+      "Lowest doctor workload": "1.00000000",
+      "Average completed per doctor": "7.30000000",
+      "Highest doctor cancellation rate": "0.50000000",
+      "Cancellation rate all doctors": "0.16571429"
     }
   },
   {
@@ -265,7 +345,17 @@
       "Snapshot occupancy": "0.20000000",
       "Completed stays": "614.00000000",
       "Average completed stay": "3.44951140",
-      "Repeat patients": null
+      "Repeat patients": null,
+      "Completed YoY change": null,
+      "Outstanding over 90 days": null,
+      "Outstanding over 90 days share": null,
+      "Average bill per visit": null,
+      "Visits per patient": null,
+      "Highest doctor workload": null,
+      "Lowest doctor workload": null,
+      "Average completed per doctor": null,
+      "Highest doctor cancellation rate": null,
+      "Cancellation rate all doctors": null
     }
   },
   {
@@ -295,7 +385,17 @@
       "Snapshot occupancy": "0.20000000",
       "Completed stays": "614.00000000",
       "Average completed stay": "3.44951140",
-      "Repeat patients": null
+      "Repeat patients": null,
+      "Completed YoY change": null,
+      "Outstanding over 90 days": null,
+      "Outstanding over 90 days share": null,
+      "Average bill per visit": null,
+      "Visits per patient": null,
+      "Highest doctor workload": null,
+      "Lowest doctor workload": null,
+      "Average completed per doctor": null,
+      "Highest doctor cancellation rate": null,
+      "Cancellation rate all doctors": null
     }
   },
   {
@@ -325,7 +425,17 @@
       "Snapshot occupancy": "0.20000000",
       "Completed stays": "614.00000000",
       "Average completed stay": "3.44951140",
-      "Repeat patients": "56.00000000"
+      "Repeat patients": "56.00000000",
+      "Completed YoY change": "-0.20588235",
+      "Outstanding over 90 days": "12922.97000000",
+      "Outstanding over 90 days share": "0.88212303",
+      "Average bill per visit": "581.81060109",
+      "Visits per patient": "1.72641509",
+      "Highest doctor workload": "183.00000000",
+      "Lowest doctor workload": "183.00000000",
+      "Average completed per doctor": "175.95000000",
+      "Highest doctor cancellation rate": "0.16055046",
+      "Cancellation rate all doctors": "0.17818776"
     }
   },
   {
@@ -355,7 +465,17 @@
       "Snapshot occupancy": "0.20000000",
       "Completed stays": "1.00000000",
       "Average completed stay": "3.00000000",
-      "Repeat patients": "1.00000000"
+      "Repeat patients": "1.00000000",
+      "Completed YoY change": "2.00000000",
+      "Outstanding over 90 days": "2095.43000000",
+      "Outstanding over 90 days share": "0.61115486",
+      "Average bill per visit": "607.36750000",
+      "Visits per patient": "8.00000000",
+      "Highest doctor workload": "5.00000000",
+      "Lowest doctor workload": "3.00000000",
+      "Average completed per doctor": "2.66666667",
+      "Highest doctor cancellation rate": "1.00000000",
+      "Cancellation rate all doctors": "0.20000000"
     }
   },
   {
@@ -385,7 +505,17 @@
       "Snapshot occupancy": "0.20000000",
       "Completed stays": "614.00000000",
       "Average completed stay": "3.44951140",
-      "Repeat patients": null
+      "Repeat patients": null,
+      "Completed YoY change": null,
+      "Outstanding over 90 days": null,
+      "Outstanding over 90 days share": null,
+      "Average bill per visit": null,
+      "Visits per patient": null,
+      "Highest doctor workload": null,
+      "Lowest doctor workload": null,
+      "Average completed per doctor": null,
+      "Highest doctor cancellation rate": "1.00000000",
+      "Cancellation rate all doctors": "1.00000000"
     }
   },
   {
@@ -415,7 +545,17 @@
       "Snapshot occupancy": "0.20000000",
       "Completed stays": "614.00000000",
       "Average completed stay": "3.44951140",
-      "Repeat patients": "200.00000000"
+      "Repeat patients": "200.00000000",
+      "Completed YoY change": "0.03763752",
+      "Outstanding over 90 days": "294001.00000000",
+      "Outstanding over 90 days share": "0.80788116",
+      "Average bill per visit": "660.53872407",
+      "Visits per patient": "17.59500000",
+      "Highest doctor workload": "335.00000000",
+      "Lowest doctor workload": "83.00000000",
+      "Average completed per doctor": "175.95000000",
+      "Highest doctor cancellation rate": "0E-8",
+      "Cancellation rate all doctors": "0E-8"
     }
   },
   {
@@ -445,7 +585,17 @@
       "Snapshot occupancy": "0.20000000",
       "Completed stays": "614.00000000",
       "Average completed stay": "3.44951140",
-      "Repeat patients": null
+      "Repeat patients": null,
+      "Completed YoY change": null,
+      "Outstanding over 90 days": null,
+      "Outstanding over 90 days share": null,
+      "Average bill per visit": null,
+      "Visits per patient": null,
+      "Highest doctor workload": null,
+      "Lowest doctor workload": null,
+      "Average completed per doctor": null,
+      "Highest doctor cancellation rate": null,
+      "Cancellation rate all doctors": null
     }
   },
   {
@@ -476,7 +626,17 @@
       "Snapshot occupancy": "0E-8",
       "Completed stays": "79.00000000",
       "Average completed stay": "3.45569620",
-      "Repeat patients": "3.00000000"
+      "Repeat patients": "3.00000000",
+      "Completed YoY change": null,
+      "Outstanding over 90 days": null,
+      "Outstanding over 90 days share": "0E-8",
+      "Average bill per visit": "555.21000000",
+      "Visits per patient": "1.14285714",
+      "Highest doctor workload": "10.00000000",
+      "Lowest doctor workload": "4.00000000",
+      "Average completed per doctor": "6.00000000",
+      "Highest doctor cancellation rate": "0.25000000",
+      "Cancellation rate all doctors": "0.07692308"
     }
   },
   {
@@ -507,7 +667,17 @@
       "Snapshot occupancy": "0E-8",
       "Completed stays": "79.00000000",
       "Average completed stay": "3.45569620",
-      "Repeat patients": null
+      "Repeat patients": null,
+      "Completed YoY change": null,
+      "Outstanding over 90 days": null,
+      "Outstanding over 90 days share": null,
+      "Average bill per visit": null,
+      "Visits per patient": null,
+      "Highest doctor workload": null,
+      "Lowest doctor workload": null,
+      "Average completed per doctor": "125.75000000",
+      "Highest doctor cancellation rate": null,
+      "Cancellation rate all doctors": "0.17405583"
     }
   }
 ]

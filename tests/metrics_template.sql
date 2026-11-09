@@ -24,6 +24,12 @@ BEGIN
         (@PatientID IS NULL OR a.PatientID=@PatientID) AND
         (@Month IS NULL OR CONVERT(CHAR(7),a.AppointmentDate,126)=@Month) AND
         (@Status IS NULL OR a.Status=@Status);
+    -- Same selection without the doctor filter, for REMOVEFILTERS(Doctor) measures.
+    SELECT * INTO #AD FROM dbo.Appointment a WHERE
+        (@DepartmentID IS NULL OR a.DepartmentID=@DepartmentID) AND
+        (@PatientID IS NULL OR a.PatientID=@PatientID) AND
+        (@Month IS NULL OR CONVERT(CHAR(7),a.AppointmentDate,126)=@Month) AND
+        (@Status IS NULL OR a.Status=@Status);
     SELECT r.* INTO #R FROM dbo.Medical_Record r JOIN #A a ON r.AppointmentID=a.AppointmentID;
     SELECT b.* INTO #B FROM dbo.Billing b JOIN #R r ON b.RecordID=r.RecordID;
     SELECT * INTO #Rooms FROM dbo.Room WHERE @DepartmentID IS NULL OR DepartmentID=@DepartmentID;
@@ -53,8 +59,18 @@ BEGIN
     SELECT @Scenario,N'Snapshot occupancy',CAST((CAST(SUM(CASE WHEN AvailabilityStatus='Occupied' THEN 1 ELSE 0 END) AS DECIMAL(28,8))/NULLIF(COUNT(*),0)) AS DECIMAL(28,8)) FROM #Rooms UNION ALL
     SELECT @Scenario,N'Completed stays',CAST((NULLIF(COUNT(*),0)) AS DECIMAL(28,8)) FROM #Stays UNION ALL
     SELECT @Scenario,N'Average completed stay',CAST((AVG(CAST(DATEDIFF(DAY,AdmissionDate,DischargeDate) AS DECIMAL(28,8)))) AS DECIMAL(28,8)) FROM #Stays UNION ALL
-    SELECT @Scenario,N'Repeat patients',CAST((NULLIF(COUNT(*),0)) AS DECIMAL(28,8)) FROM (SELECT PatientID FROM #A WHERE Status='Completed' GROUP BY PatientID HAVING COUNT(*)>1) p;
-    DROP TABLE #A,#R,#B,#Rooms,#Stays;
+    SELECT @Scenario,N'Repeat patients',CAST((NULLIF(COUNT(*),0)) AS DECIMAL(28,8)) FROM (SELECT PatientID FROM #A WHERE Status='Completed' GROUP BY PatientID HAVING COUNT(*)>1) p UNION ALL
+    SELECT @Scenario,N'Completed YoY change',CAST((CAST(SUM(CASE WHEN YEAR(AppointmentDate)=2025 THEN 1 ELSE 0 END)-SUM(CASE WHEN YEAR(AppointmentDate)=2024 THEN 1 ELSE 0 END) AS DECIMAL(28,8))/NULLIF(SUM(CASE WHEN YEAR(AppointmentDate)=2024 THEN 1 ELSE 0 END),0)) AS DECIMAL(28,8)) FROM #A WHERE Status='Completed' UNION ALL
+    SELECT @Scenario,N'Outstanding over 90 days',CAST((SUM(b.TotalAmount)) AS DECIMAL(28,8)) FROM #B b JOIN #R r ON b.RecordID=r.RecordID JOIN #A a ON r.AppointmentID=a.AppointmentID WHERE b.PaymentStatus='Unpaid' AND a.AppointmentDate<'2025-10-02' UNION ALL
+    SELECT @Scenario,N'Outstanding over 90 days share',CAST((CAST(SUM(CASE WHEN b.PaymentStatus='Unpaid' AND a.AppointmentDate<'2025-10-02' THEN b.TotalAmount ELSE 0 END) AS DECIMAL(28,8))/NULLIF(SUM(CASE WHEN b.PaymentStatus='Unpaid' THEN b.TotalAmount ELSE 0 END),0)) AS DECIMAL(28,8)) FROM #B b JOIN #R r ON b.RecordID=r.RecordID JOIN #A a ON r.AppointmentID=a.AppointmentID UNION ALL
+    SELECT @Scenario,N'Average bill per visit',CAST((CAST(SUM(TotalAmount) AS DECIMAL(28,8))/NULLIF((SELECT COUNT(*) FROM #R),0)) AS DECIMAL(28,8)) FROM #B UNION ALL
+    SELECT @Scenario,N'Visits per patient',CAST((CAST(COUNT(*) AS DECIMAL(28,8))/NULLIF(COUNT(DISTINCT PatientID),0)) AS DECIMAL(28,8)) FROM #A WHERE Status='Completed' UNION ALL
+    SELECT @Scenario,N'Highest doctor workload',CAST((MAX(n)) AS DECIMAL(28,8)) FROM (SELECT COUNT(*) n FROM #A WHERE Status='Completed' GROUP BY DoctorID) d UNION ALL
+    SELECT @Scenario,N'Lowest doctor workload',CAST((MIN(n)) AS DECIMAL(28,8)) FROM (SELECT COUNT(*) n FROM #A WHERE Status='Completed' GROUP BY DoctorID) d UNION ALL
+    SELECT @Scenario,N'Average completed per doctor',CAST((CAST(NULLIF(SUM(CASE WHEN Status='Completed' THEN 1 ELSE 0 END),0) AS DECIMAL(28,8))/NULLIF(COUNT(DISTINCT DoctorID),0)) AS DECIMAL(28,8)) FROM #AD UNION ALL
+    SELECT @Scenario,N'Highest doctor cancellation rate',CAST((MAX(r)) AS DECIMAL(28,8)) FROM (SELECT CAST(SUM(CASE WHEN Status='Cancelled' THEN 1 ELSE 0 END) AS DECIMAL(28,8))/NULLIF(SUM(CASE WHEN Status IN ('Completed','Cancelled') THEN 1 ELSE 0 END),0) r FROM #A GROUP BY DoctorID) d UNION ALL
+    SELECT @Scenario,N'Cancellation rate all doctors',CAST((CAST(SUM(CASE WHEN Status='Cancelled' THEN 1 ELSE 0 END) AS DECIMAL(28,8))/NULLIF(SUM(CASE WHEN Status IN ('Completed','Cancelled') THEN 1 ELSE 0 END),0)) AS DECIMAL(28,8)) FROM #AD;
+    DROP TABLE #A,#AD,#R,#B,#Rooms,#Stays;
     FETCH NEXT FROM cases INTO @Scenario,@DepartmentID,@DoctorID,@PatientID,@Month,@Status;
 END;
 CLOSE cases;
