@@ -7,7 +7,7 @@
     "width": 296,
     "height": 82,
     "z": 9,
-    "tabOrder": 9000
+    "tabOrder": 8000
   },
   "visual": {
     "visualType": "cardVisual",
@@ -25,7 +25,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Visits'"
+                  "Value": "'Prescriptions'"
                 }
               }
             },
@@ -120,7 +120,7 @@
             "altText": {
               "expr": {
                 "Literal": {
-                  "Value": "'KPI card showing visits for the current selection.'"
+                  "Value": "'KPI card showing prescriptions for the current selection.'"
                 }
               }
             }
@@ -200,12 +200,12 @@
                       "Entity": "Appointment"
                     }
                   },
-                  "Property": "Visits"
+                  "Property": "Prescriptions"
                 }
               },
-              "queryRef": "Appointment.Visits",
-              "nativeQueryRef": "Visits",
-              "displayName": "Visits"
+              "queryRef": "Appointment.Prescriptions",
+              "nativeQueryRef": "Prescriptions",
+              "displayName": "Prescriptions"
             }
           ]
         }

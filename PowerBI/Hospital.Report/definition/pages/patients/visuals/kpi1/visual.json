@@ -7,7 +7,7 @@
     "width": 296,
     "height": 82,
     "z": 8,
-    "tabOrder": 10000
+    "tabOrder": 9000
   },
   "visual": {
     "visualType": "cardVisual",
@@ -25,7 +25,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Repeat patients'"
+                  "Value": "'Visits'"
                 }
               }
             },
@@ -120,7 +120,7 @@
             "altText": {
               "expr": {
                 "Literal": {
-                  "Value": "'KPI card showing repeat patients for the current selection.'"
+                  "Value": "'KPI card showing visits for the current selection.'"
                 }
               }
             }
@@ -200,12 +200,12 @@
                       "Entity": "Appointment"
                     }
                   },
-                  "Property": "Repeat patients"
+                  "Property": "Visits"
                 }
               },
-              "queryRef": "Appointment.Repeat patients",
-              "nativeQueryRef": "Repeat patients",
-              "displayName": "Repeat patients"
+              "queryRef": "Appointment.Visits",
+              "nativeQueryRef": "Visits",
+              "displayName": "Visits"
             }
           ]
         }

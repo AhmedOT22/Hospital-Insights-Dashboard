@@ -4,13 +4,13 @@
   "position": {
     "x": 24,
     "y": 434,
-    "width": 608,
+    "width": 1232,
     "height": 172,
     "z": 13,
-    "tabOrder": 5000
+    "tabOrder": 4000
   },
   "visual": {
-    "visualType": "clusteredColumnChart",
+    "visualType": "lineChart",
     "visualContainerObjects": {
       "title": [
         {
@@ -25,7 +25,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Completed vs cancelled by age at snapshot'"
+                  "Value": "'Prescriptions by visit month'"
                 }
               }
             },
@@ -120,7 +120,7 @@
             "altText": {
               "expr": {
                 "Literal": {
-                  "Value": "'Column chart: Completed vs cancelled by age at snapshot.'"
+                  "Value": "'Line chart: Prescriptions by visit month.'"
                 }
               }
             }
@@ -137,15 +137,15 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Patient"
+                      "Entity": "Appointment"
                     }
                   },
-                  "Property": "Age group at snapshot"
+                  "Property": "Month"
                 }
               },
-              "queryRef": "Patient.Age group at snapshot",
-              "nativeQueryRef": "Age group at snapshot",
-              "displayName": "Age group at snapshot"
+              "queryRef": "Appointment.Month",
+              "nativeQueryRef": "Month",
+              "displayName": "Month"
             }
           ]
         },
@@ -159,30 +159,33 @@
                       "Entity": "Appointment"
                     }
                   },
-                  "Property": "Completed appointments"
+                  "Property": "Prescriptions"
                 }
               },
-              "queryRef": "Appointment.Completed appointments",
-              "nativeQueryRef": "Completed appointments",
-              "displayName": "Completed appointments"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Appointment"
-                    }
-                  },
-                  "Property": "Cancelled appointments"
-                }
-              },
-              "queryRef": "Appointment.Cancelled appointments",
-              "nativeQueryRef": "Cancelled appointments",
-              "displayName": "Cancelled appointments"
+              "queryRef": "Appointment.Prescriptions",
+              "nativeQueryRef": "Prescriptions",
+              "displayName": "Prescriptions"
             }
           ]
         }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Appointment"
+                  }
+                },
+                "Property": "Month"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ],
+        "isDefaultSort": false
       }
     }
   }

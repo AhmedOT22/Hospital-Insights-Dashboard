@@ -54,7 +54,8 @@ bookings have their own department chart on the Appointments page.
 
 Comparisons that are flat in the generated data were removed rather than shown as
 near-identical bars: gender (100/100), department collection rate (83–86%),
-department cancellation rate (17–19%), room occupancy (4 of 20 rooms occupied at the
+department cancellation rate (17–19%), repeat patients (every generated patient
+has two or more completed visits), room occupancy (4 of 20 rooms occupied at the
 snapshot), weekday, hour and average stay. Their measures stay in the model and in the
 acceptance checks. The Doctors page gives its two charts the full chart-area height
 so all 20 doctors fit without scrolling. Theme series colors keep at least 3:1

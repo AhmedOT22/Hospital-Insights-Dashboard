@@ -7,7 +7,7 @@
     "width": 296,
     "height": 82,
     "z": 10,
-    "tabOrder": 8000
+    "tabOrder": 7000
   },
   "visual": {
     "visualType": "cardVisual",
@@ -25,7 +25,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Prescriptions'"
+                  "Value": "'Cancellation rate'"
                 }
               }
             },
@@ -120,7 +120,7 @@
             "altText": {
               "expr": {
                 "Literal": {
-                  "Value": "'KPI card showing prescriptions for the current selection.'"
+                  "Value": "'KPI card showing cancellation rate for the current selection.'"
                 }
               }
             }
@@ -200,12 +200,12 @@
                       "Entity": "Appointment"
                     }
                   },
-                  "Property": "Prescriptions"
+                  "Property": "Cancellation rate"
                 }
               },
-              "queryRef": "Appointment.Prescriptions",
-              "nativeQueryRef": "Prescriptions",
-              "displayName": "Prescriptions"
+              "queryRef": "Appointment.Cancellation rate",
+              "nativeQueryRef": "Cancellation rate",
+              "displayName": "Cancellation rate"
             }
           ]
         }

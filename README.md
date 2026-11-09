@@ -16,7 +16,7 @@ an eleven-table semantic model and five 1280 × 720 report pages:
 | Appointments | Completed and cancelled trends, cancellation rate by month, future bookings by department |
 | Departments | Activity, billed and collected amounts, completed room stays and prescriptions by department |
 | Doctors | Completed appointments and cancellation rate for all 20 doctors, without arbitrary targets |
-| Patients | Patients served, repeat patients and outcomes by age; prescriptions by visit month |
+| Patients | Patients served and outcomes by age; prescriptions by visit month across the full period |
 
 The redesign uses a neutral background, blue/teal theme, consistent cards, titles,
 page navigation and department/month/doctor slicers. Native visuals replace the original

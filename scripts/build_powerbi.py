@@ -271,7 +271,8 @@ def semantic_model():
 
 # Each chart is (visual type, title, category table, category column, measures).
 # Pages with two charts give each one the full chart-area height, so long
-# category lists (20 doctors) fit without scrolling. Charts were chosen so that
+# category lists (20 doctors) fit without scrolling; with three, the last chart
+# spans the bottom row. Charts were chosen so that
 # no title/axis/measure combination repeats and each one shows real variation in
 # the generated data; flat comparisons (gender, weekday, department collection
 # rate, room occupancy) are deliberately left out.
@@ -415,7 +416,9 @@ PAGES = [
     (
         "patients",
         "Patients",
-        ["Patients served", "Repeat patients", "Visits", "Prescriptions"],
+        # Every generated patient has 2+ completed visits, so "Repeat patients"
+        # would always equal "Patients served"; it stays in the model only.
+        ["Patients served", "Visits", "Prescriptions", "Cancellation rate"],
         [
             (
                 "clusteredColumnChart",
@@ -423,13 +426,6 @@ PAGES = [
                 "Patient",
                 "Age group at snapshot",
                 ["Patients served"],
-            ),
-            (
-                "clusteredColumnChart",
-                "Repeat patients by age at snapshot",
-                "Patient",
-                "Age group at snapshot",
-                ["Repeat patients"],
             ),
             (
                 "clusteredColumnChart",
@@ -546,7 +542,7 @@ def visual(page, name, kind, title, x, y, w, h, roles=None, objects=None, alt=No
         }
     if roles and "Category" in roles:
         t, n, m = roles["Category"][0]
-        if n == "Month":
+        if n in ("Month", "Age group at snapshot"):  # natural order, not by value
             cfg["query"]["sortDefinition"] = {
                 "sort": [{"field": field(t, n, m), "direction": "Ascending"}],
                 "isDefaultSort": False,
@@ -631,9 +627,10 @@ def report():
         "name": "Hospital Clinical",
         "dataColors": [
             # Every series color keeps at least 3:1 contrast on white (WCAG 1.4.11).
+            # Amber sits second: blue and teal side by side are hard to tell apart.
             "#176B87",
-            "#1D887D",
             "#B3741D",
+            "#1D887D",
             "#637B91",
             "#8B5E9B",
             "#4F7A87",
@@ -847,6 +844,8 @@ def report():
             )
         tall = len(charts) == 2
         for i, (kind, title, table, category, measures) in enumerate(charts):
+            # With three charts the last one spans the full width of the bottom row.
+            wide = len(charts) == 3 and i == 2
             roles = {
                 "Category": [(table, category, False)],
                 "Y": [("Appointment", m, True) for m in measures],
@@ -858,7 +857,7 @@ def report():
                 title,
                 24 + (i % 2) * 624,
                 250 + (0 if tall else (i // 2) * 184),
-                608,
+                1232 if wide else 608,
                 356 if tall else 172,
                 roles,
                 alt=f"{CHART_NAMES[kind]}: {title}.",

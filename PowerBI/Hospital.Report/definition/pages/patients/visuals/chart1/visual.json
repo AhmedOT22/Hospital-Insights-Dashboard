@@ -7,7 +7,7 @@
     "width": 608,
     "height": 172,
     "z": 12,
-    "tabOrder": 6000
+    "tabOrder": 5000
   },
   "visual": {
     "visualType": "clusteredColumnChart",
@@ -25,7 +25,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Repeat patients by age at snapshot'"
+                  "Value": "'Completed vs cancelled by age at snapshot'"
                 }
               }
             },
@@ -120,7 +120,7 @@
             "altText": {
               "expr": {
                 "Literal": {
-                  "Value": "'Column chart: Repeat patients by age at snapshot.'"
+                  "Value": "'Column chart: Completed vs cancelled by age at snapshot.'"
                 }
               }
             }
@@ -159,15 +159,48 @@
                       "Entity": "Appointment"
                     }
                   },
-                  "Property": "Repeat patients"
+                  "Property": "Completed appointments"
                 }
               },
-              "queryRef": "Appointment.Repeat patients",
-              "nativeQueryRef": "Repeat patients",
-              "displayName": "Repeat patients"
+              "queryRef": "Appointment.Completed appointments",
+              "nativeQueryRef": "Completed appointments",
+              "displayName": "Completed appointments"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Appointment"
+                    }
+                  },
+                  "Property": "Cancelled appointments"
+                }
+              },
+              "queryRef": "Appointment.Cancelled appointments",
+              "nativeQueryRef": "Cancelled appointments",
+              "displayName": "Cancelled appointments"
             }
           ]
         }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Patient"
+                  }
+                },
+                "Property": "Age group at snapshot"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ],
+        "isDefaultSort": false
       }
     }
   }
