@@ -269,6 +269,12 @@ def semantic_model():
     save(MODEL / "definition.pbism", {"version": "1.0", "settings": {}})
 
 
+# Each chart is (visual type, title, category table, category column, measures).
+# Pages with two charts give each one the full chart-area height, so long
+# category lists (20 doctors) fit without scrolling. Charts were chosen so that
+# no title/axis/measure combination repeats and each one shows real variation in
+# the generated data; flat comparisons (gender, weekday, department collection
+# rate, room occupancy) are deliberately left out.
 PAGES = [
     (
         "overview",
@@ -277,10 +283,10 @@ PAGES = [
         [
             (
                 "clusteredColumnChart",
-                "Bookings by month (Jan 2026 scheduled)",
+                "Patients served by month",
                 "Appointment",
                 "Month",
-                ["Appointments"],
+                ["Patients served"],
             ),
             (
                 "clusteredBarChart",
@@ -297,11 +303,11 @@ PAGES = [
                 ["Appointments"],
             ),
             (
-                "clusteredBarChart",
-                "Cancellation rate by service department",
-                "Department",
-                "DepartmentName",
-                ["Cancellation rate"],
+                "clusteredColumnChart",
+                "Outstanding amount by visit month",
+                "Appointment",
+                "Month",
+                ["Outstanding amount"],
             ),
         ],
     ),
@@ -317,10 +323,10 @@ PAGES = [
         [
             (
                 "lineChart",
-                "Recorded appointments by month",
+                "Completed and cancelled by month",
                 "Appointment",
                 "Month",
-                ["Appointments"],
+                ["Completed appointments", "Cancelled appointments"],
             ),
             (
                 "clusteredColumnChart",
@@ -348,7 +354,7 @@ PAGES = [
     (
         "departments",
         "Departments",
-        ["Appointments", "Collection rate", "Rooms", "Snapshot occupancy"],
+        ["Appointments", "Billed amount", "Completed stays", "Average completed stay"],
         [
             (
                 "clusteredBarChart",
@@ -366,17 +372,17 @@ PAGES = [
             ),
             (
                 "clusteredBarChart",
-                "Collection rate by service department",
+                "Completed room stays by department",
                 "Department",
                 "DepartmentName",
-                ["Collection rate"],
+                ["Completed stays"],
             ),
             (
                 "clusteredBarChart",
-                "Snapshot occupancy by department",
+                "Prescriptions by service department",
                 "Department",
                 "DepartmentName",
-                ["Snapshot occupancy"],
+                ["Prescriptions"],
             ),
         ],
     ),
@@ -392,31 +398,17 @@ PAGES = [
         [
             (
                 "clusteredBarChart",
-                "Completed workload by doctor",
+                "Completed appointments by doctor",
                 "Doctor",
                 "Doctor name",
                 ["Completed appointments"],
             ),
             (
                 "clusteredBarChart",
-                "Patients served by doctor",
+                "Cancellation rate by doctor",
                 "Doctor",
                 "Doctor name",
-                ["Patients served"],
-            ),
-            (
-                "clusteredBarChart",
-                "Cancellation rate by service department",
-                "Department",
-                "DepartmentName",
                 ["Cancellation rate"],
-            ),
-            (
-                "lineChart",
-                "Completed workload over time • select a doctor",
-                "Appointment",
-                "Month",
-                ["Completed appointments"],
             ),
         ],
     ),
@@ -433,25 +425,25 @@ PAGES = [
                 ["Patients served"],
             ),
             (
-                "donutChart",
-                "Patients served by recorded gender",
+                "clusteredColumnChart",
+                "Repeat patients by age at snapshot",
                 "Patient",
-                "Gender",
-                ["Patients served"],
+                "Age group at snapshot",
+                ["Repeat patients"],
             ),
             (
                 "clusteredColumnChart",
-                "Completed vs cancelled by age cohort",
+                "Completed vs cancelled by age at snapshot",
                 "Patient",
                 "Age group at snapshot",
                 ["Completed appointments", "Cancelled appointments"],
             ),
             (
                 "lineChart",
-                "Completed patient activity",
+                "Prescriptions by visit month",
                 "Appointment",
                 "Month",
-                ["Completed appointments"],
+                ["Prescriptions"],
             ),
         ],
     ),
@@ -638,12 +630,13 @@ def report():
     theme = {
         "name": "Hospital Clinical",
         "dataColors": [
+            # Every series color keeps at least 3:1 contrast on white (WCAG 1.4.11).
             "#176B87",
             "#1D887D",
-            "#64A8B5",
-            "#D29A43",
-            "#77899C",
-            "#A6C8CF",
+            "#B3741D",
+            "#637B91",
+            "#8B5E9B",
+            "#4F7A87",
         ],
         "background": "#F4F7FA",
         "foreground": "#18394A",
@@ -852,6 +845,7 @@ def report():
                     }.items()
                 },
             )
+        tall = len(charts) == 2
         for i, (kind, title, table, category, measures) in enumerate(charts):
             roles = {
                 "Category": [(table, category, False)],
@@ -863,9 +857,9 @@ def report():
                 kind,
                 title,
                 24 + (i % 2) * 624,
-                250 + (i // 2) * 184,
+                250 + (0 if tall else (i // 2) * 184),
                 608,
-                172,
+                356 if tall else 172,
                 roles,
                 alt=f"{CHART_NAMES[kind]}: {title}.",
             )
@@ -909,9 +903,9 @@ def report():
             )
         text(
             "footnote",
-            "Service and collection rates follow appointment cohorts; room occupancy is a fixed snapshot."
+            "Room stays follow the room's department; amounts and prescriptions follow appointment cohorts."
             if page == "departments"
-            else "Rates exclude future scheduled outcomes. Financial measures follow visit cohorts, not payment-date cash flow.",
+            else "Completed and cancelled outcomes run to Dec 31, 2025; Jan 2026 holds future bookings only. Amounts follow visit month, not payment date.",
             856,
             632,
             400,

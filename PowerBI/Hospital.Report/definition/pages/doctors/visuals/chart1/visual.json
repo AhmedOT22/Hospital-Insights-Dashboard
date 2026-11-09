@@ -5,9 +5,9 @@
     "x": 648,
     "y": 250,
     "width": 608,
-    "height": 172,
+    "height": 356,
     "z": 12,
-    "tabOrder": 6000
+    "tabOrder": 4000
   },
   "visual": {
     "visualType": "clusteredBarChart",
@@ -25,7 +25,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Patients served by doctor'"
+                  "Value": "'Cancellation rate by doctor'"
                 }
               }
             },
@@ -120,7 +120,7 @@
             "altText": {
               "expr": {
                 "Literal": {
-                  "Value": "'Bar chart: Patients served by doctor.'"
+                  "Value": "'Bar chart: Cancellation rate by doctor.'"
                 }
               }
             }
@@ -159,12 +159,12 @@
                       "Entity": "Appointment"
                     }
                   },
-                  "Property": "Patients served"
+                  "Property": "Cancellation rate"
                 }
               },
-              "queryRef": "Appointment.Patients served",
-              "nativeQueryRef": "Patients served",
-              "displayName": "Patients served"
+              "queryRef": "Appointment.Cancellation rate",
+              "nativeQueryRef": "Cancellation rate",
+              "displayName": "Cancellation rate"
             }
           ]
         }

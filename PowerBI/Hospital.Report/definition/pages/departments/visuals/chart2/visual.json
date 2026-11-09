@@ -25,7 +25,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Collection rate by service department'"
+                  "Value": "'Completed room stays by department'"
                 }
               }
             },
@@ -120,7 +120,7 @@
             "altText": {
               "expr": {
                 "Literal": {
-                  "Value": "'Bar chart: Collection rate by service department.'"
+                  "Value": "'Bar chart: Completed room stays by department.'"
                 }
               }
             }
@@ -159,12 +159,12 @@
                       "Entity": "Appointment"
                     }
                   },
-                  "Property": "Collection rate"
+                  "Property": "Completed stays"
                 }
               },
-              "queryRef": "Appointment.Collection rate",
-              "nativeQueryRef": "Collection rate",
-              "displayName": "Collection rate"
+              "queryRef": "Appointment.Completed stays",
+              "nativeQueryRef": "Completed stays",
+              "displayName": "Completed stays"
             }
           ]
         }

@@ -10,7 +10,7 @@
     "tabOrder": 6000
   },
   "visual": {
-    "visualType": "donutChart",
+    "visualType": "clusteredColumnChart",
     "visualContainerObjects": {
       "title": [
         {
@@ -25,7 +25,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Patients served by recorded gender'"
+                  "Value": "'Repeat patients by age at snapshot'"
                 }
               }
             },
@@ -120,7 +120,7 @@
             "altText": {
               "expr": {
                 "Literal": {
-                  "Value": "'Donut chart: Patients served by recorded gender.'"
+                  "Value": "'Column chart: Repeat patients by age at snapshot.'"
                 }
               }
             }
@@ -140,12 +140,12 @@
                       "Entity": "Patient"
                     }
                   },
-                  "Property": "Gender"
+                  "Property": "Age group at snapshot"
                 }
               },
-              "queryRef": "Patient.Gender",
-              "nativeQueryRef": "Gender",
-              "displayName": "Gender"
+              "queryRef": "Patient.Age group at snapshot",
+              "nativeQueryRef": "Age group at snapshot",
+              "displayName": "Age group at snapshot"
             }
           ]
         },
@@ -159,12 +159,12 @@
                       "Entity": "Appointment"
                     }
                   },
-                  "Property": "Patients served"
+                  "Property": "Repeat patients"
                 }
               },
-              "queryRef": "Appointment.Patients served",
-              "nativeQueryRef": "Patients served",
-              "displayName": "Patients served"
+              "queryRef": "Appointment.Repeat patients",
+              "nativeQueryRef": "Repeat patients",
+              "displayName": "Repeat patients"
             }
           ]
         }

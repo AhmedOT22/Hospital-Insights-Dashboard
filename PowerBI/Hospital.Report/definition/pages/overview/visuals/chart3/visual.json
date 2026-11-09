@@ -10,7 +10,7 @@
     "tabOrder": 4000
   },
   "visual": {
-    "visualType": "clusteredBarChart",
+    "visualType": "clusteredColumnChart",
     "visualContainerObjects": {
       "title": [
         {
@@ -25,7 +25,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Cancellation rate by service department'"
+                  "Value": "'Outstanding amount by visit month'"
                 }
               }
             },
@@ -120,7 +120,7 @@
             "altText": {
               "expr": {
                 "Literal": {
-                  "Value": "'Bar chart: Cancellation rate by service department.'"
+                  "Value": "'Column chart: Outstanding amount by visit month.'"
                 }
               }
             }
@@ -137,15 +137,15 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Department"
+                      "Entity": "Appointment"
                     }
                   },
-                  "Property": "DepartmentName"
+                  "Property": "Month"
                 }
               },
-              "queryRef": "Department.DepartmentName",
-              "nativeQueryRef": "DepartmentName",
-              "displayName": "DepartmentName"
+              "queryRef": "Appointment.Month",
+              "nativeQueryRef": "Month",
+              "displayName": "Month"
             }
           ]
         },
@@ -159,15 +159,33 @@
                       "Entity": "Appointment"
                     }
                   },
-                  "Property": "Cancellation rate"
+                  "Property": "Outstanding amount"
                 }
               },
-              "queryRef": "Appointment.Cancellation rate",
-              "nativeQueryRef": "Cancellation rate",
-              "displayName": "Cancellation rate"
+              "queryRef": "Appointment.Outstanding amount",
+              "nativeQueryRef": "Outstanding amount",
+              "displayName": "Outstanding amount"
             }
           ]
         }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Appointment"
+                  }
+                },
+                "Property": "Month"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ],
+        "isDefaultSort": false
       }
     }
   }

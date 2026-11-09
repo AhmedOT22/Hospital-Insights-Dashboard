@@ -25,7 +25,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Completed patient activity'"
+                  "Value": "'Prescriptions by visit month'"
                 }
               }
             },
@@ -120,7 +120,7 @@
             "altText": {
               "expr": {
                 "Literal": {
-                  "Value": "'Line chart: Completed patient activity.'"
+                  "Value": "'Line chart: Prescriptions by visit month.'"
                 }
               }
             }
@@ -159,12 +159,12 @@
                       "Entity": "Appointment"
                     }
                   },
-                  "Property": "Completed appointments"
+                  "Property": "Prescriptions"
                 }
               },
-              "queryRef": "Appointment.Completed appointments",
-              "nativeQueryRef": "Completed appointments",
-              "displayName": "Completed appointments"
+              "queryRef": "Appointment.Prescriptions",
+              "nativeQueryRef": "Prescriptions",
+              "displayName": "Prescriptions"
             }
           ]
         }

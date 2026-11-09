@@ -25,7 +25,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Snapshot occupancy'"
+                  "Value": "'Average completed stay'"
                 }
               }
             },
@@ -120,7 +120,7 @@
             "altText": {
               "expr": {
                 "Literal": {
-                  "Value": "'KPI card showing snapshot occupancy for the current selection.'"
+                  "Value": "'KPI card showing average completed stay for the current selection.'"
                 }
               }
             }
@@ -200,12 +200,12 @@
                       "Entity": "Appointment"
                     }
                   },
-                  "Property": "Snapshot occupancy"
+                  "Property": "Average completed stay"
                 }
               },
-              "queryRef": "Appointment.Snapshot occupancy",
-              "nativeQueryRef": "Snapshot occupancy",
-              "displayName": "Snapshot occupancy"
+              "queryRef": "Appointment.Average completed stay",
+              "nativeQueryRef": "Average completed stay",
+              "displayName": "Average completed stay"
             }
           ]
         }

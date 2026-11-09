@@ -37,12 +37,28 @@ appointment-month slicers replace repeated hard-coded department charts.
 4. Confirm card formatting, theme loading, navigation buttons, slicers, labels and
    chronological axes on every page. Check 100% zoom, contrast, keyboard order and
    charts with long labels. Adjust native visual properties if Desktop needs them.
-5. Confirm financial cohort labels and fixed snapshot resource cards remain clear.
+5. Confirm financial cohort labels and the visit-month footnotes remain clear.
 6. Save the compiled PBIX and replace historical screenshots with actual renders.
 
 Until these steps pass, this is implemented **source awaiting Desktop acceptance**,
 not a claim that the compiled dashboard is finished. The original PBIX/screenshots
 remain historical and intentionally have not been relabelled as new screenshots.
+
+## Chart selection
+
+Every chart answers a different question: no category/measure pair appears twice in
+the report. Monthly trends use completed/cancelled outcomes, patients served,
+prescriptions or outstanding amounts, never total bookings, because January 2026
+contains only future scheduled appointments and would read as a collapse. Future
+bookings have their own department chart on the Appointments page.
+
+Comparisons that are flat in the generated data were removed rather than shown as
+near-identical bars: gender (100/100), department collection rate (83–86%),
+department cancellation rate (17–19%), room occupancy (4 of 20 rooms occupied at the
+snapshot), weekday, hour and average stay. Their measures stay in the model and in the
+acceptance checks. The Doctors page gives its two charts the full chart-area height
+so all 20 doctors fit without scrolling. Theme series colors keep at least 3:1
+contrast on white. `tests/test_pipeline.py` enforces these rules.
 
 ## Accessibility
 

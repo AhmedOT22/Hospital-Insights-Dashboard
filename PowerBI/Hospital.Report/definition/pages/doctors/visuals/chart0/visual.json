@@ -5,9 +5,9 @@
     "x": 24,
     "y": 250,
     "width": 608,
-    "height": 172,
+    "height": 356,
     "z": 11,
-    "tabOrder": 7000
+    "tabOrder": 5000
   },
   "visual": {
     "visualType": "clusteredBarChart",
@@ -25,7 +25,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Completed workload by doctor'"
+                  "Value": "'Completed appointments by doctor'"
                 }
               }
             },
@@ -120,7 +120,7 @@
             "altText": {
               "expr": {
                 "Literal": {
-                  "Value": "'Bar chart: Completed workload by doctor.'"
+                  "Value": "'Bar chart: Completed appointments by doctor.'"
                 }
               }
             }

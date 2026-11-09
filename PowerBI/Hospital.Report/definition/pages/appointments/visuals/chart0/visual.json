@@ -25,7 +25,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Recorded appointments by month'"
+                  "Value": "'Completed and cancelled by month'"
                 }
               }
             },
@@ -120,7 +120,7 @@
             "altText": {
               "expr": {
                 "Literal": {
-                  "Value": "'Line chart: Recorded appointments by month.'"
+                  "Value": "'Line chart: Completed and cancelled by month.'"
                 }
               }
             }
@@ -159,12 +159,27 @@
                       "Entity": "Appointment"
                     }
                   },
-                  "Property": "Appointments"
+                  "Property": "Completed appointments"
                 }
               },
-              "queryRef": "Appointment.Appointments",
-              "nativeQueryRef": "Appointments",
-              "displayName": "Appointments"
+              "queryRef": "Appointment.Completed appointments",
+              "nativeQueryRef": "Completed appointments",
+              "displayName": "Completed appointments"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Appointment"
+                    }
+                  },
+                  "Property": "Cancelled appointments"
+                }
+              },
+              "queryRef": "Appointment.Cancelled appointments",
+              "nativeQueryRef": "Cancelled appointments",
+              "displayName": "Cancelled appointments"
             }
           ]
         }

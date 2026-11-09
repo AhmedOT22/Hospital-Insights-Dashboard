@@ -25,7 +25,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Rooms'"
+                  "Value": "'Completed stays'"
                 }
               }
             },
@@ -120,7 +120,7 @@
             "altText": {
               "expr": {
                 "Literal": {
-                  "Value": "'KPI card showing rooms for the current selection.'"
+                  "Value": "'KPI card showing completed stays for the current selection.'"
                 }
               }
             }
@@ -200,12 +200,12 @@
                       "Entity": "Appointment"
                     }
                   },
-                  "Property": "Rooms"
+                  "Property": "Completed stays"
                 }
               },
-              "queryRef": "Appointment.Rooms",
-              "nativeQueryRef": "Rooms",
-              "displayName": "Rooms"
+              "queryRef": "Appointment.Completed stays",
+              "nativeQueryRef": "Completed stays",
+              "displayName": "Completed stays"
             }
           ]
         }

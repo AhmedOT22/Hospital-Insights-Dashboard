@@ -7,7 +7,7 @@ import json
 from pathlib import Path
 import unittest
 from scripts.generate_data import generate, AS_OF
-from scripts.build_powerbi import RELATIONS, MEASURES
+from scripts.build_powerbi import RELATIONS, MEASURES, PAGES
 from scripts.reconcile_metrics import metrics, load, CONTEXTS
 from decimal import Decimal
 
@@ -219,6 +219,48 @@ class PipelineTests(unittest.TestCase):
                     )
                     self.assertFalse(overlap, (page, p.parent.name, name))
                 boxes.append((p.parent.name, box))
+
+    def test_charts_are_distinct_readable_and_snapshot_safe(self):
+        seen = {}
+        for page, _, _, charts in PAGES:
+            for _, title, _, category, measures in charts:
+                key = (category, tuple(measures))
+                self.assertNotIn(key, seen, (page, title, seen.get(key)))
+                seen[key] = (page, title)
+                if category == "Month":
+                    # Jan 2026 holds only future bookings: monthly trends must not
+                    # count them, or the last month looks like a collapse.
+                    self.assertFalse(
+                        {"Appointments", "Scheduled appointments"} & set(measures),
+                        title,
+                    )
+        doctors = len(list(csv.DictReader((ROOT / "data/processed/Doctor.csv").open())))
+        pages = ROOT / "PowerBI/Hospital.Report/definition/pages"
+        for p in pages.glob("*/visuals/chart*/visual.json"):
+            d = json.loads(p.read_text())
+            category = d["visual"]["query"]["queryState"]["Category"]["projections"][0]
+            if category["nativeQueryRef"] == "Doctor name":
+                # About 16 px per bar after the title, so all doctors fit unscrolled.
+                self.assertGreaterEqual(d["position"]["height"] - 40, doctors * 15)
+
+    def test_theme_series_colors_have_graphic_contrast(self):
+        def luminance(color):
+            channels = [int(color[i : i + 2], 16) / 255 for i in (1, 3, 5)]
+            r, g, b = [
+                c / 12.92 if c <= 0.03928 else ((c + 0.055) / 1.055) ** 2.4
+                for c in channels
+            ]
+            return 0.2126 * r + 0.7152 * g + 0.0722 * b
+
+        theme = json.loads(
+            (
+                ROOT
+                / "PowerBI/Hospital.Report/StaticResources/RegisteredResources/Clinical.json"
+            ).read_text()
+        )
+        for color in theme["dataColors"]:
+            ratio = (1.05) / (luminance(color) + 0.05)
+            self.assertGreaterEqual(ratio, 3.0, color)
 
     def test_accessibility_alt_text_tooltips_and_tab_order(self):
         def text(prop):

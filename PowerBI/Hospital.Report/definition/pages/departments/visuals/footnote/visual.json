@@ -120,7 +120,7 @@
             "altText": {
               "expr": {
                 "Literal": {
-                  "Value": "'Service and collection rates follow appointment cohorts; room occupancy is a fixed snapshot.'"
+                  "Value": "'Room stays follow the room''s department; amounts and prescriptions follow appointment cohorts.'"
                 }
               }
             }
@@ -136,7 +136,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "Service and collection rates follow appointment cohorts; room occupancy is a fixed snapshot.",
+                    "value": "Room stays follow the room's department; amounts and prescriptions follow appointment cohorts.",
                     "textStyle": {
                       "fontFamily": "Segoe UI",
                       "fontSize": "9pt",

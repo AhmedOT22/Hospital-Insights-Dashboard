@@ -25,7 +25,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Bookings by month (Jan 2026 scheduled)'"
+                  "Value": "'Patients served by month'"
                 }
               }
             },
@@ -120,7 +120,7 @@
             "altText": {
               "expr": {
                 "Literal": {
-                  "Value": "'Column chart: Bookings by month (Jan 2026 scheduled).'"
+                  "Value": "'Column chart: Patients served by month.'"
                 }
               }
             }
@@ -159,12 +159,12 @@
                       "Entity": "Appointment"
                     }
                   },
-                  "Property": "Appointments"
+                  "Property": "Patients served"
                 }
               },
-              "queryRef": "Appointment.Appointments",
-              "nativeQueryRef": "Appointments",
-              "displayName": "Appointments"
+              "queryRef": "Appointment.Patients served",
+              "nativeQueryRef": "Patients served",
+              "displayName": "Patients served"
             }
           ]
         }

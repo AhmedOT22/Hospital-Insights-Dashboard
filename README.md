@@ -12,14 +12,14 @@ an eleven-table semantic model and five 1280 × 720 report pages:
 
 | Page | Purpose |
 | --- | --- |
-| Executive Overview | Activity, patients served, collected and outstanding amounts |
-| Appointments | Completed/cancelled outcomes, future bookings and monthly activity |
-| Departments | Service activity, attributed amounts, workforce and room snapshot |
-| Doctors | Recorded workload and patients served, without arbitrary performance targets |
-| Patients | Age/gender patterns, repeat attendance and synthetic visit scenarios |
+| Executive Overview | Patients served by month, collected amount by department, outcomes, outstanding amount by visit month |
+| Appointments | Completed and cancelled trends, cancellation rate by month, future bookings by department |
+| Departments | Activity, billed and collected amounts, completed room stays and prescriptions by department |
+| Doctors | Completed appointments and cancellation rate for all 20 doctors, without arbitrary targets |
+| Patients | Patients served, repeat patients and outcomes by age; prescriptions by visit month |
 
 The redesign uses a neutral background, blue/teal theme, consistent cards, titles,
-page navigation and department/month slicers. Native visuals replace the original
+page navigation and department/month/doctor slicers. Native visuals replace the original
 custom histogram. Measures use linked records rather than disconnected summary tables.
 
 **Power BI Desktop acceptance is pending:** the project files pass structural and
@@ -61,7 +61,7 @@ never silently reset an existing installation. See [SQL rules](sql/README.md).
 ## Evidence and limits
 
 CI runs the schema, 28 rejection cases, the full generated seed and reconciliation
-queries on SQL Server 2022, including 374 metric comparisons across 17 filter contexts. It also checks reproducibility, twelve Python tests,
+queries on SQL Server 2022, including 374 metric comparisons across 17 filter contexts. It also checks reproducibility, fourteen Python tests,
 report field bindings, accessibility metadata, filter paths and Microsoft PBIR JSON schemas. These checks
 cover data and source structure, not Desktop rendering or DAX engine correctness.
 
