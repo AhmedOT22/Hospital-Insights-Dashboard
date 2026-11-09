@@ -45,8 +45,8 @@ like every KPI above.
 Card notes (display folder *Card notes*) are text measures that format the values
 above, for example "81% is over 90 days old"; they return "No data for this
 selection" instead of a fragment when their input is blank. The two *Highlight colors*
-measures return amber when a doctor's completed appointments or cancellation rate
-exceeds the hospital-wide figure, and slate otherwise; they color bars per data point.
+measures return orange when a doctor's completed appointments or cancellation rate
+exceeds the hospital-wide figure, and slate grey otherwise; they color bars per data point.
 `Billing[Visit age band]` groups bills by the age of their linked visit at the snapshot
 (0–30, 31–90, 91–365, over 365 days) for the unpaid-amount aging chart.
 

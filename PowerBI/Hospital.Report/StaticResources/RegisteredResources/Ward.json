@@ -1,0 +1,160 @@
+{
+  "name": "Ward",
+  "dataColors": [
+    "#00737E",
+    "#5A55C2",
+    "#C0457A",
+    "#8F6E00",
+    "#2F6F8F",
+    "#8C5A3C",
+    "#4F6168",
+    "#6A7F3B"
+  ],
+  "firstLevelElements": "#14262C",
+  "secondLevelElements": "#4F6168",
+  "thirdLevelElements": "#D5DFDC",
+  "fourthLevelElements": "#9AA9AE",
+  "background": "#FFFFFF",
+  "secondaryBackground": "#E3ECEA",
+  "tableAccent": "#00737E",
+  "good": "#1F7A4D",
+  "neutral": "#8F6E00",
+  "bad": "#B42318",
+  "maximum": "#C2410C",
+  "center": "#F3F6F5",
+  "minimum": "#00737E",
+  "hyperlink": "#00737E",
+  "visitedHyperlink": "#5A55C2",
+  "textClasses": {
+    "callout": {
+      "fontFace": "DIN",
+      "fontSize": 18,
+      "color": "#00737E"
+    },
+    "title": {
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 11,
+      "color": "#14262C"
+    },
+    "header": {
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 11,
+      "color": "#14262C"
+    },
+    "label": {
+      "fontFace": "Segoe UI",
+      "fontSize": 9,
+      "color": "#4F6168"
+    }
+  },
+  "visualStyles": {
+    "*": {
+      "*": {
+        "background": [
+          {
+            "show": true,
+            "color": {
+              "solid": {
+                "color": "#FFFFFF"
+              }
+            },
+            "transparency": 0
+          }
+        ],
+        "border": [
+          {
+            "show": true,
+            "color": {
+              "solid": {
+                "color": "#E3ECEA"
+              }
+            },
+            "radius": 8
+          }
+        ],
+        "visualTooltip": [
+          {
+            "titleFontColor": "#4F6168",
+            "valueFontColor": "#14262C",
+            "background": {
+              "solid": {
+                "color": "#FFFFFF"
+              }
+            }
+          }
+        ],
+        "outspacePane": [
+          {
+            "backgroundColor": {
+              "solid": {
+                "color": "#FFFFFF"
+              }
+            },
+            "foregroundColor": {
+              "solid": {
+                "color": "#14262C"
+              }
+            },
+            "borderColor": {
+              "solid": {
+                "color": "#E3ECEA"
+              }
+            }
+          }
+        ],
+        "filterCard": [
+          {
+            "$id": "Applied",
+            "backgroundColor": {
+              "solid": {
+                "color": "#E3ECEA"
+              }
+            },
+            "foregroundColor": {
+              "solid": {
+                "color": "#14262C"
+              }
+            }
+          },
+          {
+            "$id": "Available",
+            "backgroundColor": {
+              "solid": {
+                "color": "#F3F6F5"
+              }
+            },
+            "foregroundColor": {
+              "solid": {
+                "color": "#14262C"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "page": {
+      "*": {
+        "background": [
+          {
+            "color": {
+              "solid": {
+                "color": "#F3F6F5"
+              }
+            },
+            "transparency": 0
+          }
+        ],
+        "outspace": [
+          {
+            "color": {
+              "solid": {
+                "color": "#E9EEEC"
+              }
+            },
+            "transparency": 0
+          }
+        ]
+      }
+    }
+  }
+}

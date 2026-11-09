@@ -155,8 +155,103 @@ MEASURES = {
     ),
 }
 
-ATTENTION = "#B3741D"  # amber: above average / needs attention
-MUTED = "#6F8896"  # slate: at or below average; 3.6:1 on white
+# "Ward" theme: calm clinical neutrals, deep teal primary, burnt orange reserved for
+# what needs attention. Every color used for marks or text keeps >= 3:1 on white.
+PRIMARY = "#00737E"  # deep teal: first series, KPI values, current page button
+ATTENTION = "#C2410C"  # burnt orange: headline value, above-average bars, nothing else
+MUTED = "#7A8B91"  # slate: bars at or below average; 3.5:1 on white
+INK = "#14262C"  # titles, headings, values
+INK_2 = "#4F6168"  # labels, subtitles, card notes, footnotes
+GRID = "#D5DFDC"  # gridlines and axis lines
+SOFT = "#E3ECEA"  # nav buttons, borders, applied filter cards
+PAGE_BG = "#F3F6F5"  # canvas
+WALLPAPER = "#E9EEEC"  # area around the canvas
+CARD = "#FFFFFF"  # visual background
+# Chart series. The first four pass the categorical color-vision checks together;
+# no chart uses more than two series, so 5-8 are fallbacks (all >= 3:1 on white).
+DATA_COLORS = [
+    PRIMARY,
+    "#5A55C2",  # violet
+    "#C0457A",  # plum
+    "#8F6E00",  # ochre
+    "#2F6F8F",
+    "#8C5A3C",
+    "#4F6168",
+    "#6A7F3B",
+]
+
+
+def theme_json():
+    def solid(color):
+        return {"solid": {"color": color}}
+
+    return {
+        "name": "Ward",
+        "dataColors": DATA_COLORS,
+        "firstLevelElements": INK,
+        "secondLevelElements": INK_2,
+        "thirdLevelElements": GRID,
+        "fourthLevelElements": "#9AA9AE",
+        "background": CARD,
+        "secondaryBackground": SOFT,
+        "tableAccent": PRIMARY,
+        "good": "#1F7A4D",
+        "neutral": "#8F6E00",
+        "bad": "#B42318",
+        "maximum": ATTENTION,
+        "center": PAGE_BG,
+        "minimum": PRIMARY,
+        "hyperlink": PRIMARY,
+        "visitedHyperlink": "#5A55C2",
+        "textClasses": {
+            "callout": {"fontFace": "DIN", "fontSize": 18, "color": PRIMARY},
+            "title": {"fontFace": "Segoe UI Semibold", "fontSize": 11, "color": INK},
+            "header": {"fontFace": "Segoe UI Semibold", "fontSize": 11, "color": INK},
+            "label": {"fontFace": "Segoe UI", "fontSize": 9, "color": INK_2},
+        },
+        "visualStyles": {
+            "*": {
+                "*": {
+                    "background": [
+                        {"show": True, "color": solid(CARD), "transparency": 0}
+                    ],
+                    "border": [{"show": True, "color": solid(SOFT), "radius": 8}],
+                    "visualTooltip": [
+                        {
+                            "titleFontColor": INK_2,
+                            "valueFontColor": INK,
+                            "background": solid(CARD),
+                        }
+                    ],
+                    "outspacePane": [
+                        {
+                            "backgroundColor": solid(CARD),
+                            "foregroundColor": solid(INK),
+                            "borderColor": solid(SOFT),
+                        }
+                    ],
+                    "filterCard": [
+                        {
+                            "$id": "Applied",
+                            "backgroundColor": solid(SOFT),
+                            "foregroundColor": solid(INK),
+                        },
+                        {
+                            "$id": "Available",
+                            "backgroundColor": solid(PAGE_BG),
+                            "foregroundColor": solid(INK),
+                        },
+                    ],
+                }
+            },
+            "page": {
+                "*": {
+                    "background": [{"color": solid(PAGE_BG), "transparency": 0}],
+                    "outspace": [{"color": solid(WALLPAPER), "transparency": 0}],
+                }
+            },
+        },
+    }
 
 
 def note(measure, template):
@@ -206,7 +301,7 @@ NOTES = {
     ),
 }
 
-# Field-value colors: amber marks the doctors above the hospital-wide average.
+# Field-value colors: orange marks the doctors above the hospital-wide average.
 COLORS = {
     "Doctor workload color": f'IF([Completed appointments] > [Average completed per doctor], "{ATTENTION}", "{MUTED}")',
     "Doctor cancellation color": f'IF([Cancellation rate] > [Cancellation rate all doctors], "{ATTENTION}", "{MUTED}")',
@@ -518,14 +613,14 @@ PAGES = [
         [
             (
                 "clusteredBarChart",
-                "Completed appointments by doctor • amber = above average",
+                "Completed appointments by doctor • orange = above average",
                 "Doctor",
                 "Doctor name",
                 ["Completed appointments"],
             ),
             (
                 "clusteredBarChart",
-                "Cancellation rate by doctor • amber = above average",
+                "Cancellation rate by doctor • orange = above average",
                 "Doctor",
                 "Doctor name",
                 ["Cancellation rate"],
@@ -567,7 +662,7 @@ PAGES = [
     ),
 ]
 
-# One headline card per page, drawn in amber: the number that needs attention.
+# One headline card per page, drawn in orange: the number that needs attention.
 HEADLINES = {
     "overview": "Outstanding amount",
     "appointments": "Cancelled appointments",
@@ -576,8 +671,8 @@ HEADLINES = {
 }
 # Bars colored per data point from a field-value color measure.
 CHART_COLORS = {
-    "Completed appointments by doctor • amber = above average": "Doctor workload color",
-    "Cancellation rate by doctor • amber = above average": "Doctor cancellation color",
+    "Completed appointments by doctor • orange = above average": "Doctor workload color",
+    "Cancellation rate by doctor • orange = above average": "Doctor cancellation color",
 }
 # Categories shown in natural order instead of sorted by value.
 NATURAL_ORDER = ("Month", "Age group at snapshot", "Visit age band")
@@ -635,22 +730,32 @@ def visual(page, name, kind, title, x, y, w, h, roles=None, objects=None, alt=No
                             not in ("textbox", "actionButton", "cardVisual", "slicer")
                         ),
                         "text": literal(title),
-                        "fontSize": literal(12),
-                        "fontColor": fill("#18394A"),
+                        "fontSize": literal(11),
+                        "fontColor": fill(INK),
                         "alignment": literal("left"),
                     }
                 }
             ],
+            # Text sits directly on the canvas; cards, charts and slicers are white
+            # panels, and charts and slicers also get a hairline rounded border.
             "background": [
                 {
                     "properties": {
-                        "show": literal(True),
-                        "color": fill("#FFFFFF"),
+                        "show": literal(kind != "textbox"),
+                        "color": fill(CARD),
                         "transparency": literal(0),
                     }
                 }
             ],
-            "border": [{"properties": {"show": literal(False)}}],
+            "border": [
+                {
+                    "properties": {
+                        "show": literal(kind not in ("textbox", "actionButton", "cardVisual")),
+                        "color": fill(SOFT),
+                        "radius": literal(8),
+                    }
+                }
+            ],
             "visualHeader": [{"properties": {"show": literal(False)}}],
         },
     }
@@ -809,27 +914,9 @@ def report():
 
     if (REPORT / "definition").exists():
         shutil.rmtree(REPORT / "definition")
-    theme = {
-        "name": "Hospital Clinical",
-        "dataColors": [
-            # Every series color keeps at least 3:1 contrast on white (WCAG 1.4.11).
-            # Amber sits second: blue and teal side by side are hard to tell apart.
-            "#176B87",
-            "#B3741D",
-            "#1D887D",
-            "#637B91",
-            "#8B5E9B",
-            "#4F7A87",
-        ],
-        "background": "#F4F7FA",
-        "foreground": "#18394A",
-        "tableAccent": "#176B87",
-        "textClasses": {
-            "title": {"fontFace": "Segoe UI", "fontSize": 12, "color": "#18394A"},
-            "label": {"fontFace": "Segoe UI", "fontSize": 10, "color": "#496572"},
-        },
-    }
-    save(REPORT / "StaticResources/RegisteredResources/Clinical.json", theme)
+    resources = REPORT / "StaticResources/RegisteredResources"
+    (resources / "Clinical.json").unlink(missing_ok=True)  # previous theme
+    save(resources / "Ward.json", theme_json())
     save(
         REPORT / "definition/report.json",
         {
@@ -837,7 +924,7 @@ def report():
             "layoutOptimization": "None",
             "themeCollection": {
                 "customTheme": {
-                    "name": "Clinical",
+                    "name": "Ward",
                     "reportVersionAtImport": "5.59",
                     "type": "RegisteredResources",
                 }
@@ -848,8 +935,8 @@ def report():
                     "type": "RegisteredResources",
                     "items": [
                         {
-                            "name": "Clinical",
-                            "path": "Clinical.json",
+                            "name": "Ward",
+                            "path": "Ward.json",
                             "type": "CustomTheme",
                         }
                     ],
@@ -883,11 +970,19 @@ def report():
                     "background": [
                         {
                             "properties": {
-                                "color": fill("#F4F7FA"),
+                                "color": fill(PAGE_BG),
                                 "transparency": literal(0),
                             }
                         }
-                    ]
+                    ],
+                    "outspace": [
+                        {
+                            "properties": {
+                                "color": fill(WALLPAPER),
+                                "transparency": literal(0),
+                            }
+                        }
+                    ],
                 },
             },
         )
@@ -914,9 +1009,11 @@ def report():
                                             {
                                                 "value": value,
                                                 "textStyle": {
-                                                    "fontFamily": "Segoe UI",
+                                                    "fontFamily": "Segoe UI Semibold"
+                                                    if size > 12
+                                                    else "Segoe UI",
                                                     "fontSize": f"{size}pt",
-                                                    "color": "#18394A",
+                                                    "color": INK if size > 12 else INK_2,
                                                 },
                                             }
                                         ]
@@ -959,7 +1056,7 @@ def report():
                                 "text": literal(target_label),
                                 "fontSize": literal(11),
                                 "fontColor": fill(
-                                    "#FFFFFF" if target == page else "#18394A"
+                                    "#FFFFFF" if target == page else INK
                                 ),
                                 "horizontalAlignment": literal("center"),
                             },
@@ -978,7 +1075,7 @@ def report():
                         {
                             "properties": {
                                 "fillColor": fill(
-                                    "#176B87" if target == page else "#E5EEF3"
+                                    PRIMARY if target == page else SOFT
                                 )
                             },
                             "selector": {"id": "default"},
@@ -999,7 +1096,7 @@ def report():
                     ],
                 },
             )
-        value_size = min(28, max(12, math.floor(720 * 0.028)))
+        value_size = 18  # matches the theme's callout text class
         label_size = min(14, max(8, math.floor(value_size * 0.55)))
         for i, (measure, note_measure) in enumerate(cards):
             label = CARD_LABELS.get(measure, measure)
@@ -1019,7 +1116,7 @@ def report():
                 objects=card_objects(
                     {
                         "fontSize": literal(value_size),
-                        "fontColor": fill(ATTENTION if highlight else "#176B87"),
+                        "fontColor": fill(ATTENTION if highlight else PRIMARY),
                     },
                     {"fontSize": literal(label_size)},
                 ),
@@ -1041,7 +1138,7 @@ def report():
                 {"Data": [("Appointment", note_measure, True)]},
                 alt=f"Context for {label.lower()}, such as share, comparison or average.",
                 objects=card_objects(
-                    {"fontSize": literal(10), "fontColor": fill("#496572")},
+                    {"fontSize": literal(9), "fontColor": fill(INK_2)},
                     {"show": literal(False)},
                     padding=4,
                 ),

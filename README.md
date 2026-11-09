@@ -15,16 +15,16 @@ an eleven-table semantic model and five 1280 × 720 report pages:
 | Executive Overview | Unpaid amount by visit age, collected vs unpaid by department, patients served by month |
 | Appointments | Completed and cancelled trends, cancellation rate by month, future bookings by department |
 | Departments | Activity, average bill per visit, unpaid over 90 days and completed room stays by department |
-| Doctors | Workload and cancellation rate for all 20 doctors; amber marks above the hospital average |
+| Doctors | Workload and cancellation rate for all 20 doctors; orange marks above the hospital average |
 | Patients | Patients served and outcomes by age; prescriptions by visit month across the full period |
 
 Every KPI card carries a context line under its value: a share ("81% is over 90
 days old"), a comparison ("+3.8% in 2025 vs 2024") or a range ("83–335 completed per
-doctor"). One headline card per page is drawn in amber. Bar and column charts print
+doctor"). One headline card per page is drawn in orange. Bar and column charts print
 their values instead of a value axis, and doctor charts color the bars above the
-hospital-wide average in amber.
+hospital-wide average in orange.
 
-The redesign uses a neutral background, blue/teal theme, consistent cards, titles,
+The redesign uses the "Ward" theme (sage-white canvas, deep teal, orange only for attention), consistent cards, titles,
 page navigation and department/month/doctor slicers. Native visuals replace the original
 custom histogram. Measures use linked records rather than disconnected summary tables.
 

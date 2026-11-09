@@ -32,7 +32,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "12"
+                  "Value": "11"
                 }
               }
             },
@@ -41,7 +41,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#18394A'"
+                      "Value": "'#14262C'"
                     }
                   }
                 }
@@ -63,7 +63,7 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
+                  "Value": "false"
                 }
               }
             },
@@ -95,6 +95,24 @@
               "expr": {
                 "Literal": {
                   "Value": "false"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#E3ECEA'"
+                    }
+                  }
+                }
+              }
+            },
+            "radius": {
+              "expr": {
+                "Literal": {
+                  "Value": "8"
                 }
               }
             }
@@ -172,9 +190,9 @@
                   {
                     "value": "Departments",
                     "textStyle": {
-                      "fontFamily": "Segoe UI",
+                      "fontFamily": "Segoe UI Semibold",
                       "fontSize": "21pt",
-                      "color": "#18394A"
+                      "color": "#14262C"
                     }
                   }
                 ]

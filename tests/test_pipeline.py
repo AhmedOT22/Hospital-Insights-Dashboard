@@ -314,7 +314,7 @@ class PipelineTests(unittest.TestCase):
         theme = json.loads(
             (
                 ROOT
-                / "PowerBI/Hospital.Report/StaticResources/RegisteredResources/Clinical.json"
+                / "PowerBI/Hospital.Report/StaticResources/RegisteredResources/Ward.json"
             ).read_text()
         )
         for color in theme["dataColors"]:

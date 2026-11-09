@@ -755,12 +755,12 @@
           },
           {
             "name": "Doctor workload color",
-            "expression": "IF([Completed appointments] > [Average completed per doctor], \"#B3741D\", \"#6F8896\")",
+            "expression": "IF([Completed appointments] > [Average completed per doctor], \"#C2410C\", \"#7A8B91\")",
             "displayFolder": "Highlight colors"
           },
           {
             "name": "Doctor cancellation color",
-            "expression": "IF([Cancellation rate] > [Cancellation rate all doctors], \"#B3741D\", \"#6F8896\")",
+            "expression": "IF([Cancellation rate] > [Cancellation rate all doctors], \"#C2410C\", \"#7A8B91\")",
             "displayFolder": "Highlight colors"
           }
         ]

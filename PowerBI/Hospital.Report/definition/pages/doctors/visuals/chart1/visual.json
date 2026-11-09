@@ -25,14 +25,14 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Cancellation rate by doctor • amber = above average'"
+                  "Value": "'Cancellation rate by doctor • orange = above average'"
                 }
               }
             },
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "12"
+                  "Value": "11"
                 }
               }
             },
@@ -41,7 +41,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#18394A'"
+                      "Value": "'#14262C'"
                     }
                   }
                 }
@@ -94,7 +94,25 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#E3ECEA'"
+                    }
+                  }
+                }
+              }
+            },
+            "radius": {
+              "expr": {
+                "Literal": {
+                  "Value": "8"
                 }
               }
             }

@@ -6,7 +6,7 @@ source is Hospital.pbip with PBIR report definitions and model.bim semantic meta
 No binary DataModel or legacy report layout was patched: those formats cannot be
 reliably compiled or visually verified without Power BI Desktop here.
 
-The source implements a 16:9 canvas, light clinical blue/teal theme, Segoe UI,
+The source implements a 16:9 canvas, "Ward" theme (below), Segoe UI,
 consistent navigation/cards and two-column chart grids. Redundant patient-distribution
 charts, physician contact tables, stock photos, custom histogram, disconnected totals
 and unsupported KPI targets are removed from the redesigned project. Department and
@@ -61,20 +61,41 @@ acceptance checks. The Doctors page gives its two charts the full chart-area hei
 so all 20 doctors fit without scrolling. Theme series colors keep at least 3:1
 contrast on white. `tests/test_pipeline.py` enforces these rules.
 
+## Ward theme
+
+`scripts/build_powerbi.py` writes the theme (`StaticResources/RegisteredResources/Ward.json`)
+and uses the same color constants for every color the visuals set directly, so the
+theme and the visuals cannot drift apart.
+
+| Role | Color |
+| --- | --- |
+| Primary: first series, KPI values, current page button | `#00737E` deep teal |
+| Series 2–4 | `#5A55C2` violet, `#C0457A` plum, `#8F6E00` ochre |
+| Attention: headline value, above-average bars, nothing else | `#C2410C` burnt orange |
+| Muted bars (at or below average) | `#7A8B91` slate |
+| Text: titles and values / labels and notes | `#14262C` / `#4F6168` |
+| Canvas / wallpaper / soft fill and borders / gridlines | `#F3F6F5` / `#E9EEEC` / `#E3ECEA` / `#D5DFDC` |
+| Sentiment good / neutral / bad | `#1F7A4D` / `#8F6E00` / `#B42318` |
+
+Fonts: Segoe UI (9 pt labels), Segoe UI Semibold (11 pt titles, page headings) and
+DIN (18 pt KPI values). Charts and slicers are white panels with a hairline rounded
+border; text boxes sit directly on the canvas. Every mark and text color keeps at
+least 3:1 contrast on white, and series 1–4 pass color-vision separation checks.
+
 ## KPI emphasis
 
 Each KPI card has a second, smaller card beneath it showing a context measure from
 the *Card notes* folder, so a value always comes with a share, comparison, range or
 average. Visits and prescriptions on the Patients page have no note: no context
-measure in the data adds information to them. One headline value per page is amber
+measure in the data adds information to them. One headline value per page is orange
 (outstanding amount, cancelled appointments or cancellation rate); departments has
 none, because no single department figure there signals a problem. Money cards use a
 whole-number format so Power BI's automatic display units show 1.96M, not cents.
 
 Category bar and column charts show data labels and hide the value axis and
 gridlines; monthly charts keep their axis, because 25 labels would collide. Doctor
-charts color each bar through a field-value measure: amber above the hospital-wide
-figure, slate otherwise, and their titles say so, so the meaning never depends on
+charts color each bar through a field-value measure: orange above the hospital-wide
+figure, slate grey otherwise, and their titles say so, so the meaning never depends on
 color alone. Months with only future bookings drop out of outcome charts because
 their measures are blank.
 

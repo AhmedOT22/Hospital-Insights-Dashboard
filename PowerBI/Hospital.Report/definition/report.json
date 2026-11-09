@@ -3,7 +3,7 @@
   "layoutOptimization": "None",
   "themeCollection": {
     "customTheme": {
-      "name": "Clinical",
+      "name": "Ward",
       "reportVersionAtImport": "5.59",
       "type": "RegisteredResources"
     }
@@ -14,8 +14,8 @@
       "type": "RegisteredResources",
       "items": [
         {
-          "name": "Clinical",
-          "path": "Clinical.json",
+          "name": "Ward",
+          "path": "Ward.json",
           "type": "CustomTheme"
         }
       ]
