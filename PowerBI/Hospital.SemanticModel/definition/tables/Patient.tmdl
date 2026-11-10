@@ -1,0 +1,92 @@
+table Patient
+	lineageTag: 2151b213-165b-418d-8682-4878eaa7fb06
+
+	column PatientID
+		dataType: int64
+		isHidden
+		lineageTag: 6d58c2cc-9a5c-44d3-a696-6bb8207ec9e4
+		summarizeBy: none
+		sourceColumn: PatientID
+
+	column FirstName
+		dataType: string
+		lineageTag: a5bb8678-959c-46b4-bc9c-57b5b81f5578
+		summarizeBy: none
+		sourceColumn: FirstName
+
+	column LastName
+		dataType: string
+		lineageTag: 45f6e79e-b948-458b-ae70-3e371dc61476
+		summarizeBy: none
+		sourceColumn: LastName
+
+	column DateOfBirth
+		dataType: dateTime
+		formatString: yyyy-MM-dd
+		lineageTag: edd8f52b-3ba8-4554-9cef-421e1c68a977
+		summarizeBy: none
+		sourceColumn: DateOfBirth
+
+		variation Variation
+			isDefault
+			relationship: 1db16a57-167f-4688-88be-1b12728eed2d
+			defaultHierarchy: LocalDateTable_c0db25f7-b4cd-4a81-9645-4a1985d89247.'Date Hierarchy'
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Gender
+		dataType: string
+		lineageTag: 69cb4ee4-1eb4-4533-a5c7-370eee846e04
+		summarizeBy: none
+		sourceColumn: Gender
+
+	column Address
+		dataType: string
+		lineageTag: 592b5328-ed0c-4747-aaa7-4c0760db66e5
+		summarizeBy: none
+		sourceColumn: Address
+
+	column PhoneNumber
+		dataType: string
+		lineageTag: 51daeeaf-daf2-44d6-8794-22a59da23837
+		summarizeBy: none
+		sourceColumn: PhoneNumber
+
+	column Email
+		dataType: string
+		lineageTag: 0263b7a7-b30e-4727-81a0-59f5d322f23d
+		summarizeBy: none
+		sourceColumn: Email
+
+	column EmergencyContactName
+		dataType: string
+		lineageTag: cf7183f1-6584-42b5-ab7e-50bad9053f27
+		summarizeBy: none
+		sourceColumn: EmergencyContactName
+
+	column EmergencyContactPhone
+		dataType: string
+		lineageTag: 2823c59f-5421-43fc-a2e1-1f96f75a2168
+		summarizeBy: none
+		sourceColumn: EmergencyContactPhone
+
+	column IsActive
+		dataType: boolean
+		lineageTag: 8283e363-0838-4926-9481-d45320801141
+		summarizeBy: none
+		sourceColumn: IsActive
+
+	column 'Age group at snapshot' = VAR Age = INT(YEARFRAC(Patient[DateOfBirth], DATE(2025, 12, 31), 1)) RETURN SWITCH(TRUE(), Age < 18, "0–17", Age < 30, "18–29", Age < 50, "30–49", Age < 70, "50–69", "70+")
+		dataType: string
+		lineageTag: 25f427e2-a641-4bc6-8d5f-e7a347b7b62c
+		summarizeBy: none
+
+	partition Patient = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(ServerName, DatabaseName, [CreateNavigationProperties=false]),
+				    Rows = Source{[Schema="dbo", Item="Patient"]}[Data]
+				in
+				    Rows
+

@@ -1,16 +1,38 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "footnote",
   "position": {
-    "x": 856,
-    "y": 632,
-    "width": 400,
-    "height": 64,
-    "z": 18,
+    "x": 34,
+    "y": 1021,
+    "z": 18000,
+    "height": 30,
+    "width": 1372,
     "tabOrder": 1000
   },
   "visual": {
     "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Completed and cancelled outcomes run to Dec 31, 2025; Jan 2026 holds future bookings only. Amounts follow visit month, not payment date.",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI",
+                      "fontSize": "9pt",
+                      "color": "#4F6168"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
     "visualContainerObjects": {
       "title": [
         {
@@ -26,13 +48,6 @@
               "expr": {
                 "Literal": {
                   "Value": "''"
-                }
-              }
-            },
-            "fontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "11"
                 }
               }
             },
@@ -77,13 +92,6 @@
                   }
                 }
               }
-            },
-            "transparency": {
-              "expr": {
-                "Literal": {
-                  "Value": "0"
-                }
-              }
             }
           }
         }
@@ -106,13 +114,6 @@
                       "Value": "'#E3ECEA'"
                     }
                   }
-                }
-              }
-            },
-            "radius": {
-              "expr": {
-                "Literal": {
-                  "Value": "8"
                 }
               }
             }
@@ -147,58 +148,7 @@
       ],
       "padding": [
         {
-          "properties": {
-            "top": {
-              "expr": {
-                "Literal": {
-                  "Value": "0"
-                }
-              }
-            },
-            "bottom": {
-              "expr": {
-                "Literal": {
-                  "Value": "0"
-                }
-              }
-            },
-            "left": {
-              "expr": {
-                "Literal": {
-                  "Value": "0"
-                }
-              }
-            },
-            "right": {
-              "expr": {
-                "Literal": {
-                  "Value": "0"
-                }
-              }
-            }
-          }
-        }
-      ]
-    },
-    "objects": {
-      "general": [
-        {
-          "properties": {
-            "paragraphs": [
-              {
-                "textRuns": [
-                  {
-                    "value": "Completed and cancelled outcomes run to Dec 31, 2025; Jan 2026 holds future bookings only. Amounts follow visit month, not payment date.",
-                    "textStyle": {
-                      "fontFamily": "Segoe UI",
-                      "fontSize": "9pt",
-                      "color": "#4F6168"
-                    }
-                  }
-                ]
-              }
-            ]
-          }
+          "properties": {}
         }
       ]
     }

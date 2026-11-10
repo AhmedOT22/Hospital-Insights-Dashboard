@@ -1,0 +1,10 @@
+expression ServerName = "AHMED_PC\MSSQLSERVER01" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: aceeb889-c7a3-4e84-94e7-997ff9790a10
+
+	annotation PBI_ResultType = Text
+
+expression DatabaseName = "HospitalInsights" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 0300bd0a-383c-4f1d-ade4-6bc5e738bd19
+
+	annotation PBI_ResultType = Text
+

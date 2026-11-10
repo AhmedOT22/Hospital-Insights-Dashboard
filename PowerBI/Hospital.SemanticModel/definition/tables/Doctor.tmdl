@@ -1,0 +1,73 @@
+table Doctor
+	lineageTag: df595fed-55d3-4f80-b12a-ed44502db4c0
+
+	column DoctorID
+		dataType: int64
+		isHidden
+		lineageTag: 843267ff-9523-4fc5-a3fe-44e4062f1900
+		summarizeBy: none
+		sourceColumn: DoctorID
+
+	column FirstName
+		dataType: string
+		lineageTag: 43896f32-9dcf-4e82-9650-90c1d1df8adf
+		summarizeBy: none
+		sourceColumn: FirstName
+
+	column LastName
+		dataType: string
+		lineageTag: f700faf0-8abb-40a9-a95a-016bf21bdf60
+		summarizeBy: none
+		sourceColumn: LastName
+
+	column Specialization
+		dataType: string
+		lineageTag: 5a432d22-4d3d-4ffc-b0d7-805ec9f7511b
+		summarizeBy: none
+		sourceColumn: Specialization
+
+	column PhoneNumber
+		dataType: string
+		lineageTag: 5bdd69ae-b989-451b-83fe-b69138fa5079
+		summarizeBy: none
+		sourceColumn: PhoneNumber
+
+	column Email
+		dataType: string
+		lineageTag: b5590976-80cc-465d-9559-97804d6b5e05
+		summarizeBy: none
+		sourceColumn: Email
+
+	column DepartmentID
+		dataType: int64
+		isHidden
+		lineageTag: c38a8cc2-7a51-4b44-aa7d-1a3e22c2d015
+		summarizeBy: none
+		sourceColumn: DepartmentID
+
+	column Availability
+		dataType: boolean
+		lineageTag: 0af34111-bd96-43ec-8681-f34b7e1b1d43
+		summarizeBy: none
+		sourceColumn: Availability
+
+	column IsActive
+		dataType: boolean
+		lineageTag: de9a7aeb-1278-4af9-9521-f7013a2d3fb5
+		summarizeBy: none
+		sourceColumn: IsActive
+
+	column 'Doctor name' = Doctor[FirstName] & " " & Doctor[LastName]
+		dataType: string
+		lineageTag: 820f5a85-93db-41ac-89ca-b961aa1f5b90
+		summarizeBy: none
+
+	partition Doctor = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(ServerName, DatabaseName, [CreateNavigationProperties=false]),
+				    Rows = Source{[Schema="dbo", Item="Doctor"]}[Data]
+				in
+				    Rows
+

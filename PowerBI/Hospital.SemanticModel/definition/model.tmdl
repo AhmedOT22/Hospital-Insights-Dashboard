@@ -1,0 +1,36 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	discourageImplicitMeasures
+	sourceQueryCulture: en-GB
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["Department","Medicine","Patient","Staff","Doctor","Room","Appointment","Medical_Record","Prescription","Billing","Room_Assignment","ServerName","DatabaseName"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table Department
+ref table Medicine
+ref table Patient
+ref table Staff
+ref table Doctor
+ref table Room
+ref table Appointment
+ref table Medical_Record
+ref table Prescription
+ref table Billing
+ref table Room_Assignment
+ref table DateTableTemplate_707274f4-4729-492d-9d89-a823be974e97
+ref table LocalDateTable_c0db25f7-b4cd-4a81-9645-4a1985d89247
+ref table LocalDateTable_fdf564ec-0361-4aa8-a9cf-74bdd5c171d4
+ref table LocalDateTable_e8e6135b-b14b-489b-9fad-96fb3fe1c997
+ref table LocalDateTable_eea60be1-e1e0-4213-b228-a3a173c154b9
+ref table LocalDateTable_fc347c5a-c215-4ce0-babc-06648c54b9cd
+ref table LocalDateTable_1bfbe504-b2fc-470a-967c-196b6f8e6f5a
+
+ref cultureInfo en-US
+

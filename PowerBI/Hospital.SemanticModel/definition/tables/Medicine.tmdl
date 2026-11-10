@@ -1,0 +1,45 @@
+table Medicine
+	lineageTag: c4995d16-50f1-4a6a-a625-4916dbee4dcb
+
+	column MedicineID
+		dataType: int64
+		isHidden
+		lineageTag: 1485db2b-9119-4772-8065-a4bf611498a4
+		summarizeBy: none
+		sourceColumn: MedicineID
+
+	column MedicineName
+		dataType: string
+		lineageTag: bf100e39-e85c-4663-a678-f4b125c8435e
+		summarizeBy: none
+		sourceColumn: MedicineName
+
+	column Manufacturer
+		dataType: string
+		lineageTag: a8a4285b-250d-4059-b1d8-bc4cf700f2a2
+		summarizeBy: none
+		sourceColumn: Manufacturer
+
+	column StockQuantity
+		dataType: int64
+		lineageTag: 0ea052f1-05c1-43fe-8bd7-38c781b63a4c
+		summarizeBy: none
+		sourceColumn: StockQuantity
+
+	column Price
+		dataType: double
+		lineageTag: bd9ee74d-94bd-4035-bd21-82495c1fc395
+		summarizeBy: none
+		sourceColumn: Price
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Medicine = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(ServerName, DatabaseName, [CreateNavigationProperties=false]),
+				    Rows = Source{[Schema="dbo", Item="Medicine"]}[Data]
+				in
+				    Rows
+

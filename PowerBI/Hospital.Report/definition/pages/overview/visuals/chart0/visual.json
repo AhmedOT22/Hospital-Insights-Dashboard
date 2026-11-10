@@ -1,16 +1,111 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "chart0",
   "position": {
-    "x": 24,
-    "y": 250,
-    "width": 608,
-    "height": 172,
-    "z": 15,
+    "x": 34,
+    "y": 423,
+    "z": 15000,
+    "height": 278,
+    "width": 678,
     "tabOrder": 6000
   },
   "visual": {
     "visualType": "clusteredColumnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Billing"
+                    }
+                  },
+                  "Property": "Visit age band"
+                }
+              },
+              "queryRef": "Billing.Visit age band",
+              "nativeQueryRef": "Visit age band",
+              "active": true,
+              "displayName": "Visit age band"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Appointment"
+                    }
+                  },
+                  "Property": "Outstanding amount"
+                }
+              },
+              "queryRef": "Appointment.Outstanding amount",
+              "nativeQueryRef": "Outstanding amount",
+              "displayName": "Outstanding amount"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Billing"
+                  }
+                },
+                "Property": "Visit age band"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "labels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "valueAxis": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "gridlineShow": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
     "visualContainerObjects": {
       "title": [
         {
@@ -26,13 +121,6 @@
               "expr": {
                 "Literal": {
                   "Value": "'Unpaid amount by age of visit'"
-                }
-              }
-            },
-            "fontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "11"
                 }
               }
             },
@@ -77,13 +165,6 @@
                   }
                 }
               }
-            },
-            "transparency": {
-              "expr": {
-                "Literal": {
-                  "Value": "0"
-                }
-              }
             }
           }
         }
@@ -106,13 +187,6 @@
                       "Value": "'#E3ECEA'"
                     }
                   }
-                }
-              }
-            },
-            "radius": {
-              "expr": {
-                "Literal": {
-                  "Value": "8"
                 }
               }
             }
@@ -139,101 +213,6 @@
               "expr": {
                 "Literal": {
                   "Value": "'Column chart: Unpaid amount by age of visit.'"
-                }
-              }
-            }
-          }
-        }
-      ]
-    },
-    "query": {
-      "queryState": {
-        "Category": {
-          "projections": [
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Billing"
-                    }
-                  },
-                  "Property": "Visit age band"
-                }
-              },
-              "queryRef": "Billing.Visit age band",
-              "nativeQueryRef": "Visit age band",
-              "displayName": "Visit age band"
-            }
-          ]
-        },
-        "Y": {
-          "projections": [
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Appointment"
-                    }
-                  },
-                  "Property": "Outstanding amount"
-                }
-              },
-              "queryRef": "Appointment.Outstanding amount",
-              "nativeQueryRef": "Outstanding amount",
-              "displayName": "Outstanding amount"
-            }
-          ]
-        }
-      },
-      "sortDefinition": {
-        "sort": [
-          {
-            "field": {
-              "Column": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "Billing"
-                  }
-                },
-                "Property": "Visit age band"
-              }
-            },
-            "direction": "Ascending"
-          }
-        ],
-        "isDefaultSort": false
-      }
-    },
-    "objects": {
-      "labels": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "valueAxis": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            },
-            "gridlineShow": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
                 }
               }
             }

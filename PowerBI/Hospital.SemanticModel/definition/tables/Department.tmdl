@@ -1,0 +1,43 @@
+table Department
+	lineageTag: 8b6b1591-73a9-427e-9247-7f8c792ab3f0
+
+	column DepartmentID
+		dataType: int64
+		isHidden
+		lineageTag: d28e045c-d215-4dac-bd68-2b969edc1a8d
+		summarizeBy: none
+		sourceColumn: DepartmentID
+
+	column DepartmentName
+		dataType: string
+		lineageTag: 4ac154fb-5f43-469f-883c-8019d57492a1
+		summarizeBy: none
+		sourceColumn: DepartmentName
+
+	column Location
+		dataType: string
+		lineageTag: 3cd3ccc9-c43d-49db-99b0-866ccaf6d1e4
+		summarizeBy: none
+		sourceColumn: Location
+
+	column PhoneExtension
+		dataType: string
+		lineageTag: 2f73db55-9743-4fa8-8dd8-699838b9c6f0
+		summarizeBy: none
+		sourceColumn: PhoneExtension
+
+	column IsActive
+		dataType: boolean
+		lineageTag: 5eb4a134-f640-4bab-a07f-1bba939187b6
+		summarizeBy: none
+		sourceColumn: IsActive
+
+	partition Department = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(ServerName, DatabaseName, [CreateNavigationProperties=false]),
+				    Rows = Source{[Schema="dbo", Item="Department"]}[Data]
+				in
+				    Rows
+

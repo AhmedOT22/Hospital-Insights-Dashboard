@@ -1,0 +1,94 @@
+relationship 1723b297-5d10-5cc9-b155-fe6f5564acb6
+	fromColumn: Appointment.DepartmentID
+	toColumn: Department.DepartmentID
+
+relationship 773c0c00-0bd7-5118-b319-2b241dd70b7d
+	isActive: false
+	fromColumn: Doctor.DepartmentID
+	toColumn: Department.DepartmentID
+
+relationship cdba507d-504b-5957-8433-20f981cf2756
+	fromColumn: Room.DepartmentID
+	toColumn: Department.DepartmentID
+
+relationship 460306e6-4340-5f55-bd7d-3aa42e01a557
+	fromColumn: Staff.DepartmentID
+	toColumn: Department.DepartmentID
+
+relationship d195056a-a141-5f61-a433-0e01ac2de355
+	fromColumn: Appointment.DoctorID
+	toColumn: Doctor.DoctorID
+
+relationship 44fa2758-a453-5b13-b7eb-802d57c86d3f
+	fromColumn: Appointment.PatientID
+	toColumn: Patient.PatientID
+
+relationship 636534ee-1c77-57d8-ab54-eef8752c3d7e
+	fromColumn: Medical_Record.AppointmentID
+	toColumn: Appointment.AppointmentID
+
+relationship d203dc93-e0f7-5657-b860-957b0dbce133
+	isActive: false
+	fromColumn: Medical_Record.PatientID
+	toColumn: Patient.PatientID
+
+relationship 4a4c2038-a5f5-5ef9-9d9c-b2dbba965e7f
+	isActive: false
+	fromColumn: Medical_Record.DoctorID
+	toColumn: Doctor.DoctorID
+
+relationship 4b093e74-8101-5275-b618-777a69696dd1
+	fromColumn: Prescription.RecordID
+	toColumn: Medical_Record.RecordID
+
+relationship 94737c25-f934-5832-852b-f3c0bd14c995
+	fromColumn: Prescription.MedicineID
+	toColumn: Medicine.MedicineID
+
+relationship 08746563-ecb6-57d9-af9d-268b85ee6bf6
+	fromColumn: Billing.RecordID
+	toColumn: Medical_Record.RecordID
+
+relationship 54fd8eb8-e7a0-550b-878e-75947f8ff4ec
+	isActive: false
+	fromColumn: Billing.PatientID
+	toColumn: Patient.PatientID
+
+relationship 71c4d328-3f1e-57b6-8bd4-eef848ce28f5
+	fromColumn: Room_Assignment.PatientID
+	toColumn: Patient.PatientID
+
+relationship 8f1dedb5-80d0-526c-9c80-6f62e59370a9
+	fromColumn: Room_Assignment.RoomID
+	toColumn: Room.RoomID
+
+relationship 1db16a57-167f-4688-88be-1b12728eed2d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Patient.DateOfBirth
+	toColumn: LocalDateTable_c0db25f7-b4cd-4a81-9645-4a1985d89247.Date
+
+relationship bf57e3bb-2b83-493a-bd1f-74e779675ae8
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Appointment.AppointmentDate
+	toColumn: LocalDateTable_fdf564ec-0361-4aa8-a9cf-74bdd5c171d4.Date
+
+relationship 19889414-38df-40fb-bad7-d7cd1c548f6b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Medical_Record.VisitDate
+	toColumn: LocalDateTable_e8e6135b-b14b-489b-9fad-96fb3fe1c997.Date
+
+relationship 9933e4c6-f3a9-4586-a245-cc0476541ed8
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Billing.PaymentDate
+	toColumn: LocalDateTable_eea60be1-e1e0-4213-b228-a3a173c154b9.Date
+
+relationship 69ea5ed2-1d3b-4051-854e-2da2f7585f17
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Room_Assignment.AdmissionDate
+	toColumn: LocalDateTable_fc347c5a-c215-4ce0-babc-06648c54b9cd.Date
+
+relationship 97662183-9b28-4852-808e-3f73de0a0076
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Room_Assignment.DischargeDate
+	toColumn: LocalDateTable_1bfbe504-b2fc-470a-967c-196b6f8e6f5a.Date
+

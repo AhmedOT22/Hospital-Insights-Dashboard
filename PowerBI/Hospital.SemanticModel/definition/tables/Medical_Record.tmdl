@@ -1,0 +1,76 @@
+table Medical_Record
+	lineageTag: f90cbd41-1729-4296-a0d5-d5c095685269
+
+	column RecordID
+		dataType: int64
+		isHidden
+		lineageTag: 14c7df19-4438-4bb1-8754-19a6a7b44bc9
+		summarizeBy: none
+		sourceColumn: RecordID
+
+	column PatientID
+		dataType: int64
+		isHidden
+		lineageTag: b6d2ebc5-49c1-4b41-9483-5641c6db43fc
+		summarizeBy: count
+		sourceColumn: PatientID
+
+		annotation SummarizationSetBy = Automatic
+
+	column DoctorID
+		dataType: int64
+		isHidden
+		lineageTag: dc1fe908-d3af-4579-9473-59bcc9266c43
+		summarizeBy: count
+		sourceColumn: DoctorID
+
+		annotation SummarizationSetBy = Automatic
+
+	column VisitDate
+		dataType: dateTime
+		formatString: yyyy-MM-dd
+		lineageTag: d3512633-5599-42f8-a40b-50e77ee59166
+		summarizeBy: none
+		sourceColumn: VisitDate
+
+		variation Variation
+			isDefault
+			relationship: 19889414-38df-40fb-bad7-d7cd1c548f6b
+			defaultHierarchy: LocalDateTable_e8e6135b-b14b-489b-9fad-96fb3fe1c997.'Date Hierarchy'
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Diagnosis
+		dataType: string
+		lineageTag: fd373771-1069-4abb-af66-d05ebb129220
+		summarizeBy: none
+		sourceColumn: Diagnosis
+
+	column TreatmentPlan
+		dataType: string
+		lineageTag: ec7240fc-30a1-4ddd-b843-0ef73ef6307b
+		summarizeBy: none
+		sourceColumn: TreatmentPlan
+
+	column Prescription
+		dataType: string
+		lineageTag: f79ac956-0eb4-43a1-80a8-8295752f8c19
+		summarizeBy: none
+		sourceColumn: Prescription
+
+	column AppointmentID
+		dataType: int64
+		isHidden
+		lineageTag: 0d1dc998-ecff-4798-bef8-f4892490fa45
+		summarizeBy: none
+		sourceColumn: AppointmentID
+
+	partition Medical_Record = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(ServerName, DatabaseName, [CreateNavigationProperties=false]),
+				    Rows = Source{[Schema="dbo", Item="Medical_Record"]}[Data]
+				in
+				    Rows
+

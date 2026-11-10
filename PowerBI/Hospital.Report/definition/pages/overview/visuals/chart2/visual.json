@@ -1,16 +1,76 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "chart2",
   "position": {
-    "x": 24,
-    "y": 434,
-    "width": 1232,
-    "height": 172,
-    "z": 17,
+    "x": 34,
+    "y": 718,
+    "z": 17000,
+    "height": 285,
+    "width": 1372,
     "tabOrder": 4000
   },
   "visual": {
     "visualType": "clusteredColumnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Appointment"
+                    }
+                  },
+                  "Property": "Month"
+                }
+              },
+              "queryRef": "Appointment.Month",
+              "nativeQueryRef": "Month",
+              "active": true,
+              "displayName": "Month"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Appointment"
+                    }
+                  },
+                  "Property": "Patients served"
+                }
+              },
+              "queryRef": "Appointment.Patients served",
+              "nativeQueryRef": "Patients served",
+              "displayName": "Patients served"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Appointment"
+                  }
+                },
+                "Property": "Month"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
     "visualContainerObjects": {
       "title": [
         {
@@ -26,13 +86,6 @@
               "expr": {
                 "Literal": {
                   "Value": "'Patients served by month'"
-                }
-              }
-            },
-            "fontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "11"
                 }
               }
             },
@@ -77,13 +130,6 @@
                   }
                 }
               }
-            },
-            "transparency": {
-              "expr": {
-                "Literal": {
-                  "Value": "0"
-                }
-              }
             }
           }
         }
@@ -106,13 +152,6 @@
                       "Value": "'#E3ECEA'"
                     }
                   }
-                }
-              }
-            },
-            "radius": {
-              "expr": {
-                "Literal": {
-                  "Value": "8"
                 }
               }
             }
@@ -145,66 +184,6 @@
           }
         }
       ]
-    },
-    "query": {
-      "queryState": {
-        "Category": {
-          "projections": [
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Appointment"
-                    }
-                  },
-                  "Property": "Month"
-                }
-              },
-              "queryRef": "Appointment.Month",
-              "nativeQueryRef": "Month",
-              "displayName": "Month"
-            }
-          ]
-        },
-        "Y": {
-          "projections": [
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Appointment"
-                    }
-                  },
-                  "Property": "Patients served"
-                }
-              },
-              "queryRef": "Appointment.Patients served",
-              "nativeQueryRef": "Patients served",
-              "displayName": "Patients served"
-            }
-          ]
-        }
-      },
-      "sortDefinition": {
-        "sort": [
-          {
-            "field": {
-              "Column": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "Appointment"
-                  }
-                },
-                "Property": "Month"
-              }
-            },
-            "direction": "Ascending"
-          }
-        ],
-        "isDefaultSort": false
-      }
     }
   }
 }

@@ -1,10 +1,10 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/1.0.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
   "name": "patients",
   "displayName": "Patients",
   "displayOption": "FitToPage",
-  "width": 1280,
-  "height": 720,
+  "height": 1080,
+  "width": 1440,
   "objects": {
     "background": [
       {
@@ -14,16 +14,9 @@
               "color": {
                 "expr": {
                   "Literal": {
-                    "Value": "'#F3F6F5'"
+                    "Value": "'#C3D3D5'"
                   }
                 }
-              }
-            }
-          },
-          "transparency": {
-            "expr": {
-              "Literal": {
-                "Value": "0"
               }
             }
           }
@@ -41,13 +34,6 @@
                     "Value": "'#E9EEEC'"
                   }
                 }
-              }
-            }
-          },
-          "transparency": {
-            "expr": {
-              "Literal": {
-                "Value": "0"
               }
             }
           }

@@ -68,13 +68,6 @@ replaces the original inconsistent inserts; those are archived in
 `sql/legacy/inserts.sql`. The bootstrap and seed are for an empty database; they
 never silently reset an existing installation. See [SQL rules](sql/README.md).
 
-## Evidence and limits
-
-CI runs the schema, 28 rejection cases, the full generated seed and reconciliation
-queries on SQL Server 2022, including 544 metric comparisons across 17 filter contexts. It also checks reproducibility, fifteen Python tests,
-report field bindings, accessibility metadata, filter paths and Microsoft PBIR JSON schemas. These checks
-cover data and source structure, not Desktop rendering or DAX engine correctness.
-
 [Metric definitions and filter behavior](docs/metrics.md) ·
 [Design and acceptance checklist](docs/dashboard.md) ·
 [CI runs](https://github.com/AhmedOT22/Hospital-Insights-Dashboard/actions)

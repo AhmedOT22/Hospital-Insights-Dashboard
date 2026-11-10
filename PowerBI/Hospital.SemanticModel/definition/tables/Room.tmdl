@@ -1,0 +1,46 @@
+table Room
+	lineageTag: 9cc5ba1e-e764-45e6-b111-751595496e55
+
+	column RoomID
+		dataType: int64
+		isHidden
+		lineageTag: ddb3c9d1-40d0-40c4-9262-e4069e2b0082
+		summarizeBy: none
+		sourceColumn: RoomID
+
+	column RoomNumber
+		dataType: string
+		lineageTag: 87c56486-b9e7-4497-9564-e2bdf575c8a2
+		summarizeBy: none
+		sourceColumn: RoomNumber
+
+	column DepartmentID
+		dataType: int64
+		isHidden
+		lineageTag: 8ba56fe0-a7b5-417f-bcea-ffdc8971d854
+		summarizeBy: none
+		sourceColumn: DepartmentID
+
+	column RoomType
+		dataType: string
+		lineageTag: 00b22a38-8539-4b2c-b849-297dc905e405
+		summarizeBy: none
+		sourceColumn: RoomType
+
+	column AvailabilityStatus
+		dataType: string
+		lineageTag: 29c2e8f0-00d5-4c3a-8e27-23dcb5fcb1ae
+		summarizeBy: none
+		sourceColumn: AvailabilityStatus
+
+	partition Room = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(ServerName, DatabaseName, [CreateNavigationProperties=false]),
+				    Rows = Source{[Schema="dbo", Item="Room"]}[Data]
+				in
+				    Rows
+
+	annotation PBI_ResultType = Exception
+

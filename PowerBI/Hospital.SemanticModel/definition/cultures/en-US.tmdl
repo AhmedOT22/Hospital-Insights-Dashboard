@@ -1,0 +1,796 @@
+cultureInfo en-US
+
+	linguisticMetadata =
+			{
+			  "Version": "2.0.0",
+			  "Language": "en-US",
+			  "Entities": {
+			    "billing.visit_age_band": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Billing",
+			          "ConceptualProperty": "Visit age band"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Visit age band": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "appointment.outstanding_amount": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appointment",
+			          "ConceptualProperty": "Outstanding amount"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Outstanding amount": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "Outstanding": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "appointment.collected_amount": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appointment",
+			          "ConceptualProperty": "Collected amount"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Collected amount": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "Collected": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "appointment.month": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appointment",
+			          "ConceptualProperty": "Month"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Month": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "appointment.patients_served": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appointment",
+			          "ConceptualProperty": "Patients served"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Patients served": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "appointment.appointments": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appointment",
+			          "ConceptualProperty": "Appointments"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Appointments": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "appointment.appointments_note": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appointment",
+			          "ConceptualProperty": "Appointments note"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Appointments note": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "appointment.patients_served_note": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appointment",
+			          "ConceptualProperty": "Patients served note"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Patients served note": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "appointment.collected_note": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appointment",
+			          "ConceptualProperty": "Collected note"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Collected note": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "appointment.outstanding_note": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appointment",
+			          "ConceptualProperty": "Outstanding note"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Outstanding note": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "appointment.completed_appointments": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appointment",
+			          "ConceptualProperty": "Completed appointments"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Completed appointments": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "Completed": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "appointment.cancelled_appointments": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appointment",
+			          "ConceptualProperty": "Cancelled appointments"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Cancelled appointments": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "Cancelled": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "appointment.cancellation_rate": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appointment",
+			          "ConceptualProperty": "Cancellation rate"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Cancellation rate": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "appointment.scheduled_appointments": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appointment",
+			          "ConceptualProperty": "Scheduled appointments"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Scheduled appointments": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "Scheduled": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "appointment.completed_note": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appointment",
+			          "ConceptualProperty": "Completed note"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Completed note": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "appointment.cancelled_note": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appointment",
+			          "ConceptualProperty": "Cancelled note"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Cancelled note": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "appointment.scheduled_note": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appointment",
+			          "ConceptualProperty": "Scheduled note"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Scheduled note": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "appointment.completion_rate": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appointment",
+			          "ConceptualProperty": "Completion rate"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Completion rate": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "appointment.completion_rate_note": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appointment",
+			          "ConceptualProperty": "Completion rate note"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Completion rate note": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "appointment.average_bill_per_visit": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appointment",
+			          "ConceptualProperty": "Average bill per visit"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Average bill per visit": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "appointment.outstanding_over_90_days": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appointment",
+			          "ConceptualProperty": "Outstanding over 90 days"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Outstanding over 90 days": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "appointment.completed_stays": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appointment",
+			          "ConceptualProperty": "Completed stays"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Completed stays": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "appointment.billed_amount": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appointment",
+			          "ConceptualProperty": "Billed amount"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Billed amount": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "appointment.billed_note": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appointment",
+			          "ConceptualProperty": "Billed note"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Billed note": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "appointment.collection_rate": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appointment",
+			          "ConceptualProperty": "Collection rate"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Collection rate": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "appointment.collection_rate_note": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appointment",
+			          "ConceptualProperty": "Collection rate note"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Collection rate note": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "appointment.completed_stays_note": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appointment",
+			          "ConceptualProperty": "Completed stays note"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Completed stays note": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "appointment.doctors_with_appointments": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appointment",
+			          "ConceptualProperty": "Doctors with appointments"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Doctors with bookings": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "appointment.doctors_note": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appointment",
+			          "ConceptualProperty": "Doctors note"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Doctors note": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "appointment.cancellation_rate_note": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appointment",
+			          "ConceptualProperty": "Cancellation rate note"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Cancellation rate note": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "appointment.prescriptions": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appointment",
+			          "ConceptualProperty": "Prescriptions"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Prescriptions": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "appointment.visits": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Appointment",
+			          "ConceptualProperty": "Visits"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Visits": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "department.departmentname": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Department",
+			          "ConceptualProperty": "DepartmentName"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "DepartmentName": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "doctor.doctor_name": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Doctor",
+			          "ConceptualProperty": "Doctor name"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Doctor name": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "patient.age_group_at_snapshot": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Patient",
+			          "ConceptualProperty": "Age group at snapshot"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Age group at snapshot": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    }
+			  }
+			}
+		contentType: json
+

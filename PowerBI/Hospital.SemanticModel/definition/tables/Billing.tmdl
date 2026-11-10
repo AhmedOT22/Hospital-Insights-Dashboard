@@ -1,0 +1,78 @@
+table Billing
+	lineageTag: 6dfdd79e-648c-4a53-abb4-8c2f642a5b15
+
+	column BillingID
+		dataType: int64
+		isHidden
+		lineageTag: b6f81c13-34a8-4f42-a338-4d887b1bd56d
+		summarizeBy: count
+		sourceColumn: BillingID
+
+		annotation SummarizationSetBy = Automatic
+
+	column PatientID
+		dataType: int64
+		isHidden
+		lineageTag: af8ae2d4-8580-47ca-899c-eaa2925958e6
+		summarizeBy: count
+		sourceColumn: PatientID
+
+		annotation SummarizationSetBy = Automatic
+
+	column TotalAmount
+		dataType: double
+		lineageTag: dd337d54-b1d2-4997-859d-62336714108d
+		summarizeBy: sum
+		sourceColumn: TotalAmount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PaymentStatus
+		dataType: string
+		lineageTag: 6d0326e3-57f9-47d3-bd99-32371a9ab29c
+		summarizeBy: none
+		sourceColumn: PaymentStatus
+
+	column PaymentDate
+		dataType: dateTime
+		formatString: yyyy-MM-dd
+		lineageTag: 95402c21-550d-412c-bd37-b93859336054
+		summarizeBy: none
+		sourceColumn: PaymentDate
+
+		variation Variation
+			isDefault
+			relationship: 9933e4c6-f3a9-4586-a245-cc0476541ed8
+			defaultHierarchy: LocalDateTable_eea60be1-e1e0-4213-b228-a3a173c154b9.'Date Hierarchy'
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column PaymentMethod
+		dataType: string
+		lineageTag: 3b471451-4409-4ab9-b8b1-81b481e8fc8e
+		summarizeBy: none
+		sourceColumn: PaymentMethod
+
+	column RecordID
+		dataType: int64
+		isHidden
+		lineageTag: 6220eb36-4a33-4ab5-91db-0d6bde1e3ef8
+		summarizeBy: none
+		sourceColumn: RecordID
+
+	column 'Visit age band' = VAR Age = INT(DATE(2025, 12, 31) - RELATED(Appointment[AppointmentDate])) RETURN SWITCH(TRUE(), Age <= 30, "0–30 days", Age <= 90, "31–90 days", Age <= 365, "91–365 days", "Over 365 days")
+		dataType: string
+		lineageTag: 26692dc4-6df5-4ca5-87d0-e5cc702c466c
+		summarizeBy: none
+
+	partition Billing = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(ServerName, DatabaseName, [CreateNavigationProperties=false]),
+				    Rows = Source{[Schema="dbo", Item="Billing"]}[Data]
+				in
+				    Rows
+

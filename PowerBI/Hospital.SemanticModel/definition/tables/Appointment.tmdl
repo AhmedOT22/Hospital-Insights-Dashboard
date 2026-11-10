@@ -1,0 +1,294 @@
+table Appointment
+	lineageTag: a1b976bd-b936-45c8-8e56-7958e8c01987
+
+	measure Appointments = COUNTROWS(Appointment)
+		formatString: #,0
+		displayFolder: Hospital KPIs
+		lineageTag: d69f0fc5-ede6-4530-9ef2-f0bbdfbb459a
+
+	measure 'Completed appointments' = CALCULATE([Appointments], KEEPFILTERS(Appointment[Status] = "Completed"))
+		formatString: #,0
+		displayFolder: Hospital KPIs
+		lineageTag: 9f822a1a-ac9e-48f2-9c68-db33de0b3506
+
+	measure 'Cancelled appointments' = CALCULATE([Appointments], KEEPFILTERS(Appointment[Status] = "Cancelled"))
+		formatString: #,0
+		displayFolder: Hospital KPIs
+		lineageTag: b4ba4b10-2696-495a-91be-31185f1938f8
+
+	measure 'Scheduled appointments' = CALCULATE([Appointments], KEEPFILTERS(Appointment[Status] = "Scheduled"))
+		formatString: #,0
+		displayFolder: Hospital KPIs
+		lineageTag: cf0b98e2-12a0-497f-8c9a-80170abdd66d
+
+	measure 'Completion rate' = DIVIDE(COALESCE([Completed appointments], 0), [Completed appointments] + [Cancelled appointments])
+		formatString: 0.0%
+		displayFolder: Hospital KPIs
+		lineageTag: f4ce920f-f7e4-4e86-b32b-578b1146590c
+
+	measure 'Cancellation rate' = DIVIDE(COALESCE([Cancelled appointments], 0), [Completed appointments] + [Cancelled appointments])
+		formatString: 0.0%
+		displayFolder: Hospital KPIs
+		lineageTag: 38a3cd07-056e-42c2-9330-3c1cc3fbcd3d
+
+	measure 'Patients served' = CALCULATE(DISTINCTCOUNT(Appointment[PatientID]), KEEPFILTERS(Appointment[Status] = "Completed"))
+		formatString: #,0
+		displayFolder: Hospital KPIs
+		lineageTag: 28b4a9bb-d806-4e80-af43-270e2a9f11d5
+
+	measure Visits = COUNTROWS(Medical_Record)
+		formatString: #,0
+		displayFolder: Hospital KPIs
+		lineageTag: f785c924-f057-4b6d-8b14-2e76a8542bc4
+
+	measure Prescriptions = COUNTROWS(Prescription)
+		formatString: #,0
+		displayFolder: Hospital KPIs
+		lineageTag: 58f76000-51bb-4c6b-ad8c-d76ec05a58d3
+
+	measure 'Billed amount' = SUM(Billing[TotalAmount])
+		formatString: #,0
+		displayFolder: Hospital KPIs
+		lineageTag: 7c8ac141-3c64-4ac4-b4d7-8fedd2e3b6ba
+
+	measure 'Collected amount' = CALCULATE([Billed amount], KEEPFILTERS(Billing[PaymentStatus] = "Paid"))
+		formatString: #,0
+		displayFolder: Hospital KPIs
+		lineageTag: 2df0e9a7-14d2-428f-9273-b09e9b7d2893
+
+	measure 'Outstanding amount' = CALCULATE([Billed amount], KEEPFILTERS(Billing[PaymentStatus] = "Unpaid"))
+		formatString: #,0
+		displayFolder: Hospital KPIs
+		lineageTag: 7cff3f98-26ca-4086-95a3-40db7db7f32d
+
+	measure 'Collection rate' = DIVIDE(COALESCE([Collected amount], 0), [Billed amount])
+		formatString: 0.0%
+		displayFolder: Hospital KPIs
+		lineageTag: ba61fff9-48f8-4e77-8083-7ec8f24fbc44
+
+	measure 'Doctors with appointments' = DISTINCTCOUNT(Appointment[DoctorID])
+		formatString: #,0
+		displayFolder: Hospital KPIs
+		lineageTag: ca73a0a6-65e7-4d10-99c3-d7c724424a72
+
+	measure 'Department doctors' = CALCULATE(COUNTROWS(Doctor), TREATAS(VALUES(Department[DepartmentID]), Doctor[DepartmentID]))
+		formatString: #,0
+		displayFolder: Hospital KPIs
+		lineageTag: 0f08ce85-fcc3-4b74-bb84-d193f2be4035
+
+	measure 'Department staff' = COUNTROWS(Staff)
+		formatString: #,0
+		displayFolder: Hospital KPIs
+		lineageTag: 6f5dc70c-0005-459a-9481-a58619e42852
+
+	measure Rooms = COUNTROWS(Room)
+		formatString: #,0
+		displayFolder: Hospital KPIs
+		lineageTag: d156c534-9016-4566-89c7-a73987555b42
+
+	measure 'Occupied rooms' = CALCULATE([Rooms], KEEPFILTERS(Room[AvailabilityStatus] = "Occupied"))
+		formatString: #,0
+		displayFolder: Hospital KPIs
+		lineageTag: 59db4388-3f91-422a-87ef-52d8eee663ab
+
+	measure 'Snapshot occupancy' = DIVIDE(COALESCE([Occupied rooms], 0), [Rooms])
+		formatString: 0.0%
+		displayFolder: Hospital KPIs
+		lineageTag: e5141ae9-36bc-4671-a63d-2bf3df8d3ca2
+
+	measure 'Completed stays' = COUNTROWS(FILTER(Room_Assignment, NOT ISBLANK(Room_Assignment[DischargeDate])))
+		formatString: #,0
+		displayFolder: Hospital KPIs
+		lineageTag: 924b9e2f-86f5-4cd9-9038-d7a4f0b28c91
+
+	measure 'Average completed stay' = AVERAGEX(FILTER(Room_Assignment, NOT ISBLANK(Room_Assignment[DischargeDate])), DATEDIFF(Room_Assignment[AdmissionDate], Room_Assignment[DischargeDate], DAY))
+		formatString: 0.0
+		displayFolder: Hospital KPIs
+		lineageTag: 1444e91c-ebf2-4419-a8bd-590ca60cdf21
+
+	measure 'Repeat patients' = COUNTROWS(FILTER(VALUES(Appointment[PatientID]), CALCULATE([Completed appointments]) > 1))
+		formatString: #,0
+		displayFolder: Hospital KPIs
+		lineageTag: 33f4cfa9-50cd-482f-b0bb-d48f77dbd401
+
+	measure 'Completed YoY change' = VAR CurrentYear = CALCULATE([Completed appointments], KEEPFILTERS(YEAR(Appointment[AppointmentDate]) = 2025)) VAR PriorYear = CALCULATE([Completed appointments], KEEPFILTERS(YEAR(Appointment[AppointmentDate]) = 2024)) RETURN DIVIDE(CurrentYear - PriorYear, PriorYear)
+		formatString: +0.0%;-0.0%;0.0%
+		displayFolder: Hospital KPIs
+		lineageTag: 0e7f2ee8-9802-42fc-9241-6bda451adc25
+
+	measure 'Outstanding over 90 days' = CALCULATE([Outstanding amount], KEEPFILTERS(Appointment[AppointmentDate] < DATE(2025, 10, 2)))
+		formatString: #,0
+		displayFolder: Hospital KPIs
+		lineageTag: 8d47ec8b-ad1f-4d91-b846-f625d9946341
+
+	measure 'Outstanding over 90 days share' = DIVIDE(COALESCE([Outstanding over 90 days], 0), [Outstanding amount])
+		formatString: 0.0%
+		displayFolder: Hospital KPIs
+		lineageTag: a7d210c6-c03f-4e78-96b9-aa6f74facfba
+
+	measure 'Average bill per visit' = DIVIDE([Billed amount], [Visits])
+		formatString: #,0
+		displayFolder: Hospital KPIs
+		lineageTag: 5c54546a-0845-44cc-835e-2e886f8c133a
+
+	measure 'Visits per patient' = DIVIDE([Completed appointments], [Patients served])
+		formatString: 0.0
+		displayFolder: Hospital KPIs
+		lineageTag: 3ee79a30-30f7-40be-a385-216e093de016
+
+	measure 'Highest doctor workload' = MAXX(VALUES(Appointment[DoctorID]), [Completed appointments])
+		formatString: #,0
+		displayFolder: Hospital KPIs
+		lineageTag: 5d539263-b882-4428-80d9-e1412ba42c11
+
+	measure 'Lowest doctor workload' = MINX(VALUES(Appointment[DoctorID]), [Completed appointments])
+		formatString: #,0
+		displayFolder: Hospital KPIs
+		lineageTag: 835e7a8f-de16-4443-ae8f-8ab1a91e161e
+
+	measure 'Average completed per doctor' = CALCULATE(DIVIDE([Completed appointments], [Doctors with appointments]), REMOVEFILTERS(Doctor))
+		formatString: #,0.0
+		displayFolder: Hospital KPIs
+		lineageTag: 879261ed-dce7-4ab8-a379-e3e330f7ce85
+
+	measure 'Highest doctor cancellation rate' = MAXX(VALUES(Appointment[DoctorID]), [Cancellation rate])
+		formatString: 0.0%
+		displayFolder: Hospital KPIs
+		lineageTag: fcefebad-3710-4ae8-9ebe-9703a508acf2
+
+	measure 'Cancellation rate all doctors' = CALCULATE([Cancellation rate], REMOVEFILTERS(Doctor))
+		formatString: 0.0%
+		displayFolder: Hospital KPIs
+		lineageTag: cb41527b-14b7-44a0-904c-a1c8130e3731
+
+	measure 'Appointments note' = FORMAT(COALESCE([Scheduled appointments], 0), "#,0") & " Upcoming bookings"
+		displayFolder: Card notes
+		lineageTag: f672ddcc-facf-4a03-81f0-073649375b5e
+
+	measure 'Patients served note' = IF(ISBLANK([Visits per patient]), "No data for this selection", FORMAT([Visits per patient], "0.0") & " visits")
+		displayFolder: Card notes
+		lineageTag: e64db6a8-b8cf-4de4-8630-774b146b019d
+
+	measure 'Collected note' = IF(ISBLANK([Collection rate]), "No data for this selection", FORMAT([Collection rate], "0%") & " of billed amount")
+		displayFolder: Card notes
+		lineageTag: 50fde3c6-ae24-43f3-b3c0-16d19ccb7064
+
+	measure 'Outstanding note' = IF(ISBLANK([Outstanding over 90 days share]), "No data for this selection", FORMAT([Outstanding over 90 days share], "0%") & " is over 90 days old")
+		displayFolder: Card notes
+		lineageTag: f93f2d49-fb6f-4b90-993f-17900f60ae37
+
+	measure 'Completed note' = IF(ISBLANK([Completed YoY change]), "Select both 2024 and 2025 months to compare years", FORMAT([Completed YoY change], "+0.0%;-0.0%;0.0%") & " in 2025 vs 2024")
+		displayFolder: Card notes
+		lineageTag: c0affbd7-9190-4819-9325-f8c9db5bede2
+
+	measure 'Cancelled note' = IF(ISBLANK([Highest doctor cancellation rate]), "No data for this selection", "Highest doctor cancellation rate is " & FORMAT([Highest doctor cancellation rate], "0.0%"))
+		displayFolder: Card notes
+		lineageTag: ba405439-c902-491d-a57c-6f6bd62602df
+
+	measure 'Scheduled note' = "Booked after the Dec 31, 2025 snapshot"
+		displayFolder: Card notes
+		lineageTag: 2e5d9f5f-d46c-46ea-9a48-861983785783
+
+	measure 'Completion rate note' = "Future bookings excluded"
+		displayFolder: Card notes
+		lineageTag: 38f61c95-c3c1-4bb9-9533-4f50b5679176
+
+	measure 'Doctors note' = IF(ISBLANK([Highest doctor workload]), "No data for this selection", FORMAT([Lowest doctor workload], "#,0") & "–" & FORMAT([Highest doctor workload], "#,0") & " completed per doctor")
+		displayFolder: Card notes
+		lineageTag: d4660ebb-c6cc-407e-b5c0-db40906c8f60
+
+	measure 'Cancellation rate note' = IF(ISBLANK([Highest doctor cancellation rate]), "No data for this selection", "Highest doctor " & FORMAT([Highest doctor cancellation rate], "0.0%"))
+		displayFolder: Card notes
+		lineageTag: 62508572-52c2-4245-84e9-671c5b69b282
+
+	measure 'Billed note' = IF(ISBLANK([Average bill per visit]), "No data for this selection", "Average cost per visit is " & FORMAT([Average bill per visit], "#,0") & "$")
+		displayFolder: Card notes
+		lineageTag: 91c3c931-7914-407b-b432-038ef310fa85
+
+	measure 'Collection rate note' = IF(ISBLANK([Outstanding amount]), "No data for this selection", FORMAT([Outstanding amount], "#,0") & "$ still unpaid")
+		displayFolder: Card notes
+		lineageTag: 092c735c-420c-46cd-b899-f4f049fcf178
+
+	measure 'Completed stays note' = IF(ISBLANK([Average completed stay]), "No data for this selection", "Average stay is " & FORMAT([Average completed stay], "0.0") & " days")
+		displayFolder: Card notes
+		lineageTag: 11075148-1a4e-41b1-99dd-50be897828db
+
+	measure 'Doctor workload color' = IF([Completed appointments] > [Average completed per doctor], "#C2410C", "#7A8B91")
+		displayFolder: Highlight colors
+		lineageTag: db9dbf74-54d2-41d3-bcd1-97c4528674c0
+
+	measure 'Doctor cancellation color' = IF([Cancellation rate] > [Cancellation rate all doctors], "#C2410C", "#7A8B91")
+		displayFolder: Highlight colors
+		lineageTag: 46e616c2-33aa-43c1-83a0-8fb824169ce6
+
+	column AppointmentID
+		dataType: int64
+		isHidden
+		lineageTag: 8196f68b-611f-44ec-8d94-eacfa6e2fe51
+		summarizeBy: none
+		sourceColumn: AppointmentID
+
+	column PatientID
+		dataType: int64
+		isHidden
+		lineageTag: 88ecf659-52ec-4631-944d-4838a1f12616
+		summarizeBy: none
+		sourceColumn: PatientID
+
+	column DoctorID
+		dataType: int64
+		isHidden
+		lineageTag: 8ce951fe-5fd3-4f86-81ee-d48ad6eca504
+		summarizeBy: none
+		sourceColumn: DoctorID
+
+	column DepartmentID
+		dataType: int64
+		isHidden
+		lineageTag: 49793011-9714-40d4-a5e4-ee6aee3e06da
+		summarizeBy: none
+		sourceColumn: DepartmentID
+
+	column AppointmentDate
+		dataType: dateTime
+		formatString: yyyy-MM-dd
+		lineageTag: c8c2aadf-477e-4702-ab13-946273792231
+		summarizeBy: none
+		sourceColumn: AppointmentDate
+
+		variation Variation
+			isDefault
+			relationship: bf57e3bb-2b83-493a-bd1f-74e779675ae8
+			defaultHierarchy: LocalDateTable_fdf564ec-0361-4aa8-a9cf-74bdd5c171d4.'Date Hierarchy'
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column AppointmentTime
+		dataType: dateTime
+		formatString: HH:mm
+		lineageTag: b14398bc-166d-4ae8-afd0-885b3fef6798
+		summarizeBy: none
+		sourceColumn: AppointmentTime
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column Status
+		dataType: string
+		lineageTag: 4c00359a-9773-4e7a-88d6-823531ef65bc
+		summarizeBy: none
+		sourceColumn: Status
+
+	column Month = FORMAT(Appointment[AppointmentDate], "yyyy-MM")
+		dataType: string
+		lineageTag: 8326c1c7-7533-41ba-b673-4428d7bdca7f
+		summarizeBy: none
+
+	partition Appointment = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(ServerName, DatabaseName, [CreateNavigationProperties=false]),
+				    Rows = Source{[Schema="dbo", Item="Appointment"]}[Data]
+				in
+				    Rows
+

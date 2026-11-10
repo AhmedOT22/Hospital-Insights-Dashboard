@@ -1,0 +1,68 @@
+table Staff
+	lineageTag: 1a2c3051-f1ba-49c5-9cb6-50d206632624
+
+	column StaffID
+		dataType: int64
+		isHidden
+		lineageTag: 491cf3ff-3f01-4b5d-a74a-6027051be045
+		summarizeBy: none
+		sourceColumn: StaffID
+
+	column FirstName
+		dataType: string
+		lineageTag: dac03617-7d8a-48d1-b122-27c889e9d540
+		summarizeBy: none
+		sourceColumn: FirstName
+
+	column LastName
+		dataType: string
+		lineageTag: d632120f-2fc8-4912-a115-9dccc633b51a
+		summarizeBy: none
+		sourceColumn: LastName
+
+	column Role
+		dataType: string
+		lineageTag: d4bbe728-1bd2-4903-99b5-6cb05686bf6f
+		summarizeBy: none
+		sourceColumn: Role
+
+	column DepartmentID
+		dataType: int64
+		isHidden
+		lineageTag: 4115da07-d8be-4c7e-b01a-171970a3a8d3
+		summarizeBy: none
+		sourceColumn: DepartmentID
+
+	column PhoneNumber
+		dataType: string
+		lineageTag: ab829f6e-9eaa-4b47-92e1-7e883ef1a6ad
+		summarizeBy: none
+		sourceColumn: PhoneNumber
+
+	column Email
+		dataType: string
+		lineageTag: 8cf83860-d0c2-4227-bb8a-99a7ec1912ef
+		summarizeBy: none
+		sourceColumn: Email
+
+	column ShiftHours
+		dataType: string
+		lineageTag: 5fa92713-bb57-472e-b421-9519f731ad71
+		summarizeBy: none
+		sourceColumn: ShiftHours
+
+	column IsActive
+		dataType: boolean
+		lineageTag: ba9877c0-e0ed-4cac-bf98-0e72ed4ae969
+		summarizeBy: none
+		sourceColumn: IsActive
+
+	partition Staff = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(ServerName, DatabaseName, [CreateNavigationProperties=false]),
+				    Rows = Source{[Schema="dbo", Item="Staff"]}[Data]
+				in
+				    Rows
+

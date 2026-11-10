@@ -1,0 +1,154 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 611.05637395446377,
+            "y": 526.47346345704091
+          },
+          "nodeIndex": "Appointment",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 903.61210919043083,
+            "y": -50
+          },
+          "nodeIndex": "Billing",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 320.0855776457895,
+            "y": 868.3664910825496
+          },
+          "nodeIndex": "Department",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 855.91965922909628,
+            "y": 881.20657568958131
+          },
+          "nodeIndex": "Doctor",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1068.0761884048211,
+            "y": 552.21933740311783
+          },
+          "nodeIndex": "Medical_Record",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1498.5766959036564,
+            "y": 828.94874470739614
+          },
+          "nodeIndex": "Medicine",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 613.73654494009827,
+            "y": 153.84662097449973
+          },
+          "nodeIndex": "Patient",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1208.6175377644231,
+            "y": 878.86294491500166
+          },
+          "nodeIndex": "Prescription",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 50,
+            "y": 613.15421770672776
+          },
+          "nodeIndex": "Room",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 324.22709326033981,
+            "y": 358.16869451225443
+          },
+          "nodeIndex": "Room_Assignment",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 569.09872772450615,
+            "y": 1124.2929769504303
+          },
+          "nodeIndex": "Staff",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

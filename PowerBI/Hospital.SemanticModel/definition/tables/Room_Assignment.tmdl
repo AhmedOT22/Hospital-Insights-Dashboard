@@ -1,0 +1,63 @@
+table Room_Assignment
+	lineageTag: 5b4c423f-865a-4eee-ae6d-03e6c6909bb9
+
+	column AssignmentID
+		dataType: int64
+		isHidden
+		lineageTag: abe0bd7c-0289-4f83-8a26-329902e8ff79
+		summarizeBy: count
+		sourceColumn: AssignmentID
+
+		annotation SummarizationSetBy = Automatic
+
+	column RoomID
+		dataType: int64
+		isHidden
+		lineageTag: 46323c22-37a9-4a03-bef3-8c4198da0b27
+		summarizeBy: none
+		sourceColumn: RoomID
+
+	column PatientID
+		dataType: int64
+		isHidden
+		lineageTag: 7c2ba9c1-3b55-4bfc-a3cf-6679f3ca1e25
+		summarizeBy: none
+		sourceColumn: PatientID
+
+	column AdmissionDate
+		dataType: dateTime
+		formatString: yyyy-MM-dd
+		lineageTag: 27aa9c5e-5c0f-4baa-bc7b-61d6643315c7
+		summarizeBy: none
+		sourceColumn: AdmissionDate
+
+		variation Variation
+			isDefault
+			relationship: 69ea5ed2-1d3b-4051-854e-2da2f7585f17
+			defaultHierarchy: LocalDateTable_fc347c5a-c215-4ce0-babc-06648c54b9cd.'Date Hierarchy'
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column DischargeDate
+		dataType: dateTime
+		formatString: yyyy-MM-dd
+		lineageTag: 4873de5d-abf7-49e3-a3e4-f97f2f88e90e
+		summarizeBy: none
+		sourceColumn: DischargeDate
+
+		variation Variation
+			isDefault
+			relationship: 97662183-9b28-4852-808e-3f73de0a0076
+			defaultHierarchy: LocalDateTable_1bfbe504-b2fc-470a-967c-196b6f8e6f5a.'Date Hierarchy'
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition Room_Assignment = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(ServerName, DatabaseName, [CreateNavigationProperties=false]),
+				    Rows = Source{[Schema="dbo", Item="Room_Assignment"]}[Data]
+				in
+				    Rows
+

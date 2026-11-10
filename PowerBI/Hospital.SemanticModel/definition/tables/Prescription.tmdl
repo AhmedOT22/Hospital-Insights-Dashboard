@@ -1,0 +1,51 @@
+table Prescription
+	lineageTag: a022f279-4b89-49a6-8b33-4141b8a5a546
+
+	column PrescriptionID
+		dataType: int64
+		isHidden
+		lineageTag: 26892462-a8bb-4009-9405-2d40cbee4da4
+		summarizeBy: none
+		sourceColumn: PrescriptionID
+
+	column RecordID
+		dataType: int64
+		isHidden
+		lineageTag: dec423bf-fb6e-43d0-89bb-44b328ed91b3
+		summarizeBy: none
+		sourceColumn: RecordID
+
+	column MedicineID
+		dataType: int64
+		isHidden
+		lineageTag: bc11bbc7-5871-4653-85f9-5cd7d407e689
+		summarizeBy: none
+		sourceColumn: MedicineID
+
+	column Dosage
+		dataType: string
+		lineageTag: 92add1bc-6202-476c-85fe-8324c56f2ea9
+		summarizeBy: none
+		sourceColumn: Dosage
+
+	column Frequency
+		dataType: string
+		lineageTag: 0dfa495b-4a9b-4325-937f-41e1dbdc394a
+		summarizeBy: none
+		sourceColumn: Frequency
+
+	column Duration
+		dataType: string
+		lineageTag: b43f6cac-66d1-49b0-8f3e-e2225ab89478
+		summarizeBy: none
+		sourceColumn: Duration
+
+	partition Prescription = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(ServerName, DatabaseName, [CreateNavigationProperties=false]),
+				    Rows = Source{[Schema="dbo", Item="Prescription"]}[Data]
+				in
+				    Rows
+
